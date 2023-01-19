@@ -5,7 +5,7 @@ function enter(pi) {
             pi.warp(130030002, 0);
             return true;
         } else {
-            pi.message("Please click on the NPC first to receive a quest.");
+            pi.message("请先点击NPC获得任务。");
         }
     } else if (pi.getPlayer().getMapId() == 130030002) {
         if (pi.isQuestCompleted(20011)) {
@@ -13,7 +13,7 @@ function enter(pi) {
             pi.warp(130030003, 0);
             return true;
         } else {
-            pi.message("Please complete the required quest before proceeding.");
+            pi.message("请在继续之前完成所需的任务。");
         }
     } else if (pi.getPlayer().getMapId() == 130030003) {
         if (pi.isQuestCompleted(20012)) {
@@ -21,7 +21,7 @@ function enter(pi) {
             pi.warp(130030004, 0);
             return true;
         } else {
-            pi.message("Please complete the required quest before proceeding.");
+            pi.message("请在继续之前完成所需的任务。");
         }
     } else if (pi.getPlayer().getMapId() == 130030004) {
         if (pi.isQuestCompleted(20013)) {
@@ -29,7 +29,7 @@ function enter(pi) {
             pi.warp(130030005, 0);
             return true;
         } else {
-            pi.message("Please complete the required quest before proceeding.");
+            pi.message("请在继续之前完成所需的任务。");
         }
     }
 

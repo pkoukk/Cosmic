@@ -36,14 +36,14 @@ function start(mode, type, selection) { // missing script for questid found than
         }
 
         if (status == 0) {
-            qm.sendNext("#h0#... First of all, thank you for your great work. If it weren't you, I... I wouldn't be safe from the curse of Black Witch. Thank you so much.");
+            qm.sendNext("#h0#... 首先，谢谢你的出色工作。如果不是你，我。。。我不可能从黑魔女的诅咒下幸免。非常感谢你.");
         } else if (status == 1) {
-            qm.sendNextPrev("If nothing else, this chain of events makes one thing crystal clear, you have put in countless hours of hard work to better yourself and contribute to the Cygnus Knights.");
+            qm.sendNextPrev("如果没有其他事情的话，这一连串的事件让一件事变得非常清楚，那就是你付出了无数小时的努力来提升自己，为冒险骑士团团做出贡献。");
         } else if (status == 2) {
-            qm.sendAcceptDecline("To celebrate your hard work and accomplishments... I would like to award you a new title and renew my blessings onto you. Will you... accept this?");
+            qm.sendAcceptDecline("为了庆祝你的努力和成就。。。我想授予你一个新的头衔，并再次祝福你。你愿意..接受嘛?");
         } else if (status == 3) {
             if (!qm.canHold(1142069, 1)) {
-                qm.sendOk("Please, make a room available on your EQUIP inventory for the medal.");
+                qm.sendOk("请给你的装备栏留出点空间好存放勋章.");
                 qm.dispose();
                 return;
             }
@@ -56,7 +56,7 @@ function start(mode, type, selection) { // missing script for questid found than
             qm.forceStartQuest();
             qm.forceCompleteQuest();
 
-            qm.sendOk("#h0#. For courageously battling the Black Mage, I will appoint you as the new Chief Knight of Cygnus Knights from this moment onwards. Please use your power and authority wisely to help protect the citizens of Maple World.");
+            qm.sendOk("#h0#. 由于你勇敢地与黑魔法师战斗，从现在起，我将任命你为冒险骑士团团的新骑士团长。请明智地运用你的力量和权力来帮助保护冒险岛世界的公民.");
         } else if (status == 4) {
             qm.dispose();
         }

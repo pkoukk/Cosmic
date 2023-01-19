@@ -55,10 +55,10 @@ function action(mode, type, selection) {
         if (status == 0) {
             if (cm.haveItem(4031013, 30)) {
                 completed = true;
-                cm.sendOk("You're a true hero! Take this and the Dark Lord will acknowledge you.");
+                cm.sendOk("哇.. 你已经收集了30个黑珠!!这应该不容易...难以置信!你通过了测试,给你#b#z4031012##k.拿好了去交给武术教练.");
             } else {
                 completed = false;
-                cm.sendSimple("You will have to collect me #b30 #t4031013##k. Good luck. \r\n#b#L1#I would like to leave#l");
+                cm.sendSimple("你要收集#b30个 #t4031013##k给我.加油. \r\n#b#L1#我想放弃#l");
             }
         } else if (status == 1) {
             if (completed) {

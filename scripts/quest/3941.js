@@ -45,19 +45,19 @@ function start(mode, type, selection) {
 
         if (status == 0) {
             if (!isTigunMorphed(qm.getPlayer())) {
-                qm.sendNext("What's this? I can't simply give the Queen's silk to anyone, claiming they will hand it at once to the queen. Get out of my sights.");
+                qm.sendNext("什么？我不能随便把王妃预定的丝绸给人，它们应该立刻交给王妃。滚粗。");
                 status = 1;
                 return;
             }
 
-            qm.sendNext("Tigun, what are you doing here?");
+            qm.sendNext("提干，你在这里干什么？");
         } else if (status == 1) {
             if (!isTigunMorphed(qm.getPlayer())) {
-                qm.sendNext("What's this? I can't simply give the Queen's silk to anyone, claiming they will hand it at once to the queen. Get out of my sights.");
+                qm.sendNext("什么？我不能随便把王妃预定的丝绸给人，它们应该立刻交给王妃。滚粗。");
                 return;
             }
 
-            qm.sendNext("The Queen wants her silk right now? Alright, I have them here. Hold on a moment.");
+            qm.sendNext("王妃现在想要她的丝绸？好吧，我把它们放在这里了。等一下。");
             qm.forceStartQuest();
         } else if (status == 2) {
             qm.dispose();
@@ -82,7 +82,7 @@ function end(mode, type, selection) {
 
         if (status == 0) {
             if (!isTigunMorphed(qm.getPlayer())) {
-                qm.sendNext("What's this? I can't simply give the Queen's silk to anyone, claiming they will hand it at once to the queen. Get out of my sights.");
+                qm.sendNext("什么？我不能随便把王妃预定的丝绸给人，它们应该立刻交给王妃。滚粗。");
                 qm.dispose();
                 return;
             }
@@ -90,10 +90,10 @@ function end(mode, type, selection) {
             if (qm.canHold(4031571, 1)) {
                 qm.gainItem(4031571);
 
-                qm.sendNext("There you go. Please deliver to the queen as soon as possible, Tigun, she gets really mad if things get delayed.");
+                qm.sendNext("给你。提干，请你尽快给王妃送去，如果事情耽搁了，她会很生气的。");
                 qm.forceCompleteQuest();
             } else {
-                qm.sendNext("Hey, you're lacking space to hold this, man. I will stay with it while you arrange your backpack...");
+                qm.sendNext("嘿，你没地方放这个，伙计。当你整理背包的时候我会留下来。。。");
             }
         } else if (status == 1) {
             qm.dispose();

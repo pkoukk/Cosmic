@@ -280,7 +280,7 @@ function scheduledTimeout(eim) {
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -312,9 +312,9 @@ function yuleteAction(eim) {
     if (eim.getIntProperty("yuleteTalked") == 1) {
         eim.setIntProperty("yuletePassed", 1);
 
-        eim.dropMessage(5, "Yulete: Ugh, you guys disgust me. All I desired was to make this nation the greatest alchemy powerhouse of the entire world. If they won't accept this, I will make it true by myself, at any costs!!!");
+        eim.dropMessage(5, "犹泰: 呃，你们让我恶心。我只想让这个国家成为全世界最伟大的炼金强国。如果他们不接受这一点，我将不惜一切代价，自己实现这一点");
     } else {
-        eim.dropMessage(5, "Yulete: Hahaha... Did you really think I was going to be so disprepared knowing that the Magatia societies' dogs would be coming in my pursuit after my actions? Fools!");
+        eim.dropMessage(5, "犹泰: Hahaha... 你们真的以为我在知道你们会来之后会躲起来么？蠢货！");
     }
     eim.setIntProperty("yuleteTalked", -1);
 
@@ -360,7 +360,7 @@ function changedLeader(eim, leader) {
     }
 }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
@@ -455,8 +455,8 @@ function friendlyKilled(mob, eim) {
     eim.setIntProperty("escortFail", 1);
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }

@@ -3,7 +3,7 @@ function enter(pi) {
         pi.playPortalSound();
         pi.warp(100030310, 0);
     } else {
-        pi.playerMessage(5, "Cannot enter the Lush Forest without a reason.");
+        pi.playerMessage(5, "无缘无故不能进入潘姆之家大路1。");
     }
     return true;
 }

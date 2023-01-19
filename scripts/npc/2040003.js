@@ -3,7 +3,7 @@ var em;
 var eim;
 
 function sendBaseText() {
-    cm.sendOk("Access is restricted to the public.");
+    cm.sendOk("不对外开放");
     cm.dispose();
 }
 
@@ -22,10 +22,10 @@ function start() {
     }
 
     if (eim == null) { // Not in instance
-        cm.sendYesNo("Are you ready to enter #b#m922000000##k?");
+        cm.sendYesNo("你要进入#m922000009##k吗?");
     }
     else { // Inside the instance
-        cm.sendYesNo("Are you ready to leave this place?");
+        cm.sendYesNo("你确定要离开这里么？");
     }
 }
 
@@ -38,7 +38,7 @@ function action(mode, type, selection) {
     if (eim == null) { // Not in instance, ready to enter
         cm.removeAll(4031092); // This handling is done in the portal script and in the event end, just for legacy purposes here
         if (!em.startInstance(cm.getPlayer())) {
-            cm.sendOk("Someone else is already gathering some parts for me. Please wait until the area is cleared.");
+            cm.sendOk("里面有人了.");
         }
     }
     else { // Inside the instance, ready to exit

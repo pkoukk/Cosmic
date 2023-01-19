@@ -130,7 +130,7 @@ function setup(level, lobbyid) {
     return eim;
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
 function respawnStages(eim) {
     eim.getInstanceMap(910010000).instanceMapRespawn();
@@ -154,11 +154,11 @@ function scheduledTimeout(eim) {
 }
 
 function bunnyDefeated(eim) {
-    eim.dropMessage(5, "Due to your failure to protect the Moon Bunny, you have been transported to the Exile Map.");
+    eim.dropMessage(5, "由于你未能保护好月妙，你将被传送出去。");
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -189,7 +189,7 @@ function changedLeader(eim, leader) {
     }
 }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
@@ -246,7 +246,7 @@ function clearPQ(eim) {
     eim.warpEventTeam(910010100);
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
 function friendlyKilled(mob, eim) {
     if (mob.getId() == 9300061) {
@@ -260,7 +260,7 @@ function friendlyItemDrop(eim, mob) {
         eim.setIntProperty("bunnyCake", cakes);
 
         const PacketCreator = Java.type('tools.PacketCreator');
-        mob.getMap().broadcastMessage(PacketCreator.serverNotice(6, "The Moon Bunny made rice cake number " + cakes + "."));
+        mob.getMap().broadcastMessage(PacketCreator.serverNotice(6, "月妙做好了的年糕有： " + cakes + "个."));
     }
 }
 
@@ -269,15 +269,15 @@ function friendlyDamaged(eim, mob) {
         var bunnyDamage = eim.getIntProperty("bunnyDamaged") + 1;
         if (bunnyDamage > 5) {
             const PacketCreator = Java.type('tools.PacketCreator');
-            broadcastMessage(PacketCreator.serverNotice(6, "The Moon Bunny is feeling sick. Please protect it so it can make delicious rice cakes."));
+            broadcastMessage(PacketCreator.serverNotice(6, "月妙感觉不太好，保护好它，让他继续做年糕"));
             eim.setIntProperty("bunnyDamaged", 0);
         }
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }
 

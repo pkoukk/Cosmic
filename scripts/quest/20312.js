@@ -32,7 +32,7 @@ function start(mode, type, selection) {
         qm.dispose();
     } else {
         if (status == 1 && mode == 0) {
-            qm.sendNext("Come back when you are ready.");
+            qm.sendNext("准备好了再回来。");
             qm.dispose();
             return;
         }
@@ -42,22 +42,22 @@ function start(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendNext("The jewel you brought back from the Master of Disguise is Shinsoo's Teardrop. It is the crystalization of Shinsoo's powers. If the Black Mage gets his hands on this, then this spells doom for all of us.");
+            qm.sendNext("你从变身术士那带回来的宝石是神兽的眼泪，它拥有非常强大的力量。如果被黑魔法师给得手了，那我们全部都可能要倒大楣了...");
         } else if (status == 1) {
-            qm.sendYesNo("As a token of her appreciation for your effort in preventing potentially serious matter, the Empress has decided to present you with a new title. Are you ready to accept it?");
+            qm.sendYesNo("感谢你为了阻止严重的灾难所作出的的努力，女皇将任命你为皇家骑士团的高级骑士，你准备好了嘛?");
         } else if (status == 2) {
             nPSP = (qm.getPlayer().getLevel() - 70) * 3;
             if (qm.getPlayer().getRemainingSp() > nPSP) {
-                qm.sendNext("You still have way too much #bSP#k with you. You can't earn a new title like that, I strongly urge you to use more SP on your 1st and 2nd level skills.");
+                qm.sendNext("你身上剩余的技能点数太多了.这样的话你不能获取新的头衔，我建议你再加几点一二转技能");
             } else {
                 if (!qm.canHold(1142068)) {
-                    qm.sendNext("If you wish to receive the medal befitting the title, you may want to make some room in your equipment inventory.");
+                    qm.sendNext("如果你想获得与头衔相符的奖牌，你可能需要在你的装备栏中腾出一些空间。");
                 } else {
                     qm.completeQuest();
                     qm.gainItem(1142068, 1);
                     const Job = Java.type('client.Job');
                     qm.getPlayer().changeJob(Job.BLAZEWIZARD3);
-                    qm.sendOk("#h #, as of this moment, you are an Advanced Knight. From this moment on, you will train yourself with fervor as you will lead your group of Knights for the safety of this world. That fervor will provide you with plenty of courage.");
+                    qm.sendOk("请先把道具栏空出一些空间哦.");
                 }
             }
         } else if (status == 3) {

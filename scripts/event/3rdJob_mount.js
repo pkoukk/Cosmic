@@ -49,7 +49,7 @@ function checkHogHealth(eim) {
         var oldHp = eim.getIntProperty("whog_hp");
 
         if (oldHp - hp > 1000) {    // or 800, if using mobHP / eventTime
-            eim.dropMessage(6, "Please protect the pig from the aliens!");  // thanks Vcoc
+            eim.dropMessage(6, "保护好小猪!");  // thanks Vcoc
         }
         eim.setIntProperty("whog_hp", hp);
     }
@@ -89,7 +89,7 @@ function playerEntry(eim, player) {
     eim.startEventTimer(eventTime * 60000);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     var api = player.getAbstractPlayerInteraction();
@@ -129,7 +129,7 @@ function clearPQ(eim) {
     em.setProperty("noEntry", "false");
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
@@ -143,20 +143,20 @@ function friendlyKilled(mob, eim) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose() {}
+function dispose() { }
 
 
 // ---------- FILLER FUNCTIONS ----------
 
-function disbandParty(eim, player) {}
+function disbandParty(eim, player) { }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 

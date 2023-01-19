@@ -17,10 +17,10 @@ function action(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            cm.sendSimple("Wait! You'll figure the stuff out by the time you reach Lv. 10 anyway, but if you absolutely want to prepare beforehand, you may view the following information.\r\n\r\n Tell me, what would you like to know?\r\n#b#L0#About you#l\r\n#L1#Mini Map#l\r\n#L2#Quest Window#l\r\n#L3#Inventory#l\r\n#L4#Regular Attack Hunting#l\r\n#L5#How to Pick Up Items#l\r\n#L6#How to Equip Items#l\r\n#L7#Skill Window#l\r\n#L8#How to Use Quick Slots#l\r\n#L9#How to Break Boxes#l\r\n#L10#How to Sit in a Chair#l\r\n#L11#World Map#l\r\n#L12#Quest Notifications#l\r\n#L13#Enhancing Stats#l\r\n#L14#Who are the Cygnus Knights?#l");
+            cm.sendSimple("等等!尽管你到了10级就会知道这些事情,但是如果你想事先知道,你可以看看这些.\r\n\r\n告诉我你想知道什么?\r\n#b#L0#你是谁#l\r\n#L1#小地图#l\r\n#L2#任务窗口#l\r\n#L3#道具栏#l\r\n#L4#常规攻击狩猎#l\r\n#L5#怎么拾取道具#l\r\n#L6#怎么穿装备#l\r\n#L7#技能窗口#l\r\n#L8#怎么使用快捷键#l\r\n#L9#怎么打破箱子#l\r\n#L10#怎么坐#l\r\n#L11#世界地图#l\r\n#L12#任务信息#l\r\n#L13#增强属性#l\r\n#L14#骑士团是什么?#l");
         } else if (status == 1) {
             if (selection == 0) {
-                cm.sendNext("I serve under Shinsoo, the guardian of Empress Cygnus. My master, Shinsoo, has ordered me to guide everyone who comes to Maple World to join Cygnus Knights. I will be assisting and following you around until you become a Knight or reach Lv. 11. Please let me know if you have any questions.");
+                cm.sendNext("我是#p1101008#,圣地女皇守护者米哈尔的手下.我在这里作为骑士团新手的向导.在你到达11级之前我都会在这里为你提供帮助.");
             } else if (selection == 1) {
                 cm.guideHint(1);
                 cm.dispose();
@@ -61,11 +61,11 @@ function action(mode, type, selection) {
                 cm.guideHint(13);
                 cm.dispose();
             } else if (selection == 14) {
-                cm.sendOk("The Black Mage is trying to revive and conquer our peaceful Maple World. As a response to this threat, Empress Cygnus has formed a knighthood, now known as Cygnus Knights. You can become a Knight when you reach Lv. 10.");
+                cm.sendOk("黑魔法师试图破坏我们和平的冒险岛世界..我们的女皇为了抵抗黑魔法师创立了骑士团.当你到达10级就可以加入骑士团了.");
                 cm.dispose();
             }
         } else if (status == 2) {
-            cm.sendNextPrev("There is no need for you to check this info now. These are basics that you'll pick up as you play. You can always ask me questions that come up after you've reached Lv. 10, so just relax.");
+            cm.sendNextPrev("你现在还不需要知道这些. 你到了10级以后我会告诉你.");
             cm.dispose();
         }
     }

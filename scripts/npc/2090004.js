@@ -29,7 +29,7 @@ function action(mode, type, selection) {
     if (mode == 1) {
         status++;
     } else {
-        cm.sendOk("Oh, talk to me when you have decided what you want from me. I am very busy right now.");
+        cm.sendOk("哦,当你决定你想要什么时候再联系我.我现在很忙.");
         cm.dispose();
         return;
     }
@@ -39,18 +39,18 @@ function action(mode, type, selection) {
             //player lost his book, help him complete quest anyways
 
             if (cm.canHold(4031554)) {
-                cm.sendOk("Oh, the boy wanted you to bring him a #t4031554#? No problem, I was on his debt anyway. Now, tell him I am repaying the debt, OK?");
+                cm.sendOk("哦,男孩想让你给他带#t4031554#?没问题,我欠他的.现在把这个拿去给他吧?");
                 cm.gainItem(4031554, 1);
                 cm.dispose();
                 return;
             } else {
-                cm.sendOk("Oh, the boy wanted you to bring him a #t4031554#? Make room at your ETC inventory first.");
+                cm.sendOk("哦,男孩想让你给他带 #t4031554#?其他栏留一个空间.");
                 cm.dispose();
                 return;
             }
         }
-        var selStr = "I am a man of many talents. Let me know what you'd like to do. #b"
-        var options = ["Make a medicine", "Make a scroll", "Donate medicine ingredients"];
+        var selStr = "我是个方面的天才.让我知道你想做什么. #b"
+        var options = ["做药", "做卷轴", "捐赠制药材料"];
         for (var i = 0; i < options.length; i++) {
             selStr += "\r\n#L" + i + "# " + options[i] + "#l";
         }
@@ -66,12 +66,12 @@ function action(mode, type, selection) {
             matQtyMeso = [0, 0, 910, 950, 1940, 600, 700, 1000];
 
             if (!cm.haveItem(4161030)) {
-                cm.sendNext("If you want to make a medicine, you must study the Book on Herbal Medicine first. Nothing is more dangerous than practicing a medicine without proper knowledge.");
+                cm.sendNext("你如果想做药水,你得先看看<<草药学>>. 随意配药的很危险的.");
                 cm.dispose();
                 return;
             }
 
-            selStr = "What kind of medicine are you interested in making?#b";
+            selStr = "你想制作什么药?#b";
 
             for (var i = 0; i < itemSet.length; i++) {
                 selStr += "\r\n#L" + i + "# #v" + itemSet[i] + "# #t" + itemSet[i] + "##l";
@@ -80,12 +80,12 @@ function action(mode, type, selection) {
         } else if (selectedType == 1) { //Make a scroll
             status++;
 
-            selStr = "What kind of scrolls are you interested in making?#b";
-            itemSet = ["Scroll for One-Handed Sword for ATT", "Scroll for One-Handed Axe for ATT", "Scroll for One-Handed BW for ATT",
-                "Scroll for Dagger for ATT", "Scroll for Wand for Magic Att.", "Scroll for Staff for Magic Att.",
-                "Scroll for Two-handed Sword for ATT.", "Scroll for Two-handed Axe for ATT", "Scroll for Two-handed BW for ATT",
-                "Scroll for Spear for ATT", "Scroll for Pole Arm for ATT", "Scroll for Bow for ATT", "Scroll for Crossbow for ATT ",
-                "Scroll for Claw for ATT", "Scroll for Knuckle for ATT", "Scroll for Gun for ATT#k"];
+            selStr = "你想做什么卷轴?#b";
+            itemSet = ["#z2043000#", "#z2043100#", "#z2043200#",
+                "#z2043300#", "#z2043700#", "#z2043800#",
+                "#z2044000#", "#z2044100#", "#z2044200#",
+                "#z2044300#", "#z2044400#", "#z2044500#", "#z2044600#",
+                "#z2044700#", "#z2044800#", "#z2044900#"];
 
             for (var i = 0; i < itemSet.length; i++) {
                 selStr += "\r\n#L" + i + "# " + itemSet[i] + "#l";
@@ -93,7 +93,7 @@ function action(mode, type, selection) {
         } else {//Donate medicine ingredients
             status++;
 
-            selStr = "So you wish to donate some medicine ingredients? This is great news! Donations will be accepted in the unit of #b100#k. The donator will receive a marble that enables one to make a scroll. Which of these would you like to donate? #b";
+            selStr = "你想捐赠一些材料?太棒了!捐赠以#b100#k个位单位.捐赠的人将会得到一块用来制作卷轴的石头.你要捐赠什么? #b";
             itemSet = [4000276, 4000277, 4000278, 4000279, 4000280, 4000291, 4000292, 4000286, 4000287, 4000293, 4000294, 4000298, 4000284, 4000288, 4000285, 4000282, 4000295, 4000289, 4000296, 4000297];
 
             for (var i = 0; i < itemSet.length; i++) {
@@ -104,7 +104,7 @@ function action(mode, type, selection) {
         cm.sendSimple(selStr);
     } else if (status == 2) {
         selectedItem = selection;
-        cm.sendGetText("How many #b#t" + itemSet[selectedItem] + "##k do you want to make?");
+        cm.sendGetText("你打算做几个#b#t" + itemSet[selectedItem] + "##k 呢?");
     } else if (status == 3) {
         if (selectedType == 0) { //Medicines
             var text = cm.getText();
@@ -118,7 +118,7 @@ function action(mode, type, selection) {
             matQty = matQtySet[selectedItem];
             matMeso = matQtyMeso[selectedItem];
 
-            var prompt = "You want to make #b" + makeQty + " #t" + item + "##k? In order to make " + makeQty + " #t" + item + "#, you'll need the following items:\r\n";
+            var prompt = "你想制作#b#t" + makeQty + " #t" + item + "##k? 为了制作 #t" + makeQty + " #t" + item + "# 你需要以下物品:";
             if (mats instanceof Array) {
                 for (var i = 0; i < mats.length; i++) {
                     prompt += "\r\n#i" + mats[i] + "# " + matQty[i] * makeQty + " #t" + mats[i] + "#";
@@ -128,7 +128,7 @@ function action(mode, type, selection) {
             }
 
             if (matMeso > 0) {
-                prompt += "\r\n#i4031138# " + matMeso * makeQty + " meso";
+                prompt += "\r\n#i4031138# " + matMeso * makeQty + "金币";
             }
 
             cm.sendYesNo(prompt);
@@ -145,7 +145,7 @@ function action(mode, type, selection) {
             item = itemSet[selectedItem];
             mats = matSet[selectedItem];
             matQty = matQtySet[selectedItem];
-            var prompt = "You want to make #b#t" + item + "##k? In order to make #t" + item + "# you'll need the following items:";
+            var prompt = "你想制作#b#t" + item + "##k? 为了制作 #t" + item + "# 你需要以下物品:";
             if (mats instanceof Array) {
                 for (var i = 0; i < mats.length; i++) {
                     prompt += "\r\n#i" + mats[i] + "# " + matQty[i] + " #t" + mats[i] + "#";
@@ -162,7 +162,7 @@ function action(mode, type, selection) {
             rewdSet = [7, 7, [7, 8], 10, 11, 8, [7, 8], [7, 9], [7, 8], 9, 10, [10, 11], 11, [11, 12], 13, 13, 14, 15, [15, 16], 17];
 
             item = itemSet[selectedItem];
-            var prompt = "Are you sure you want to donate #b100 #t " + item + "##k?";
+            var prompt = "要捐赠#b100个#t" + item + "##k吗?";
             cm.sendYesNo(prompt);
         }
     } else if (status == 4) {
@@ -185,7 +185,7 @@ function action(mode, type, selection) {
             }
 
             if (!complete || !cm.canHold(item, makeQty)) {
-                cm.sendOk("Please make sure you are neither lacking ingredients or lacking space in your use inventory.");
+                cm.sendOk("检查背包是否满了,或者材料不足.");
             } else {
                 if (mats instanceof Array) {
                     for (var i = 0; i < mats.length; i++) {
@@ -222,7 +222,7 @@ function action(mode, type, selection) {
             }
 
             if (!complete || !cm.canHold(item, 1)) {
-                cm.sendOk("Please make sure you are neither lacking ingredients or lacking space in your use inventory.");
+                cm.sendOk("检查背包是否满了,或者材料不足.");
             } else {
                 if (mats instanceof Array) {
                     for (var i = 0; i < mats.length; i++) {
@@ -244,7 +244,7 @@ function action(mode, type, selection) {
             }
 
             if (!complete) {
-                cm.sendOk("Please make sure you are neither lacking ingredients or lacking space in your etc inventory.");
+                cm.sendOk("检查背包是否满了,或者材料不足.");
                 cm.dispose();
                 return;
             }
@@ -258,7 +258,7 @@ function action(mode, type, selection) {
             }
 
             if (!cm.canHold(4001124, reward)) {
-                cm.sendOk("Please make sure you are neither lacking ingredients or lacking space in your etc inventory.");
+                cm.sendOk("检查背包是否满了,或者材料不足.");
             } else {
                 cm.gainItem(item, -100);
                 cm.gainItem(4001124, reward);

@@ -62,33 +62,33 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            options = ["I want to make a ring.", "I want to discard the ring box I have."];
-            cm.sendSimple("I'm #p9201000#, the #bengagement ring maker#k. How can I help you?\r\n\r\n#b" + generateSelectionMenu(options));
+            options = ["我想做个戒指.", "我想打造我的订婚戒指盒."];
+            cm.sendSimple("我是#p9201000#,#b戒指制作商人#k.有什么事吗?\r\n\r\n#b" + generateSelectionMenu(options));
         } else if (status == 1) {
             if (selection == 0) {
                 if (!cm.isQuestCompleted(100400)) {
                     if (!cm.isQuestStarted(100400)) {
                         state = 0;
-                        cm.sendNext("So you want to make a engagement ring, huh? Very well, I can provide one after you receive #rblessings#k from your #b#p9201003##k.");
+                        cm.sendNext("所以你想做个订婚戒指，嗯?好的,当你获得#b#p9201003##k的#r祝福#k之后我可以为你服务.");
                     } else {
-                        cm.sendOk("Take the blessings from your #b#p9201003##k before trying to craft an engagement ring. They must be waiting for you at home, beyond #rHenesys hunting grounds#k.");
+                        cm.sendOk("获得#b#p9201003##k的#r祝福#k之后才可以做订婚戒指.他们正在等你,在#r射手村打猎场#k上面.");
                         cm.dispose();
                     }
                 } else {
                     if (hasEngagementBox(cm.getPlayer())) {
-                        cm.sendOk("Sorry, you already have an engagement box. I cannot provide you more than one box per time.");
+                        cm.sendOk("对不起,你已经有订婚戒指盒了. 我不能给你更多.");
                         cm.dispose();
                         return;
                     }
                     if (cm.getPlayer().getGender() != 0) {
-                        cm.sendOk("Sorry, but the ring box is currently available only for males.");
+                        cm.sendOk("对不起, 但是戒指盒只有男士的.");
                         cm.dispose();
                         return;
                     }
 
                     state = 1;
-                    options = ["Moonstone", "Star Gem", "Golden Heart", "Silver Swan"];
-                    var selStr = "So, what kind of engagement ring you want me to craft?\r\n\r\n#b" + generateSelectionMenu(options);
+                    options = ["月长石", "闪耀新星", "金心", "银翼"];
+                    var selStr = "那么,你想制作什么样的戒指呢?\r\n\r\n#b" + generateSelectionMenu(options);
                     cm.sendSimple(selStr);
                 }
             } else {
@@ -97,16 +97,16 @@ function action(mode, type, selection) {
                         cm.removeAll(i);
                     }
 
-                    cm.sendOk("Your ring box has been discarded.");
+                    cm.sendOk("你的戒指盒丢掉了.");
                 } else {
-                    cm.sendOk("You have no ring box to discard.");
+                    cm.sendOk("你没有.");
                 }
 
                 cm.dispose();
             }
         } else if (status == 2) {
             if (state == 0) {
-                cm.sendOk("Where do they live, you ask? My, it goes way back... you see, I'm a friend of theirs, and I was the one who crafted and personally delivered their engagement ring. They live beyond #rHenesys Hunting Grounds#k, I'm sure you know where it is.");
+                cm.sendOk("你问他们在哪?他们在#r射手打猎场上面#k.");
                 cm.startQuest(100400);
                 cm.dispose();
             } else {
@@ -120,19 +120,19 @@ function action(mode, type, selection) {
                 matQty = matQtySet[selection];
                 cost = costSet[selection];
 
-                var prompt = "Then I'm going to craft you a #b#t" + item + "##k, is that right?";
-                prompt += " In that case, I'm going to need specific items from you in order to make it. Make sure you have room in your inventory, though!#b";
+                var prompt = "要我制作一个#b#t" + item + "##k,对吗?";
+                prompt += "我需要一些材料.#b";
 
                 if (mats instanceof Array) {
                     for (var i = 0; i < mats.length; i++) {
-                        prompt += "\r\n#i" + mats[i] + "# " + matQty[i] + " #t" + mats[i] + "#";
+                        prompt += "\r\n#i" + mats[i] + "# " + matQty[i] + "个#t" + mats[i] + "#";
                     }
                 } else {
-                    prompt += "\r\n#i" + mats + "# " + matQty + " #t" + mats + "#";
+                    prompt += "\r\n#i" + mats + "# " + matQty + "个#t" + mats + "#";
                 }
 
                 if (cost > 0) {
-                    prompt += "\r\n#i4031138# " + cost + " meso";
+                    prompt += "\r\n#i4031138# " + cost + "金币";
                 }
 
                 cm.sendYesNo(prompt);
@@ -142,11 +142,11 @@ function action(mode, type, selection) {
             var recvItem = item, recvQty = 1, qty = 1;
 
             if (!cm.canHold(recvItem, recvQty)) {
-                cm.sendOk("Check your inventory for a free slot first.");
+                cm.sendOk("背包空间不足.");
                 cm.dispose();
                 return;
             } else if (cm.getMeso() < cost * qty) {
-                cm.sendOk("I'm sorry but there's a fee for my services. Please bring me the right amount of mesos here before trying to forge a ring.");
+                cm.sendOk("我要金币.");
                 cm.dispose();
                 return;
             } else {
@@ -162,7 +162,7 @@ function action(mode, type, selection) {
             }
 
             if (!complete) {
-                cm.sendOk("Hm, it seems you're lacking some ingredients for the engagement ring. Please provide them first, will you?");
+                cm.sendOk("材料不足?");
             } else {
                 if (mats instanceof Array) {
                     for (var i = 0; i < mats.length; i++) {
@@ -177,7 +177,7 @@ function action(mode, type, selection) {
                 }
 
                 cm.gainItem(recvItem, recvQty);
-                cm.sendOk("All done, the engagement ring came out just right. I wish you a happy engagement.");
+                cm.sendOk("给你.");
             }
             cm.dispose();
         }

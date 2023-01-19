@@ -31,7 +31,7 @@ function end(mode, type, selection) {
         qm.dispose();
     } else {
         if (status == 0 && mode == 0) {
-            qm.sendNext("Eh? Why? Is there something wrong?");
+            qm.sendNext("怎么了?还有什么问题么");
             qm.dispose();
             return;
         }
@@ -41,15 +41,15 @@ function end(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendYesNo("You managed to bring all of #t4032097#!!! Okay, I believe that your are now qualified to become an official knight! Do you want to become one?");
+            qm.sendYesNo("你带来了足够的#t4032097#。。。好吧，我相信你现在有资格成为正式骑士了。你愿意么？");
         } else if (status == 1) {
             if (qm.getPlayer().getJob().getId() == 1200 && qm.getPlayer().getRemainingSp() > ((qm.getPlayer().getLevel() - 30) * 3)) {
-                qm.sendNext("Wa, wait... you have way too much #bSP#k with you. You'll need to spend more SP on 1st-level skills to become an official knight.");
+                qm.sendNext("你的一转技能点还没有用完.");
                 qm.dispose();
             } else {
                 if (qm.getPlayer().getJob().getId() != 1210) {
                     if (!qm.canHold(1142067)) {
-                        qm.sendNext("If you wish to receive the medal befitting the title, you may want to make some room in your equipment inventory.");
+                        qm.sendNext("如果你想获得与头衔相符的奖牌，你可能需要在你的装备栏中腾出一些空间。");
                         qm.dispose();
                         return;
                     }
@@ -59,12 +59,12 @@ function end(mode, type, selection) {
                     qm.getPlayer().changeJob(Job.BLAZEWIZARD2);
                     qm.completeQuest();
                 }
-                qm.sendNext("You are no longer a Knight-in-Training. You are now an official Cygnus Knight!");
+                qm.sendNext("你已经不再是见习骑士了。你现在是正式的冒险骑士团成员.");
             }
         } else if (status == 2) {
-            qm.sendNextPrev("I have given you some #bSP#k. I have also given you some skills of Blaze Wizards that are only available to official knights, so keep working!");
+            qm.sendNextPrev("我给了你一些#b技能点#k，还有一些只有炎术士才能使用的技能，所以我希望你努力学习，并希望能像你的灵魂一样培养它。");
         } else if (status == 3) {
-            qm.sendPrev("Now that you have officially become one, I want you to keep that fire in you that you had when you first started this journey, but this time, as a proud member of the Cygnus Knights!");
+            qm.sendPrev("现在你已经是我们中的正式一员了，我希望你能够保持刚刚加入这段旅程时的热情，但这一次，是以冒险骑士的身份");
         } else if (status == 4) {
             qm.dispose();
         }

@@ -191,7 +191,7 @@ function afterSetup(eim) {
     }
 }
 
-function respawnStages(eim) {}
+function respawnStages(eim) { }
 
 function playerEntry(eim, player) {
     var map = eim.getMapInstance(entryMap);
@@ -246,12 +246,12 @@ function changedMap(eim, player, mapid) {
 
 function afterChangedMap(eim, player, mapid) {
     if (mapid == 990000100) {
-        var texttt = "So, here is the brief. You guys should be warned that, once out on the fortress outskirts, anyone that would not be equipping the #b#t1032033##k will die instantly due to the deteriorated state of the air around there. That being said, once your team moves out, make sure to #bhit the glowing rocks#k in that region and #bequip the dropped item#k before advancing stages. That will protect you thoroughly from the air sickness. Good luck!";
+        var texttt = "简单介绍一下。你们要注意，一旦离开堡垒外围，任何不装备#b#t1032033##k的人都会因为周围空气的恶化而立即死亡。也就是说，一旦你的团队出发，确保在更高阶段之前，先#b打碎该地区的发光岩石#k，#b装备掉下来的物品#k。这将彻底保护你免受昏迷之苦。祝你好运";
         player.getAbstractPlayerInteraction().npcTalk(9040000, texttt);
     }
 }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
 function playerDead(eim, player) {
     if (player.getMapId() == 990000900) {
@@ -285,9 +285,9 @@ function playerDisconnected(eim, player) {
     }
 }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
@@ -313,11 +313,11 @@ function clearPQ(eim) {
     eim.startEventTimer(bonusTime * 60000);
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
 function dispose(eim) {
     em.schedule("reopenGuildQuest", em.getLobbyDelay() * 1.5 * 1000);

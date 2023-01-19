@@ -31,7 +31,7 @@ function end(mode, type, selection) {
         qm.dispose();
     } else {
         if (status == 0 && mode == 0) {
-            qm.sendNext("Hmm? Why? What's holding you back?");
+            qm.sendNext("为什么？是什么阻碍了你？");
             qm.dispose();
             return;
         }
@@ -41,15 +41,15 @@ function end(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendYesNo("Oh, you brought all #t4032100#s! Ahaha, I knew you'd be good at it. Tell you what, I now commend that you're now ready to become an official knight. Do you want to become one right now?");
+            qm.sendYesNo("哦，你把#t4032100#都带来了！哈哈，我就知道你可以的。我觉得你已经准备好成为一名称职的骑士了。你现在愿意吗？");
         } else if (status == 1) {
             if (qm.getPlayer().getJob().getId() == 1500 && qm.getPlayer().getRemainingSp() > ((qm.getPlayer().getLevel() - 30) * 3)) {
-                qm.sendNext("Hey, how did you manage to hunt all that? You have way too much #bSP#k lying around unused! You can't become an official knight like this! Use more SP on the 1st level skill.");
+                qm.sendNext("你的一转技能点还没有用完.");
                 qm.dispose();
             } else {
                 if (qm.getPlayer().getJob().getId() != 1510) {
                     if (!qm.canHold(1142067)) {
-                        qm.sendNext("If you wish to receive the medal befitting the title, you may want to make some room in your equipment inventory.");
+                        qm.sendNext("如果你想获得与头衔相符的奖牌，你可能需要在你的装备栏中腾出一些空间。");
                         qm.dispose();
                         return;
                     }
@@ -59,12 +59,12 @@ function end(mode, type, selection) {
                     qm.getPlayer().changeJob(Job.THUNDERBREAKER2);
                     qm.completeQuest();
                 }
-                qm.sendNext("You are now no longer a Knight-in-Training. You have now officially become a Cygnus Knight.");
+                qm.sendNext("你已经不再是见习骑士了。你现在是正式的冒险骑士团成员.");
             }
         } else if (status == 2) {
-            qm.sendNextPrev("I have also given you some #bSP#k and the accompanying skills of a Thunder Breakers that are only available to the official knights. These skills are lightning-based, so use them wisely!");
+            qm.sendNextPrev("我给了你一些#b技能点#k，还有一些只有奇袭者才能使用的技能，所以我希望你努力学习，并希望能像你的灵魂一样培养它。");
         } else if (status == 3) {
-            qm.sendPrev("Well, personally, I hope you don't lose your enthusiasm even after becoming the Cygnus Knights. Always seek out the positive even if you're in the midst of a barrage of negative items.");
+            qm.sendPrev("好吧，就我个人而言，我希望你在成为冒险骑士后也不要失去热情。即使被负面的事情包围，也要努力寻找积极的一面.");
         } else if (status == 4) {
             qm.dispose();
         }

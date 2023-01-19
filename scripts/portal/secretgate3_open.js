@@ -30,7 +30,7 @@ function enter(pi) {
         pi.warp(990000641, 1);
         return true;
     } else {
-        pi.getPlayer().dropMessage(5, "This door is closed.");
+        pi.getPlayer().dropMessage(5, "门关了");
         return false;
     }
 }

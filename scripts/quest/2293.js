@@ -33,7 +33,7 @@ function start(mode, type, selection) {
     }
 
     if (status == 0) {
-        qm.sendNext("Do you remember the last song that the Spirit of Rock played? I can think of a few songs that he may be imitating, so listen carefully and tell me which song it is. #bYou only get one chance,#k so please choose wisely.");
+        qm.sendNext("你还记得摇滚精神演奏的最后一首歌吗？我能想到他可能在模仿的几首歌，所以仔细听，告诉我是哪首歌。#b你只有一次机会#k，所以请谨慎做出选择.");
         qm.forceStartQuest();
     } else if (status == 1) {
         qm.dispose();
@@ -60,26 +60,26 @@ function end(mode, type, selection) {
     } else if (status == 1) {
         if (selection == 1) {
             qm.playSound("Party1/Failed");
-            qm.sendOk("Awkwardly familiar...");
+            qm.sendOk("令人尴尬的熟悉。。。");
             status = -1;
         } else if (selection == 2) {
             qm.playSound("Coconut/Failed");
-            qm.sendOk("Was it this?");
+            qm.sendOk("是这个吗?");
             status = -1;
         } else if (selection == 3) {
             qm.playSound("quest2293/Die");
-            qm.sendOk("You heard that?");
+            qm.sendOk("你听到了吗?");
             status = -1;
         } else if (selection == 4) {
-            qm.sendGetNumber("Now, please tell me the answer. You only get #bone chance#k, so please choose wisely. Please enter #b1, 2, or 3#k in the window below.\r\n", 1, 1, 3);
+            qm.sendGetNumber("现在，请告诉我答案。你只有#b一次机会#k,所以请明智地选择。请在聊天窗口输入#b1, 2, 或者3#k\r\n", 1, 1, 3);
         }
     } else if (status == 2) {
         if (selection == 1) {
-            qm.sendOk("Obviously you don't enjoy music.");
+            qm.sendOk("显然你不喜欢音乐.");
         } else if (selection == 2) {
-            qm.sendOk("I suppose you could get #b#eone#n#k more chance.");
+            qm.sendOk("我想你可以再试一次.");
         } else if (selection == 3) {
-            qm.sendOk("So that was the song he was playing... Well, it wasn't my song after all, but I'm glad I can know that now with certainty. Thank you so much.");
+            qm.sendOk("所以这就是他演奏的那首歌。。。好吧，这毕竟不是我的歌，但我很高兴我现在可以肯定地知道。非常感谢。");
             qm.forceCompleteQuest();
             qm.gainExp(32500);
         } else {

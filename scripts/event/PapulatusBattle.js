@@ -129,7 +129,7 @@ function afterSetup(eim) {
     updateGateState(1);
 }
 
-function respawnStages(eim) {}
+function respawnStages(eim) { }
 
 function playerEntry(eim, player) {
     var map = eim.getMapInstance(entryMap);
@@ -140,7 +140,7 @@ function scheduledTimeout(eim) {
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -155,7 +155,7 @@ function playerLeft(eim, player) {
 
 function changedMap(eim, player, mapid) {
     if (mapid < minMapId || mapid > maxMapId) {
-        if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+        if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
             eim.unregisterPlayer(player);
             end(eim);
         } else {
@@ -164,12 +164,12 @@ function changedMap(eim, player, mapid) {
     }
 }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
-    if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+    if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
         end(eim);
     } else {
@@ -178,7 +178,7 @@ function playerRevive(eim, player) { // player presses ok on the death pop up.
 }
 
 function playerDisconnected(eim, player) {
-    if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+    if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
         end(eim);
     } else {
@@ -186,9 +186,9 @@ function playerDisconnected(eim, player) {
     }
 }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
@@ -225,9 +225,9 @@ function monsterKilled(mob, eim) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
 function updateGateState(newState) {    // thanks Conrad for noticing missing gate update
     em.getChannelServer().getMapFactory().getMap(220080000).getReactorById(2208001).forceHitReactor(newState);

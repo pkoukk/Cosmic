@@ -31,7 +31,7 @@
 var status = -1;
 
 function start() {
-    cm.sendSimple("Hold up! Access to this area is limited due to remodeling. I can only allow people who meet certain conditions to enter here.#b\n\r\n#L0#I'm helping #eBlake#n right now.#l\r\n#L1#I'm a #rVIP#b at this shopping Center!#l");
+    cm.sendSimple("等等！由于改建，进入该区域的道路受到限制。我只能允许符合某些条件的人进入这里。#b\n\r\n#L0#帮助#e布莱克#n.#l\r\n#L1#我是购物中心的#rVIP#b!#l");
 }
 
 function action(mode, type, selection) {
@@ -49,22 +49,22 @@ function action(mode, type, selection) {
             if (cm.isQuestStarted(2286) || cm.isQuestStarted(2287) || cm.isQuestStarted(2288)) {
                 var em = cm.getEventManager("RockSpirit");
                 if (!em.startInstance(cm.getPlayer())) {
-                    cm.sendOk("Uh... It looks like the rooms ahead are a bit crowded right now. Please wait around here for a bit, ok?");
+                    cm.sendOk("啊...看样子前面现在有点拥挤.等一下好吗?");
                 }
                 cm.dispose();
                 return;
             } else {
-                cm.sendOk("I did not hear anything from Blake that you are assisting him.");
+                cm.sendOk("我没有听到布莱克说你在帮助他。.");
             }
         } else {
             if (cm.isQuestCompleted(2290)) {
                 if (cm.getPlayer().getLevel() > 50) {
-                    cm.sendOk("The VIP area is available only for players #rlevel 50 or below#k.");
+                    cm.sendOk("VIP区域只有50级以下的玩家可以进入");
                 } else {
-                    cm.sendOk("The VIP area only gets available after handing over #r#t4032521#s#k from the #b'Admission to the VIP Zone'#k quest.");
+                    cm.sendOk("VIP区域只有持有 #r#t4032521#s#k的人才可以进入.");
                 }
             } else {
-                cm.sendOk("#rVIP#k? Yeah that is funny #rMr. VIP#k, now get lost before I call security.");
+                cm.sendOk("#rVIP#k? 听起来可真有趣 #rVIP先生#k?滚粗，不然我叫保安了.");
             }
         }
         cm.dispose();

@@ -46,9 +46,9 @@ function action(mode, type, selection) {
             } else if (mapid == 930000400) {
                 if (cm.haveItem(4001169, 20)) {
                     if (cm.isEventLeader()) {
-                        cm.sendNext("Oh you have brought them! We can now continue, shall we proceed?");
+                        cm.sendNext("哦，你带来了#z4001169#！我们现在可以继续了，好吗?");
                     } else {
-                        cm.sendOk("You have brought them, but you're not the leader! Please let the leader hand me the marbles...");
+                        cm.sendOk("你带来了全部的#z4001169#，但你不是队长！请让队长把毒珠递给我....");
                         cm.dispose();
 
                     }
@@ -65,24 +65,24 @@ function action(mode, type, selection) {
                             if (!cm.haveItem(2270004)) {
                                 if (cm.canHold(2270004, 10)) {
                                     cm.gainItem(2270004, 10);
-                                    cm.sendOk("Take 10 #t2270004#. First, #rweaken the #o9300174##k and, once it gets low health, use the item I gave you to capture them.");
+                                    cm.sendOk("请给我10个#t2270004#. 首先, #r攻击#o9300174##k 当它的生命值降低时，使用我给你的物品来捕捉它们.");
                                     cm.dispose();
 
                                 } else {
-                                    cm.sendOk("Please make space on your USE inventory before receiving the purifiers!");
+                                    cm.sendOk("在接收净化器之前，请给消耗栏腾出一些空间!");
                                     cm.dispose();
 
                                 }
                             } else {
-                                cm.sendYesNo(ellinStr + "\r\n\r\nIt may be you are #rwilling to quit#k? Please double-think it, maybe your partners are still trying this instance.");
+                                cm.sendYesNo(ellinStr + "\r\n\r\n你想离开？请再三考虑，也许你的队友还在尝试这个任务.");
                             }
                         } else {
-                            cm.sendYesNo("You guys caught all the #o9300174#. Let the party leader hand all #b20 #t4001169##k to me to proceed." + "\r\n\r\nIt may be you are #rwilling to quit#k? Please double-think it, maybe your partners are still trying this instance.");
+                            cm.sendYesNo("你们抓住了所有#o9300174#.请让你的队长把#b20个#t4001169##k交给我" + "\r\n\r\n还是你想离开？请再三考虑，也许你的队友还在尝试这个任务.");
                         }
                     }
                 }
             } else {
-                cm.sendYesNo(ellinStr + "\r\n\r\nIt may be you are #rwilling to quit#k? Please double-think it, maybe your partners are still trying this instance.");
+                cm.sendYesNo(ellinStr + "\r\n\r\n你想离开？请再三考虑，也许你的队友还在尝试这个任务.");
             }
         } else if (status == 1) {
             if (mapid == 930000000) {
@@ -107,25 +107,25 @@ function action(mode, type, selection) {
 function ellinMapMessage(mapid) {
     switch (mapid) {
         case 930000000:
-            return "Welcome to the Forest of Poison Haze. Proceed by entering the portal.";
+            return "欢迎来到毒雾森林。进入入口继续.";
 
         case 930000100:
-            return "The #b#o9300172##k have taken the area. We have to eliminate all these contaminated monsters to proceed further.";
+            return "#b#o9300172##k 已经占领了这个地区。我们必须消灭所有这些被污染的怪物才能继续前.";
 
         case 930000200:
-            return "A great spine has blocked the way ahead. To remove this barrier we must retrieve the poison the #b#o9300173##k carries to deter the overgrown spine. However, the poison in natural state can't be handled, as it is way too concentrated. Use the #bfountain#k over there to dilute it.";
+            return "一根大刺藤挡住了前面的路。为了消除这个障碍，我们必须找回#b#o9300173##k以阻止过度生长的脊柱。然而，天然状态下的毒药是不能处理的，因为它太浓了.我们需要再#b泉水#k那边稀释";
 
         case 930000300:
-            return "Oh great, you have reached me. We can now proceed further inside the forest.";
+            return "太棒了,你们来到这里了.我们现在可以继续深入树林探索了.";
 
         case 930000400:
-            return "The #b#o9300175##k took over this area. However they are not ordinary monsters, then regrow pretty fast, #rnormal weapon and magic does no harm to it#k at all. We have to purify all these contaminated monsters, using #b#t2270004##k! Let your group leader get me 20 Monster Marbles from them.";
+            return "#b#o9300175##k空这里这里.然而他们并不是普通的怪物,他们生长的很快,#r普通的攻击和魔法完全不法伤害他们#k.我们必须使用#b#t2270004##k净化这些被污染的怪物!让你的队长给我20个怪物毒珠.";
 
         case 930000600:
-            return "The root of all problems of the forest! Place the obtained Magic Stone on the Altar and prepare yourselves!";
+            return "这个森林问题的根源就在这里了! 把得到的魔法石放到祭坛上,保护好自己!";
 
         case 930000700:
-            return "This is it, you guys did it! Thank you so much for purifying the forest!!";
+            return "你们成功了!感谢你们净化了森林!!";
 
     }
 }

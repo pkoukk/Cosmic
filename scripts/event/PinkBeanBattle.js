@@ -90,7 +90,7 @@ function setEventRewards(eim) {
 }
 
 function afterSetup(eim) {
-    eim.dropMessage(5, "The first wave will start within 15 seconds, prepare yourselves.");
+    eim.dropMessage(5, "第一波会在15秒内开始，请做好准备.");
     eim.schedule("startWave", 15 * 1000);
 }
 
@@ -122,7 +122,7 @@ function setup(channel) {
 }
 
 function playerEntry(eim, player) {
-    eim.dropMessage(5, "[Expedition] " + player.getName() + " has entered the map.");
+    eim.dropMessage(5, "[远征] " + player.getName() + "进入了地图");
     var map = eim.getMapInstance(entryMap);
     player.changeMap(map, map.getPortal(0));
 }
@@ -133,18 +133,18 @@ function scheduledTimeout(eim) {
 
 function changedMap(eim, player, mapid) {
     if (mapid < minMapId || mapid > maxMapId) {
-        if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+        if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
             eim.unregisterPlayer(player);
-            eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+            eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
             end(eim);
         } else {
-            eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the expedition.");
+            eim.dropMessage(5, "[远征] " + player.getName() + " has left the 远征.");
             eim.unregisterPlayer(player);
         }
     }
 }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
 function playerDead(eim, player) {
     var count = eim.getIntProperty("fallenPlayers");
@@ -153,12 +153,12 @@ function playerDead(eim, player) {
     eim.setIntProperty("fallenPlayers", count);
 
     if (count == 5) {
-        eim.dropMessage(5, "[Expedition] Too many players have fallen, Pink Bean is now deemed undefeatable; the expedition is over.");
+        eim.dropMessage(5, "[远征] Too many players have fallen, Pink Bean is now deemed undefeatable; the 远征 is over.");
         end(eim);
     } else if (count == 4) {
-        eim.dropMessage(5, "[Expedition] Pink Bean is growing stronger than ever, last stand mode everyone!");
+        eim.dropMessage(5, "[远征] Pink Bean is growing stronger than ever, last stand mode everyone!");
     } else if (count == 3) {
-        eim.dropMessage(5, "[Expedition] Casualty count is starting to get out of control. Battle with care.");
+        eim.dropMessage(5, "[远征] Casualty count is starting to get out of control. Battle with care.");
     }
 }
 
@@ -173,25 +173,25 @@ function monsterRevive(eim, mob) {
 }
 
 function playerDisconnected(eim, player) {
-    if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+    if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
-        eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+        eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
         end(eim);
     } else {
-        eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the expedition.");
+        eim.dropMessage(5, "[远征] " + player.getName() + " has left the 远征.");
         eim.unregisterPlayer(player);
     }
 }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -287,8 +287,8 @@ function startWave(eim) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }

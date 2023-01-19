@@ -1,8 +1,8 @@
 /*
-	This file is part of the OdinMS Maple Story Server
+    This file is part of the OdinMS Maple Story Server
     Copyright (C) 2008 Patrick Huy <patrick.huy@frz.cc>
-		       Matthias Butz <matze@odinms.de>
-		       Jan Christian Meyer <vimes@odinms.de>
+               Matthias Butz <matze@odinms.de>
+               Jan Christian Meyer <vimes@odinms.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -57,39 +57,39 @@ function start() {
     const Point = Java.type('java.awt.Point');
     const spawnpoint = new Point(208, 83);
     stairwayToTheSky2.spawnMonsterOnGroundBelow(eliza, spawnpoint);
-    stairwayToTheSky2.broadcastMessage(PacketCreator.serverNotice(6, "Eliza has appeared with a black whirlwind."));
+    stairwayToTheSky2.broadcastMessage(PacketCreator.serverNotice(6, "艾利杰带着黑色旋风出现了。"));
     em.schedule("start", 3 * 60 * 60 * 1000);
 }
 
 // ---------- FILLER FUNCTIONS ----------
 
-function dispose() {}
+function dispose() { }
 
-function setup(eim, leaderid) {}
+function setup(eim, leaderid) { }
 
-function monsterValue(eim, mobid) {return 0;}
+function monsterValue(eim, mobid) { return 0; }
 
-function disbandParty(eim, player) {}
+function disbandParty(eim, player) { }
 
-function playerDisconnected(eim, player) {}
+function playerDisconnected(eim, player) { }
 
-function playerEntry(eim, player) {}
+function playerEntry(eim, player) { }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function scheduledTimeout(eim) {}
+function scheduledTimeout(eim) { }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerExit(eim, player) {}
+function playerExit(eim, player) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function clearPQ(eim) {}
+function clearPQ(eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 

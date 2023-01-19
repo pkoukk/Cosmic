@@ -24,11 +24,11 @@ status = -1;
 var sel, sel2;
 
 function start() {
-    cm.sendOk("Hello, the Maple 7th Day Market is currently unavailable.");
+    cm.sendOk("你好,现在市场还没有开放.");
     cm.dispose();
     return;
 
-    cm.sendSimple("Hello, the Maple 7th Day Market opens today.#b\r\n#L0#Move to Maple 7th Day Market map\r\n#L1#Listen for an explanation about the Maple 7th Day Market");
+    cm.sendSimple("你好,冒险岛周末集市开放了.#b\r\n#L0#进入市场地图");
 }
 
 function action(mode, type, selection) {
@@ -50,7 +50,7 @@ function action(mode, type, selection) {
             sel = selection;
         }
         if (selection == 0) {
-            cm.sendNext("Okay, we will send you to the Maple 7th Day Market map.");
+            cm.sendNext("好,我现在送你去周末集市.");
         } else {
             cm.sendSimple("What would you like to know about the Maple 7th Day Market?#b\r\n#L0#Where does the Maple 7th Day Market take place?\r\n#L1#What can you do at the Maple 7th Day Market?\r\n#L2#I do not have any questions.");
         }

@@ -22,7 +22,7 @@ var status;
 
 function start() {
     if (cm.isQuestStarted(3311)) {
-        cm.sendOk("The diary of Dr. De Lang. A lot of formulas and pompous scientific texts can be found all way through the pages.", 2);
+        cm.sendOk("德朗博士的的笔记.很多公式和浮夸的科学文献可以在书页中找到，但值得注意的是，在最后一篇文章（3周前）中，有人写道，他完成了对新赫罗里德蓝图改进的研究，从而为向社会展示它做了最后的准备。。。 后面没有内容了...", 2);
     }
     cm.dispose();
 }

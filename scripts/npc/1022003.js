@@ -51,8 +51,8 @@ function action(mode, type, selection) {
         cm.dispose();
     }
     if (status == 0 && mode == 1) {
-        var selStr = "Hm? Who might you be? Oh, you've heard about my forging skills? In that case, I'd be glad to process some of your ores... for a fee.#b"
-        var options = ["Refine a mineral ore", "Refine a jewel ore", "Upgrade a helmet", "Upgrade a shield"];
+        var selStr = "嗯？你会是谁呢？你听说过我的锻造技能吗？那样的话，我很乐意加工你们的矿石。。。收费。#b"
+        var options = ["锻造矿石", "锻造宝石", "升级头盔", "升级盾牌"];
         for (var i = 0; i < options.length; i++) {
             selStr += "\r\n#L" + i + "# " + options[i] + "#l";
         }
@@ -61,35 +61,35 @@ function action(mode, type, selection) {
     } else if (status == 1 && mode == 1) {
         selectedType = selection;
         if (selectedType == 0) { //mineral refine
-            var selStr = "So, what kind of mineral ore would you like to refine?#b";
-            var minerals = ["Bronze", "Steel", "Mithril", "Adamantium", "Silver", "Orihalcon", "Gold"];
+            var selStr = "要做哪种?#b";
+            var minerals = ["#z4011000#", "#z4011001#", "#z4011002#", "#z4011003#", "#z4011004#", "#z4011005#", "#z4011006#"];
             for (var i = 0; i < minerals.length; i++) {
                 selStr += "\r\n#L" + i + "# " + minerals[i] + "#l";
             }
             cm.sendSimple(selStr);
             equip = false;
         } else if (selectedType == 1) { //jewel refine
-            var selStr = "So, what kind of jewel ore would you like to refine?#b";
-            var jewels = ["Garnet", "Amethyst", "Aquamarine", "Emerald", "Opal", "Sapphire", "Topaz", "Diamond", "Black Crystal"];
+            var selStr = "要做哪种?#b";
+            var jewels = ["#z4021000#", "#z4021001#", "#z4021002#", "#z4021003#", "#z4021004#", "#z4021005#", "#z4021006#", "#z4021007#", "#z4021008#"];
             for (var i = 0; i < jewels.length; i++) {
                 selStr += "\r\n#L" + i + "# " + jewels[i] + "#l";
             }
             cm.sendSimple(selStr);
             equip = false;
         } else if (selectedType == 2) { //helmet refine
-            var selStr = "Ah, you wish to upgrade a helmet? Then tell me, which one?#b";
-            var helmets = ["Blue Metal Gear#k - Common Lv. 15#b", "Yellow Metal Gear#k - Common Lv. 15#b", "Metal Koif#k - Warrior Lv. 10#b", "Mithril Koif#k - Warrior Lv. 10#b", "Steel Helmet#k - Warrior Lv. 12#b", "Mithril Helmet#k - Warrior Lv. 12#b", "Steel Full Helm#k - Warrior Lv. 15#b",
-                "Mithril Full Helm#k - Warrior Lv. 15#b", "Iron Viking Helm#k - Warrior Lv. 20#b", "Mithril Viking Helm#k - Warrior Lv. 20#b", "Steel Football Helmet#k - Warrior Lv. 20#b", "Mithrill Football Helmet#k - Warrior Lv. 20#b", "Mithril Sharp Helm#k - Warrior Lv. 22#b", "Gold Sharp Helm#k - Warrior Lv. 22#b",
-                "Orihalcon Burgernet Helm#k - Warrior Lv. 25#b", "Gold Burgernet Helm#k - Warrior Lv. 25#b", "Great Red Helmet#k - Warrior Lv. 35#b", "Great Blue Helmet#k - Warrior Lv. 35#b", "Mithril Nordic Helm#k - Warrior Lv. 40#b", "Gold Nordic Helm#k - Warrior Lv. 40#b", "Mithril Crusader Helm#k - Warrior Lv. 50#b",
-                "Silver Crusader Helm#k - Warrior Lv. 50#b", "Old Steel Nordic Helm#k - Warrior Lv. 55#b", "Old Mithril Nordic Helm#k - Warrior Lv. 55#b"];
+            var selStr = "哪一种?#b";
+            var helmets = ["#z1002042#", "#z1002041#", "#z1002002#", "#z1002044#", "#z1002003#", "#z1002040#", "#z1002007#",
+                "#z1002052#", "#z1002011#", "#z1002058#", "#z1002009#", "#z1002056#", "#z1002087#", "#z1002088#",
+                "#z1002050#", "#z1002049#", "#z1002047#", "#z1002048#", "#z1002099#", "#z1002098#", "#z1002085#",
+                "#z1002028#", "#z1002022#", "#z1002101#"];
             for (var i = 0; i < helmets.length; i++) {
                 selStr += "\r\n#L" + i + "# " + helmets[i] + "#l";
             }
             cm.sendSimple(selStr);
             equip = true;
         } else if (selectedType == 3) { //shield refine
-            var selStr = "Ah, you wish to upgrade a shield? Then tell me, which one?#b";
-            var shields = ["Adamantium Tower Shield#k - Warrior Lv. 40#b", "Mithril Tower Shield#k - Warrior Lv. 40#b", "Silver Legend Shield#k - Warrior Lv. 60#b", "Adamantium Legend Shield#k - Warrior Lv. 60#b"];
+            var selStr = "哪一种?#b";
+            var shields = ["#z1092014#", "#z1092013#", "#z1092010#", "#z1092011#"];
             for (var i = 0; i < shields.length; i++) {
                 selStr += "\r\n#L" + i + "# " + shields[i] + "#l";
             }
@@ -121,7 +121,7 @@ function action(mode, type, selection) {
             cost = costSet[selectedItem];
         }
 
-        var prompt = "So, you want me to make some #t" + item + "#s? In that case, how many do you want me to make?";
+        var prompt = "想要些#t" + item + "#?要多少个?";
 
         cm.sendGetNumber(prompt, 1, 1, 100)
     } else if (status == 3 && mode == 1) {
@@ -154,13 +154,13 @@ function action(mode, type, selection) {
             matQty = matQtySet[selectedItem];
             cost = costSet[selectedItem];
         }
-        var prompt = "You want me to make ";
+        var prompt = "制作";
         if (qty == 1) {
-            prompt += "a #t" + item + "#?";
+            prompt += "一个#t" + item + "#?";
         } else {
-            prompt += qty + " #t" + item + "#?";
+            prompt += qty + "个#t" + item + "#?";
         }
-        prompt += " In that case, I'm going to need specific items from you in order to make it. Make sure you have room in your inventory, though!#b";
+        prompt += "那样,我需要这些东西.确保你的背包里有足够的空间!#b";
         if (mats instanceof Array) {
             for (var i = 0; i < mats.length; i++) {
                 prompt += "\r\n#i" + mats[i] + "# " + matQty[i] * qty + " #t" + mats[i] + "#";
@@ -169,18 +169,18 @@ function action(mode, type, selection) {
             prompt += "\r\n#i" + mats + "# " + matQty * qty + " #t" + mats + "#";
         }
         if (cost > 0) {
-            prompt += "\r\n#i4031138# " + cost * qty + " meso";
+            prompt += "\r\n#i4031138# " + cost * qty + "金币";
         }
         cm.sendYesNo(prompt);
     } else if (status == 4 && mode == 1) {
         var complete = true;
 
         if (!cm.canHold(item, qty)) {
-            cm.sendOk("Check your inventory for a free slot first.");
+            cm.sendOk("检查一下背包是不是满了.");
             cm.dispose();
             return;
         } else if (cm.getMeso() < cost * qty) {
-            cm.sendOk("I'm afraid you cannot afford my services.");
+            cm.sendOk("我想你还没有足够的金币.");
             cm.dispose();
             return;
         } else {
@@ -195,7 +195,7 @@ function action(mode, type, selection) {
             }
         }
         if (!complete) {
-            cm.sendOk("I'm afraid you're missing something for the item you want. See you another time, yes?");
+            cm.sendOk("你少了点什么东西?");
         } else {
             if (mats instanceof Array) {
                 for (var i = 0; i < mats.length; i++) {
@@ -206,7 +206,7 @@ function action(mode, type, selection) {
             }
             cm.gainMeso(-cost * qty);
             cm.gainItem(item, qty);
-            cm.sendOk("There, finished. What do you think, a piece of art, isn't it? Well, if you need anything else, you nkow where to find me.");
+            cm.sendOk("完成了.怎么样，是不是做的很棒？如果你还想做点别的东西，你知道在哪找我");
         }
         cm.dispose();
     }

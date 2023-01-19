@@ -6,18 +6,18 @@ function start(mode, type, selection) {
         status -= 2;
     } else if (mode != 1) {
         //if (mode == 0)
-        qm.sendNext("#b(You need to think about this for a second...)#k");
+        qm.sendNext("#b(请慎重考虑清楚。)#k");
         qm.dispose();
         return;
     }
 
     if (status == 0) {
-        qm.sendNext("How's the training going? Hmmm... Level 70... That's still not much, but you have really made some strides since the first time I met you fresh out of ice. Keep training, and I am sure one day you'll be able to regain your pre-battle form.");
+        qm.sendNext("训练进行得怎么样？嗯......70级......这还不算多，但自从我第一次见到你时，你真的取得了一些进步。继续训练，我相信有一天你会恢复战斗前的状态。");
     } else if (status == 1) {
-        qm.sendAcceptDecline("But before doing that, I'll need you back in Rein for a bit. #bYour pole arm is reacting strange once again. It looks like it has something it wants to tell you. #kIt might be able to awaken your hidden powers, so please come immediately.");
+        qm.sendAcceptDecline("但在做这件事之前，我需要你回到雷恩待一段时间#b你的杆臂再次反应奇怪。看起来它有什么想告诉你的#k它可能会唤醒你隐藏的力量，所以请立即来。");
     } else if (status == 2) {
         qm.forceStartQuest();
-        qm.sendOk("Anyway, I thought it was really something that a weapon has its own identity, but seriously... this weapon does not stop talking. It first kept on crying because I wasn't really paying attention to its needs, and... ahh, please keep this a secret from the pole arm. I don't think it's a good idea to upset the weapon any further.");
+        qm.sendOk("不管怎么说，我以为武器有自己的身份，但说真的。。。这武器不停地说话。它先是不停地哭，因为我没有真正注意到它的需要，然后。。。啊，请保守这个秘密。我不认为再打乱武器是个好主意。");
     } else if (status == 3) {
         qm.dispose();
     }

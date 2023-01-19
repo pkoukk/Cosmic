@@ -40,14 +40,14 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendNext("#b#p1104002##k... The black witch... Trapped me here... There's no time now, she's already on her way to #rattack Ereve#k!");
+            cm.sendNext("#b#p1104002##k... 黑魔女...把我困在这里... 没多少时间了, 她已经开始#r入侵圣地#k了!");
         } else if (status == 1) {
-            cm.sendYesNo("Fellow Knight, you must reach to #rEreve#k right now, #rthe Empress is in danger#k!! Even in this condition, I can still Magic Warp you there. When you're ready talk to me. #bAre you ready to face Eleanor?#k");
+            cm.sendYesNo("尊敬的骑士,你现在必须赶去#r圣地#k, #r女皇有危险#k!! 我会用我的魔法将你传送过去.你准备好了就告诉我. #b要去圣地面对黑魔女了吗?#k");
         } else if (status == 2) {
             if (cm.getWarpMap(913030000).countPlayers() == 0) {
                 cm.warp(913030000, 0);
             } else {
-                cm.sendOk("There's someone already challenging her. Please wait awhile.");
+                cm.sendOk("有人正在挑战她,请等一会.");
             }
 
             cm.dispose();

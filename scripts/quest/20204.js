@@ -31,7 +31,7 @@ function end(mode, type, selection) {
         qm.dispose();
     } else {
         if (status == 0 && mode == 0) {
-            qm.sendNext("What's holding you back?");
+            qm.sendNext("是什么阻碍了你？");
             qm.dispose();
             return;
         }
@@ -41,15 +41,15 @@ function end(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendYesNo("So you brought all the #t4032099#s with you. This is much b... way, I shouldn't congratulate you for doing something that you should be doing. At least, I can tell that you are now qualified to become an official knight. Do you want to become one right now?");
+            qm.sendYesNo("你带来了所有的#t4032099#。这太...，好吧，我不应该祝贺你做到了你应该做的事情。不过，我可以说你现在有资格成为一名正式骑士。你现在愿意吗？");
         } else if (status == 1) {
             if (qm.getPlayer().getJob().getId() == 1400 && qm.getPlayer().getRemainingSp() > ((qm.getPlayer().getLevel() - 30) * 3)) {
-                qm.sendNext("What's with all this #bSP#k lying around? Use more SP on your 1st-level skills.");
+                qm.sendNext("你的一转技能点还没有用完.");
                 qm.dispose();
             } else {
                 if (qm.getPlayer().getJob().getId() != 1410) {
                     if (!qm.canHold(1142067)) {
-                        qm.sendNext("If you wish to receive the medal befitting the title, you may want to make some room in your equipment inventory.");
+                        qm.sendNext("如果你想获得与头衔相符的奖牌，你可能需要在你的装备栏中腾出一些空间。");
                         qm.dispose();
                         return;
                     }
@@ -59,12 +59,12 @@ function end(mode, type, selection) {
                     qm.getPlayer().changeJob(Job.NIGHTWALKER2);
                     qm.completeQuest();
                 }
-                qm.sendNext("You are no longer a Knight-in-Training. You have officially become a Cygnus Knight.");
+                qm.sendNext("你已经不再是见习骑士了。你现在是正式的冒险骑士团成员.");
             }
         } else if (status == 2) {
-            qm.sendNextPrev("I have given you some #bSP#k. I have also given you some skills of Night Walker that are only available to official knights, so keep working!");
+            qm.sendNextPrev("我给了你一些#b技能点#k，还有一些只有夜行者才能使用的技能，所以我希望你努力学习，并希望能像你的灵魂一样培养它。");
         } else if (status == 3) {
-            qm.sendPrev("As a member of the Cygnus Knights, I hope you remain unaffected by temptations and stay strong.");
+            qm.sendPrev("作为一位正式的骑士团成员，我希望你不受诱惑的影响，保持坚定");
         } else if (status == 4) {
             qm.dispose();
         }

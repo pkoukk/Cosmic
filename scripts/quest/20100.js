@@ -37,12 +37,12 @@ function start(mode, type, selection) {
         return;
     }
     if (status == 0) {
-        qm.sendAcceptDecline("Ahhh, you're back. I can see that you're at level 10 now. It looks like you're flashing a glimmer of hope towards becoming a Knight. The basic training has now ended, and it's time for you to make the decision.");
+        qm.sendAcceptDecline("啊，你回来了。我可以看到你现在是10级。看起来你有一线希望成为骑士。基本训练现在已经结束，是你做出决定的时候了。");
     } else if (status == 1) {
         qm.forceStartQuest();
         qm.forceCompleteQuest();
 
-        qm.sendOk("Now look to the left. The leaders of the Knights will be waiting for you. There will be 5 paths for you to choose from. All you need to do is choose one of them. All 5 of them will lead you to the path of a Knight, so... I suggest you pay attention to what each path offers, and select the one you'd most like to take.");
+        qm.sendOk("现在向左看。骑士团的领袖在等级选择，这有五条路径供您选择。你只需要从中选择一个。这五条路都会带你走上骑士之路，所以......我建议你注意每一条路都提供了什么，并选择你最想走的路。");
     } else if (status == 2) {
         qm.dispose();
     }

@@ -3,7 +3,7 @@ function enter(pi) {
         pi.playPortalSound();
         pi.warp(100030103, "west00");
     } else {
-        pi.playerMessage(5, "You cannot go to the Back Yard without a reason");
+        pi.playerMessage(5, "你不能无缘无故地去尤塔家后院");
     }
     return true;
 }  

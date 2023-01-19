@@ -21,7 +21,7 @@ function start() {
 
 function action(mode, type, selection) {
     if (mode <= 0 && status == 0) {
-        cm.sendNext("If you aren't in a hurry, then please come back in a bit. As you can see, there's so much work going on right now that I can't possibly give them to you on time.");
+        cm.sendNext("如果你不着急的话，请稍后再来。如你所见，现在有很多工作要做，我不可能按时交给你。");
         cm.dispose();
         return;
     }
@@ -36,11 +36,11 @@ function action(mode, type, selection) {
     }
 
     if (status == 0) {
-        cm.sendYesNo("Are you here to refine the ores of a mineral or a jewel? It doesn't matter how many ores you have, if you don't have them refined by a master like me, then they won't see the light of day. What do you think, do you want to refine them right now?");
+        cm.sendYesNo("你是来炼制矿石还是珠宝？不管你有多少矿石，如果你没有像我这样的大师炼制，他们就看不到光明。你觉得呢，你现在想改进一下吗？");
     }
     if (status == 1 && mode == 1) {
-        var selStr = "I like your attitude! Let's just take care of this right now. What kind of ores would you like to refine? #b";
-        var options = ["Refine mineral ore", "Refine jewel ores", "Refine crystal ores"];
+        var selStr = "我喜欢你的态度!我们直接开始我们的事情吧.你想让我帮你锻造什么样的矿石? #b";
+        var options = ["冶炼金属矿石", "冶炼珠宝", "冶炼水晶"];
         for (var i = 0; i < options.length; i++) {
             selStr += "\r\n#L" + i + "# " + options[i] + "#l";
         }
@@ -49,24 +49,24 @@ function action(mode, type, selection) {
         selectedType = selection;
 
         if (selectedType == 0) { //mineral refine
-            var selStr = "Which mineral would you like to refine?#b";
-            var minerals = ["Bronze Plate", "Steel Plate", "Mithril Plate", "Adamantium Plate", "Silver Plate", "Orihalcon Plate", "Gold Plate", "Lithium"];
+            var selStr = "要冶炼什么矿石?#b";
+            var minerals = ["#z4011000#", "#z4011001#", "#z4011002#", "#z4011003#", "#z4011004#", "#z4011005#", "#z4011006#", "#z4011008#"];
             for (var i = 0; i < minerals.length; i++) {
                 selStr += "\r\n#L" + i + "# " + minerals[i] + "#l";
             }
             cm.sendSimple(selStr);
             equip = false;
         } else if (selectedType == 1) { //jewel refine
-            var selStr = "Which jewel would you like to refine?#b";
-            var jewels = ["Garnet", "Amethyst", "Aquamarine", "Emerald", "Opal", "Sapphire", "Topaz", "Diamond", "Black Crystal"];
+            var selStr = "要制作什么宝石?#b";
+            var jewels = ["#z4021000#", "#z4021001#", "#z4021002#", "#z4021003#", "#z4021004#", "#z4021005#", "#z4021006#", "#z4021007#", "#z4021008#"];
             for (var i = 0; i < jewels.length; i++) {
                 selStr += "\r\n#L" + i + "# " + jewels[i] + "#l";
             }
             cm.sendSimple(selStr);
             equip = false;
         } else if (selectedType == 2) { //Crystal refine
-            var selStr = "A crystal? That's a rare item indeed. Don't worry, I can refine it just as well as others. Which crystal would you like to refine? #b";
-            var crystals = ["Power Crystal", "Wisdom Crystal", "DEX Crystal", "LUK Crystal"];
+            var selStr = "水晶? 那是贵重物品.别担心, 我一样能胜任.想要锻造什么水晶? #b";
+            var crystals = ["#z4005000#", "#z4005001#", "#z4005002#", "#z4005003#"];
             for (var i = 0; i < crystals.length; i++) {
                 selStr += "\r\n#L" + i + "# " + crystals[i] + "#l";
             }
@@ -105,7 +105,7 @@ function action(mode, type, selection) {
             cost = costSet[selectedItem];
         }
 
-        var prompt = "So, you want me to make some #t" + item + "#s? In that case, how many do you want me to make?";
+        var prompt = "那么,你是想制作#t" + item + "#?要做多少呢?";
         cm.sendGetNumber(prompt, 1, 1, 100)
     } else if (status == 4 && mode == 1) {
         if (equip) {
@@ -115,14 +115,14 @@ function action(mode, type, selection) {
             qty = (selection > 0) ? selection : (selection < 0 ? -selection : 1);
         }
 
-        var prompt = "You want me to make ";
+        var prompt = "你要我制作";
         if (qty == 1) {
-            prompt += "a #t" + item + "#?";
+            prompt += "一个 #t" + item + "#?";
         } else {
             prompt += qty + " #t" + item + "#?";
         }
 
-        prompt += " In that case, I'm going to need specific items from you in order to make it. Make sure you have room in your inventory, though!#b";
+        prompt += "给我提供这些材料,记得整理一下背包,确保有足够的空间存放你要的东西#b";
 
         if (mats instanceof Array) {
             for (var i = 0; i < mats.length; i++) {
@@ -133,7 +133,7 @@ function action(mode, type, selection) {
         }
 
         if (cost > 0) {
-            prompt += "\r\n#i4031138# " + cost * qty + " meso";
+            prompt += "\r\n#i4031138# " + cost * qty + "金币";
         }
 
         cm.sendYesNo(prompt);
@@ -155,9 +155,9 @@ function action(mode, type, selection) {
         }
 
         if (!cm.canHold(recvItem, recvQty)) {
-            cm.sendOk("I'm afraid you are short in inventory slots for this.");
+            cm.sendOk("我想你背包放不下更多这种东西了.");
         } else if (cm.getMeso() < cost * qty) {
-            cm.sendOk("I'm afraid you cannot afford my services.");
+            cm.sendOk("我想你的金币不够支付我的劳动.");
         } else {
             if (mats instanceof Array) {
                 for (var i = 0; complete && i < mats.length; i++) {
@@ -179,7 +179,7 @@ function action(mode, type, selection) {
             }
 
             if (!complete) {
-                cm.sendOk("Please check and see if you have all the necessary items with you. If so, then please check your etc. inventory and see if you have an empty space.");
+                cm.sendOk("检查下其他栏是不是没有空间了.");
             } else {
                 if (mats instanceof Array) {
                     for (var i = 0; i < mats.length; i++) {
@@ -194,7 +194,7 @@ function action(mode, type, selection) {
                 }
 
                 cm.gainItem(recvItem, recvQty);
-                cm.sendOk("There, finished. What do you think, a piece of art, isn't it? Well, if you need anything else, you know where to find me.");
+                cm.sendOk("做好了,给你. 你觉得怎么样,是不是充满艺术感? 好啦,如果你还有什么需要,你知道在哪里可以找到我.");
             }
         }
 

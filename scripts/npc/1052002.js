@@ -57,8 +57,8 @@ function action(mode, type, selection) {
         cm.dispose();
     }
     if (status == 0 && mode == 1) {
-        var selStr = "Pst... If you have the right goods, I can turn it into something niice...#b"
-        var options = ["Create a glove", "Upgrade a glove", "Create a claw", "Upgrade a claw", "Create materials"];
+        var selStr = "我可以制作一些道具\r\n...#b"
+        var options = ["制作手套", "升级手套", "制作拳套", "升级拳套", "制作材料"];
         for (var i = 0; i < options.length; i++) {
             selStr += "\r\n#L" + i + "# " + options[i] + "#l";
         }
@@ -66,44 +66,44 @@ function action(mode, type, selection) {
     } else if (status == 1 && mode == 1) {
         selectedType = selection;
         if (selectedType == 0) { //glove refine
-            var selStr = "So, what kind of glove would you like me to make?#b";
-            var gloves = ["Work Gloves#k - Common Lv. 10#b", "Brown Duo#k - Thief Lv. 15#b", "Blue Duo#k - Thief Lv. 15#b", "Black Duo#k - Thief Lv. 15#b", "Bronze Mischief#k - Thief Lv. 20#b", "Bronze Wolfskin#k - Thief Lv. 25#b", "Steel Sylvia#k - Thief Lv. 30#b",
-                "Steel Arbion#k - Thief Lv. 35#b", "Red Cleave#k - Thief Lv. 40#b", "Blue Moon Glove#k - Thief Lv. 50#b", "Bronze Pow#k - Thief Lv. 60#b"];
+            var selStr = "要做哪种?#b";
+            var gloves = ["#z1082002##k - Lv. 10#b", "#z1082029##k - Lv. 15#b", "#z1082030##k - Lv. 15#b", "#z1082031##k - Lv. 15#b", "#z1082032##k - Lv. 20#b", "#z1082037##k - Lv. 25#b", "#z1082042##k - Lv. 30#b",
+                "#z1082046##k - Lv. 35#b", "#z1082075##k - Lv. 40#b", "#z1082065##k - Lv. 50#b", "#z1082092##k - Lv. 60#b"];
             for (var i = 0; i < gloves.length; i++) {
                 selStr += "\r\n#L" + i + "# " + gloves[i] + "#l";
             }
             equip = true;
             cm.sendSimple(selStr);
         } else if (selectedType == 1) { //glove upgrade
-            var selStr = "An upgraded glove? Sure thing, but note that upgrades won't carry over to the new item... #b";
-            var gloves = ["Mithril Mischief#k - Thief Lv. 20#b", "Dark Mischief#k - Thief Lv. 20#b", "Mithril Wolfskin#k - Thief Lv. 25#b",
-                "Dark Wolfskin#k - Thief Lv. 25#b", "Silver Sylvia#k - Thief Lv. 30#b", "Gold Sylvia#k - Thief Lv. 30#b", "Orihalcon Arbion#k - Thief Lv. 35#b", "Gold Arbion#k - Thief Lv. 35#b", "Gold Cleave#k - Thief Lv. 40#b",
-                "Dark Cleave#k - Thief Lv. 40#b", "Red Moon Glove#k - Thief Lv. 50#b", "Brown Moon Glove#k - Thief Lv. 50#b", "Silver Pow#k - Thief Lv. 60#b", "Gold Pow#k - Thief Lv. 60#b"];
+            var selStr = "要做哪种#b";
+            var gloves = ["#z1082033##k Lv. 20#b", "#z1082034##k Lv. 20#b", "#z1082038##k Lv. 25#b",
+                "#z1082039##k Lv. 25#b", "#z1082043##k Lv. 30#b", "#z1082044##k Lv. 30#b", "#z1082047##k Lv. 35#b", "#z1082045##k Lv. 35#b", "#z1082076##k Lv. 40#b",
+                "#z1082074##k Lv. 40#b", "#z1082067##k Lv. 50#b", "#z1082066##k Lv. 50#b", "#z1082093##k Lv. 60#b", "#z1082094##k Lv. 60#b"];
             for (var i = 0; i < gloves.length; i++) {
                 selStr += "\r\n#L" + i + "# " + gloves[i] + "#l";
             }
             equip = true;
             cm.sendSimple(selStr);
         } else if (selectedType == 2) { //claw refine
-            var selStr = "So, what kind of claw would you like me to make?#b";
-            var claws = ["Steel Titans#k - Thief Lv. 15#b", "Bronze Igor#k - Thief Lv. 20#b", "Meba#k - Thief Lv. 25#b", "Steel Guards#k - Thief Lv. 30#b", "Bronze Guardian#k - Thief Lv. 35#b", "Steel Avarice#k - Thief Lv. 40#b", "Steel Slain#k - Thief Lv. 50#b"];
+            var selStr = "要做哪种?#b";
+            var claws = ["#z1472001##k Lv. 15#b", "#z1472004##k Lv. 20#b", "#z1472007##k Lv. 25#b", "#z1472008##k Lv. 30#b", "#z1472011##k Lv. 35#b", "#z1472014##k Lv. 40#b", "#z1472018##k Lv. 50#b"];
             for (var i = 0; i < claws.length; i++) {
                 selStr += "\r\n#L" + i + "# " + claws[i] + "#l";
             }
             equip = true;
             cm.sendSimple(selStr);
         } else if (selectedType == 3) { //claw upgrade
-            var selStr = "An upgraded claw? Sure thing, but note that upgrades won't carry over to the new item...#b";
-            var claws = ["Mithril Titans#k - Thief Lv. 15#b", "Gold Titans#k - Thief Lv. 15#b", "Steel Igor#k - Thief Lv. 20#b", "Adamantium Igor#k - Thief Lv. 20#b", "Mithril Guards#k - Thief Lv. 30#b", "Adamantium Guards#k - Thief Lv. 30#b",
-                "Silver Guardian#k - Thief Lv. 35#b", "Dark Guardian#k - Thief Lv. 35#b", "Blood Avarice#k - Thief Lv. 40#b", "Adamantium Avarice#k - Thief Lv. 40#b", "Dark Avarice#k - Thief Lv. 40#b", "Blood Slain#k - Thief Lv. 50#b", "Sapphire Slain#k - Thief Lv. 50#b"];
+            var selStr = "要做哪种#b";
+            var claws = ["#z1472002##k Lv. 15#b", "#z1472003##k Lv. 15#b", "#z1472005##k Lv. 20#b", "#z1472006##k Lv. 20#b", "#z1472009##k Lv. 30#b", "#z1472010##k Lv. 30#b",
+                "#z1472012##k Lv. 35#b", "#z1472013##k Lv. 35#b", "#z1472015##k Lv. 40#b", "#z1472016##k Lv. 40#b", "#z1472017##k Lv. 40#b", "#z1472019##k Lv. 50#b", "#z1472020##k Lv. 50#b"];
             for (var i = 0; i < claws.length; i++) {
                 selStr += "\r\n#L" + i + "# " + claws[i] + "#l";
             }
             equip = true;
             cm.sendSimple(selStr);
         } else if (selectedType == 4) { //material refine
-            var selStr = "Materials? I know of a few materials that I can make for you...#b";
-            var materials = ["Make Processed Wood with Tree Branch", "Make Processed Wood with Firewood", "Make Screws (packs of 15)"];
+            var selStr = "我可以为你制作着些材料...#b";
+            var materials = ["用#z4000003#制作#z4003001#", "用#z4000018#制作#z4003001#", "制作#z4003000#(15个)"];
             for (var i = 0; i < materials.length; i++) {
                 selStr += "\r\n#L" + i + "# " + materials[i] + "#l";
             }
@@ -126,7 +126,7 @@ function action(mode, type, selection) {
             cost = costSet[selectedItem];
         }
 
-        var prompt = "So, you want me to make some #t" + item + "#s? In that case, how many do you want me to make?";
+        var prompt = "想制作#t" + item + "#?做多少?";
 
         cm.sendGetNumber(prompt, 1, 1, 100)
     } else if (status == 3 && mode == 1) {
@@ -175,14 +175,14 @@ function action(mode, type, selection) {
             cost = costSet[selectedItem];
         }
 
-        var prompt = "You want me to make ";
+        var prompt = "要制作";
         if (qty == 1) {
-            prompt += "a #t" + item + "#?";
+            prompt += "一个#t" + item + "#?";
         } else {
-            prompt += qty + " #t" + item + "#?";
+            prompt += qty + "个#t" + item + "#?";
         }
 
-        prompt += " In that case, I'm going to need specific items from you in order to make it. Make sure you have room in your inventory, though!#b";
+        prompt += "我需要这些材料!#b";
 
         if (mats instanceof Array) {
             for (var i = 0; i < mats.length; i++) {
@@ -193,7 +193,7 @@ function action(mode, type, selection) {
         }
 
         if (cost > 0) {
-            prompt += "\r\n#i4031138# " + cost * qty + " meso";
+            prompt += "\r\n#i4031138# " + cost * qty + "金币";
         }
 
         cm.sendYesNo(prompt);
@@ -209,11 +209,11 @@ function action(mode, type, selection) {
         }
 
         if (!cm.canHold(recvItem, recvQty)) {
-            cm.sendOk("Check your inventory for a free slot first.");
+            cm.sendOk("背包空间不足.");
             cm.dispose();
             return;
         } else if (cm.getMeso() < cost * qty) {
-            cm.sendOk("I'm afraid you cannot afford my services.");
+            cm.sendOk("金币不够.");
             cm.dispose();
             return;
         } else {
@@ -229,7 +229,7 @@ function action(mode, type, selection) {
         }
 
         if (!complete) {
-            cm.sendOk("What are you trying to pull? I can't make anything unless you bring me what I ask for.");
+            cm.sendOk("材料不足.");
         } else {
             if (mats instanceof Array) {
                 for (var i = 0; i < mats.length; i++) {
@@ -243,7 +243,7 @@ function action(mode, type, selection) {
             }
 
             cm.gainItem(recvItem, recvQty);
-            cm.sendOk("All done. If you need anything else... Well, I'm not going anywhere.");
+            cm.sendOk("完成了.");
         }
         cm.dispose();
     }

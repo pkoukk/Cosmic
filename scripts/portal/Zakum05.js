@@ -26,23 +26,23 @@
 
 function enter(pi) {
     if (!(pi.isQuestStarted(100200) || pi.isQuestCompleted(100200))) {
-        pi.getPlayer().dropMessage(5, "You need approval from the masters to battle. You may not attempt the boss right now.");
+        pi.getPlayer().dropMessage(5, "你需要得到长老的批准才能战斗。你现在还不可以挑战扎昆。");
         return false;
     }
 
     if (!pi.isQuestCompleted(100201)) {
-        pi.getPlayer().dropMessage(5, "You haven't completed all the trials yet. You may not attempt the boss right now.");
+        pi.getPlayer().dropMessage(5, "你还没通过全部的考验.你现在还不够资格挑战扎昆.");
         return false;
     }
 
     if (!pi.haveItem(4001017)) {    // thanks Conrad for pointing out missing checks for token item and unused reactor
-        pi.getPlayer().dropMessage(5, "You do not have the Eye of Fire. You may not face the boss.");
+        pi.getPlayer().dropMessage(5, "你没有火焰的眼.你无法召唤扎昆.");
         return false;
     }
 
     var react = pi.getMap().getReactorById(2118002);
     if (react != null && react.getState() > 0) {
-        pi.getPlayer().dropMessage(5, "The entrance is currently blocked.");
+        pi.getPlayer().dropMessage(5, "入口被封锁了.");
         return false;
     }
 

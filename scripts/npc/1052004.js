@@ -53,7 +53,7 @@ function action(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            cm.sendSimple("Well, hello! Welcome to the Henesys Plastic Surgery! Would you like to transform your face into something new? With a #b#t5152001##k, you can let us take care of the rest and have the face you've always wanted~!\r\n#L2#Plastic Surgery: #i5152001##t5152001##l");
+            cm.sendSimple("你好!欢迎来到射手村整形医院! 要整形吗?只要你有#b#t5152001##k,你可以改变一下脸型~!\r\n#L2#我有#i5152001##t5152001##l");
         } else if (status == 1) {
             if (selection == 2) {
                 facenew = Array();
@@ -67,16 +67,16 @@ function action(mode, type, selection) {
                         pushIfItemExists(facenew, fface_v[i] + cm.getPlayer().getFace() % 1000 - (cm.getPlayer().getFace() % 100));
                     }
                 }
-                cm.sendStyle("Let's see... I can totally transform your face into something new. Don't you want to try it? For #b#t5152001##k, you can get the face of your liking. Take your time in choosing the face of your preference.", facenew);
+                cm.sendStyle("嗯... 我可以为你服务. 来试试吧?使用#b#t5152001##k,你可以选择你喜欢的脸型.选择你想要的造型吧.", facenew);
             }
         } else if (status == 2) {
             cm.dispose();
             if (cm.haveItem(5152001) == true) {
                 cm.gainItem(5152001, -1);
                 cm.setFace(facenew[selection]);
-                cm.sendOk("Enjoy your new and improved face!");
+                cm.sendOk("你的新脸型真棒.");
             } else {
-                cm.sendOk("Hmm ... it looks like you don't have the coupon specifically for this place. Sorry to say this, but without the coupon, there's no plastic surgery for you...");
+                cm.sendOk("没有会员卡的话我不嗯能够为你服务");
             }
         }
     }

@@ -1,8 +1,8 @@
 /*
-	This file is part of the OdinMS Maple Story Server
+    This file is part of the OdinMS Maple Story Server
     Copyright (C) 2008 Patrick Huy <patrick.huy@frz.cc>
-		       Matthias Butz <matze@odinms.de>
-		       Jan Christian Meyer <vimes@odinms.de>
+               Matthias Butz <matze@odinms.de>
+               Jan Christian Meyer <vimes@odinms.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -58,39 +58,39 @@ function start() {
     goblinForest2.spawnMonsterOnGroundBelow(kingSageCat, spawnpoint);
 
     const PacketCreator = Java.type('tools.PacketCreator');
-    goblinForest2.broadcastMessage(PacketCreator.serverNotice(6, "The ghostly air around here has become stronger. The unpleasant sound of a cat crying can be heard."));
+    goblinForest2.broadcastMessage(PacketCreator.serverNotice(6, "这里幽灵般的空气变得更浓了。可以听到不愉快的猫叫声。"));
     em.schedule("start", 3 * 60 * 60 * 1000);
 }
 
 // ---------- FILLER FUNCTIONS ----------
 
-function dispose() {}
+function dispose() { }
 
-function setup(eim, leaderid) {}
+function setup(eim, leaderid) { }
 
-function monsterValue(eim, mobid) {return 0;}
+function monsterValue(eim, mobid) { return 0; }
 
-function disbandParty(eim, player) {}
+function disbandParty(eim, player) { }
 
-function playerDisconnected(eim, player) {}
+function playerDisconnected(eim, player) { }
 
-function playerEntry(eim, player) {}
+function playerEntry(eim, player) { }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function scheduledTimeout(eim) {}
+function scheduledTimeout(eim) { }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerExit(eim, player) {}
+function playerExit(eim, player) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function clearPQ(eim) {}
+function clearPQ(eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 

@@ -47,12 +47,12 @@ function action(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            cm.sendYesNo("Your party gave a stellar effort and gathered up at least 30 coupons. For that, I have a present for each and every one of you. After receiving the present, you will be sent back to Ludibrium. Now, would you like to receive the present right now?");
+            cm.sendYesNo("你的队伍给我带来了至少30张通行证,因此我会奖励你们每一个人.请让背包都腾出一些空间,现在我来发放奖励?");
         } else if (status == 1) {
             var eim = cm.getEventInstance();
 
             if (!eim.giveEventReward(cm.getPlayer())) {
-                cm.sendNext("It seems you don't have a free slot in either your #rEquip#k, #rUse#k or #rEtc#k inventories. Please make some room and try again.");
+                cm.sendNext("看来你背包空间不足.检查装备、消耗、其它栏");
             } else {
                 cm.warp(809050017);
             }

@@ -40,7 +40,7 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendOk("I am Advanced Knight #b#p1103000##k. Thanks to your bravery I and all of Ereve have been rescued from the grasps of Eleanor. By the kindness of our Empress, well battled!");
+            cm.sendOk("我是高阶骑士#b#p1103000##k.感谢你拯救了圣地!");
             cm.dispose();
         }
     }

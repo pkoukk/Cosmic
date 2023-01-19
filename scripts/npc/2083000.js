@@ -46,16 +46,16 @@ function action(mode, type, selection) {
         if (status == 0) {
             const YamlConfig = Java.type('config.YamlConfig');
             if (cm.haveItem(4001086)) {
-                cm.sendYesNo("Do you want to access #b#m240050400##k right now?");
+                cm.sendYesNo("石板上的文字发出了奇异的光芒，石板后的一扇小门开启了。想要使用秘密通道吗？");
             } else if (YamlConfig.config.server.USE_ENABLE_SOLO_EXPEDITIONS) {
                 if (canBypassHTPQ()) {
-                    cm.sendYesNo("Do you want to access #b#m240050400##k right now?");
+                    cm.sendYesNo("石板上的文字发出了奇异的光芒，石板后的一扇小门开启了。想要使用秘密通道吗？");
                 } else {
-                    cm.sendOk("Those who don't have the #r#t4001086##k must prove their valor before challenging #bHorntail#k. Come here holding the #r3 certificates#k that proves you're worthy to || the task.");    // NPC picture is so long it goes through some section of text, || to fill up that space
+                    cm.sendOk("那些没有#r#t4001086##k的人在挑战#b暗黑龙王#k前,需要证明自己有足够的资格.拿到#r3 证书#k以后再来.");    // NPC picture is so long it goes through some section of text, || to fill up that space
                     cm.dispose();
                 }
             } else {
-                cm.sendOk("Those who don't have the #r#t4001086##k must prove their valor before challenging #bHorntail#k.");
+                cm.sendOk("那些没有#r#t4001086##k的人在挑战#b暗黑龙王#k前，需要证明自己有足够的资格.");
                 cm.dispose();
             }
         } else {

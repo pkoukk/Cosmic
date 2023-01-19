@@ -39,13 +39,13 @@ function end(mode, type, selection) {
         }
 
         if (status == 0) {
-            qm.sendNext("So you've come to attend my class, huh? Right, I'll make it fast.");
+            qm.sendNext("你是来参加我的课的吧？好的，我会尽快的。");
         } else if (status == 1) {
-            qm.sendNextPrev("I will teach you the actual application of the #bMaker#k method. All you need to do is have an item in mind to make, gather all the ingredients from the receipt and mix them in a #rscientifically alchemisty way#k. Easy, isn't it?");
+            qm.sendNextPrev("我将教你如何实际运用#b炼金术#k。你所需要做的就是准备一件东西，从收据上收集所有的成分，然后用科学的炼金方法把它们混合起来。很简单，不是吗？");
         } else if (status == 2) {
-            qm.sendNextPrev("Let's take producing the #bWeight Earrings#k as an example. There is a rather specific #rductility theory#k to generate it, as any other 'unique' items have, the name going around the #rmain physical force#k acting over the thing we are working on: on that case, the #bDuctility Theory of Gravity#k (as it is a 'Weighted Earrings', got it?).");
+            qm.sendNextPrev("让我们拿制作#b锤耳环#k举个例子.有一个相当具体的#r延性理论#k要生成它，正如任何其他唯一项所具有的那样，在#r主要体力#k对我们正在做的事情采取行动：在那个案子上#b重力延性理论#k(因为这是个加重耳环，明白吗？).");
         } else if (status == 3) {
-            qm.sendNextPrev("Ok, now you need to hand me a fee, 10,000 mesos that is, for that information. The collected fee shall be used for acquiring the needed materials for your learning of the fine art of the #bMaker#k.");
+            qm.sendNextPrev("好吧，为了这个信息现在你得给我一笔费用，一共10,000金币。所收取的费用将用于获取所需的材料，以供您学习#b炼金术#k。");
         } else if (status == 4) {
             qm.gainMeso(-10000);
 

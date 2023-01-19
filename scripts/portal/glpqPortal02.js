@@ -4,7 +4,7 @@ function enter(pi) {
         pi.warp(610030521, 0);
         return true;
     } else {
-        pi.playerMessage(5, "Only mages may enter this portal.");
+        pi.playerMessage(5, "只有魔法师可以进入");
         return false;
     }
 }

@@ -30,6 +30,6 @@ function enter(pi) {
         return true;
     }
 
-    pi.getPlayer().message("A mysterious force won't let you in.");
+    pi.getPlayer().message("一股神秘力量阻止了你进入.");
     return false;
 }

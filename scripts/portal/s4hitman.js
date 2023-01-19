@@ -32,11 +32,11 @@ function enter(pi) {
 
             return true;
         } else {
-            pi.getPlayer().message("Some other player is currently inside.");
+            pi.getPlayer().message("有其他玩家在里面.");
             return false;
         }
     }
 
-    pi.getPlayer().message("A mysterious force won't let you in.");
+    pi.getPlayer().message("一股神秘力量阻止了你进入.");
     return false;
 }

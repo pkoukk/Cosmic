@@ -55,9 +55,9 @@ function setup(level, lobbyid) {
     return eim;
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
-function respawnStages(eim) {}
+function respawnStages(eim) { }
 
 function playerCanLeave(eim) {
     eim.setIntProperty("canLeave", 1);
@@ -66,9 +66,9 @@ function playerCanLeave(eim) {
 function playerSurvived(eim) {
     if (eim.getLeader().isAlive()) {
         eim.setIntProperty("canLeave", 2);
-        eim.dropMessage(5, "Kyrin: You have passed the test. Now for the closing part... Are you able reach the exit over there?");
+        eim.dropMessage(5, "Kyrin: 结束了，你通过了测试，你现在可以通过那边的出口离开。");
     } else {
-        eim.dropMessage(5, "Kyrin: You have failed the test. Aww, don't have such a sad face, just try it again later, ok?");
+        eim.dropMessage(5, "Kyrin: 你没能通过测试，别太伤心，等会再试好吗?");
     }
 }
 
@@ -77,7 +77,7 @@ function playerEntry(eim, player) {
     player.changeMap(map, map.getPortal(0));
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -85,7 +85,7 @@ function playerExit(eim, player) {
     em.setProperty("noEntry", "false");
 }
 
-function playerLeft(eim, player) {}
+function playerLeft(eim, player) { }
 
 function scheduledTimeout(eim) {
     var player = eim.getPlayers().get(0);
@@ -115,11 +115,11 @@ function clearPQ(eim) {
     em.setProperty("noEntry", "false");
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
@@ -133,14 +133,14 @@ function friendlyKilled(mob, eim) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose() {}
+function dispose() { }
 
 
 // ---------- FILLER FUNCTIONS ----------
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 

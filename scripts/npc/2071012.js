@@ -30,14 +30,14 @@ function action(mode, type, selection) {
             }
 
             if (!cm.haveItem(4031793, 1)) {
-                cm.sendOk("Umm... Hey... Would you help me find a #bsoft and shiny silver fur#k that I lost on the woods? I need it, I need it, I need it sooooo much!");
+                cm.sendOk("嘿... 你能帮我找找我丢在森林里的#b#z4031793##k吗?我现在急需使用它!");
                 cm.dispose();
                 return;
             }
 
-            cm.sendYesNo("Hey... Umm... Would you help me find a #bsoft and shiny silver fur#k that I lost on the woods? I need it, I need it, I need it sooooo much! ... Oh you found it!!! Will you give it to me?");
+            cm.sendYesNo("嘿... 你能帮我找找我丢在森林里的#b#z4031793##k吗?我现在急需使用它! ... 你找打了吗!!!能给我吗?");
         } else if (status == 1) {
-            cm.sendNext("Teehehee~ That's your reward for taking it from me, serves you well.");
+            cm.sendNext("谢谢~这是你从我这里拿走的奖励，会对你有帮助的。");
             cm.gainItem(4031793, -1);
             cm.gainFame(-5);
             cm.setQuestProgress(23647, 1, 1);

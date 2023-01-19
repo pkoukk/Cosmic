@@ -45,7 +45,7 @@ var itemQty_lv2 = [1, 1, 1, 1, 1, 40, 40, 40, 40, 60, 60, 60, 60, 1, 1, 1, 1, 1,
 var itemSet_lv1 = [1302021, 1302024, 1302033, 1082150, 1002419, 2022053, 2022054, 2020032, 2022057, 2022096, 2022097, 2022192, 2020030, 2010005, 2022041, 2030000, 2040100, 2040004, 2040207, 2048004, 4031203, 4000021, 4003005, 4003000, 4003001, 4010000, 4010001, 4010002, 4010005, 4020004];
 var itemQty_lv1 = [1, 1, 1, 1, 1, 20, 20, 20, 20, 20, 25, 25, 25, 50, 50, 12, 1, 1, 1, 1, 3, 4, 2, 2, 1, 2, 2, 2, 2, 2];
 
-var levels = ["Tier 1", "Tier 2", "Tier 3", "Tier 4", "Tier 5", "Tier 6"];
+var levels = ["一阶奖励", "二阶奖励", "三阶奖励", "四阶奖励", "五阶奖励", "六阶奖励"];
 
 function start() {
     status = -1;
@@ -67,7 +67,7 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            var sendStr = "The #bInternet Cafe Party Quest#k rewards players with ticket-like #bfigure erasers#k, that can be used on the vending machine to retrieve prizes. By further increasing the stakes, one can get better prizes, separated by #rtiers#k.\r\n\r\nThe possible rewards for each tier are depicted here:\r\n\r\n#b";
+            var sendStr = "#b网吧组队任务#k奖励#b橡皮擦#k,可以用来在自动售货机上抽奖.投入更多的橡皮擦可以获得更好的奖励.\r\n\r\n可能获得以下的奖励:\r\n\r\n#b";
             for (var i = 0; i < 6; i++) {
                 sendStr += "#L" + i + "#" + levels[i] + "#l\r\n";
             }
@@ -96,9 +96,9 @@ function action(mode, type, selection) {
                 lvQty = itemQty_lv6;
             }
 
-            var sendStr = "The following items are being awarded at #b" + levels[selection] + "#k:\r\n\r\n";
+            var sendStr = "以下奖励输入#b" + levels[selection] + "#k:\r\n\r\n";
             for (var i = 0; i < lvTarget.length; i++) {
-                sendStr += "  #L" + i + "# #i" + lvTarget[i] + "#  #t" + lvTarget[i] + "#";
+                sendStr += "  #L" + i + "# #i" + lvTarget[i] + "#  #z" + lvTarget[i] + "#";
                 if (lvQty[i] > 1) {
                     sendStr += " (" + lvQty[i] + ")";
                 }

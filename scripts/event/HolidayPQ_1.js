@@ -144,7 +144,7 @@ function setup(level, lobbyid) {
     return eim;
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
 function respawnStages(eim) {
     eim.getInstanceMap(entryMap).instanceMapRespawn();
@@ -168,7 +168,7 @@ function scheduledTimeout(eim) {
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -199,7 +199,7 @@ function changedLeader(eim, leader) {
     }
 }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
@@ -295,7 +295,7 @@ function monsterKilled(mob, eim) {
     } // PQ not started yet
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
 function friendlyKilled(mob, eim) {
     eim.setIntProperty("snowmanStep", 0);
@@ -364,11 +364,11 @@ function snowmanSnackFake(eim) {
         eim.setIntProperty("snowmanStep", step - 1);
     }
 
-    eim.dropMessage(5, "The snowman absorbed a Fake Snow Vigor!");
+    eim.dropMessage(5, "雪人吸收了雪之精气!");
 }
 
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }
 

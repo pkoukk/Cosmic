@@ -11,16 +11,16 @@ function end(mode, type, selection) {
     status++;
 
     if (status == 0) {
-        qm.sendNext("Whoa... this is it!!! With this sample, the studies that are taking place in Omega Sector will be reinvigorated with results! I am also at a loss for words for finding someone that is more talented than me at hunting. I'll have to get back on track! Anyway, for your job well done, I'll have to reward you accordingly.");
+        qm.sendNext("哇......这就是它！！！有了这个样本，地球防御本部正在进行的研究将因结果而重新焕发活力！我也很难找到比我更具狩猎天赋的人。我必须回到正轨！无论如何，为了你的工作做得好，我必须依次奖励你");
     } else if (status == 1) {
         const InventoryType = Java.type('client.inventory.InventoryType');
         if (qm.getPlayer().getInventory(InventoryType.USE).getNumFreeSlot() < 1) {
-            qm.getPlayer().dropMessage(1, "USE inventory full.");
+            qm.getPlayer().dropMessage(1, "消耗栏已满");
             qm.dispose();
             return;
         }
 
-        var talkStr = "Here, please select the scroll of your choice. All success rates are at 10%. \r\n\r\n#rSELECT A ITEM\r\n#b"
+        var talkStr = "请选择你想要的卷轴。所有的成功率都是10%。\r\n\r\n#r选择卷轴\r\n#b"
         stance = qm.getPlayer().getJobStyle();
 
         const Job = Java.type('client.Job');

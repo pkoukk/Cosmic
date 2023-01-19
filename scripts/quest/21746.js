@@ -36,7 +36,7 @@ function start(mode, type, selection) {
         }
 
         if (status == 0) {
-            qm.sendNext("If you want to know more about the Seal Rock of Mu Lung, you will need to pass my test. Prove your valor overpowering me in melee combat, only then I shall recognize you as a worthy knight.");
+            qm.sendNext("如果你想了解更多关于武陵封印石的知识，你需要通过我的测试。证明你能击倒我，只有这样我才能认出你是一个值得尊敬的骑士。");
         } else {
             var mapobj = qm.getWarpMap(925040001);
             if (mapobj.countPlayers() == 0) {
@@ -45,7 +45,7 @@ function start(mode, type, selection) {
                 qm.warp(925040001, 0);
                 qm.forceStartQuest();
             } else {
-                qm.sendOk("Someone is already attempting a challenge. Wait for them to finish before you enter.");
+                qm.sendOk("有人已经在尝试挑战。等他们做完后再进去。");
             }
 
 
@@ -70,7 +70,7 @@ function end(mode, type, selection) {
         }
 
         if (status == 0) {
-            qm.sendNext("Oh, you brought the ink. Now let me pour it, cautiously.... Almost there, almost. ... ..... Kyaaa! Th-the letter. It says: 'I'll be there to take your Seal Rock of Mu Lung.'");
+            qm.sendNext("哦，你带来了墨水。现在让我小心地倒。......快了，快了......啊！这..这信上写着：'我会在那儿拿走你的武陵封印石'");
         } else if (status == 1) {
             qm.gainItem(4032342, -8);
             qm.gainItem(4220151, -1);

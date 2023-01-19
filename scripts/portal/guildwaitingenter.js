@@ -37,7 +37,7 @@ function enter(pi) {
         pi.warp(990000100, 0);
         return true;
     } else { //cannot proceed while allies can still enter
-        pi.playerMessage(5, "The portal will open in about " + timeLeft + " seconds.");
+        pi.playerMessage(5, "传送门预计在" + timeLeft + "秒后打开.");
         return false;
     }
 }

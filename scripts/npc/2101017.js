@@ -51,28 +51,28 @@ function action(mode, type, selection) {
             expedMembers = expedicao.getMemberList();
             if (status == 0) {
                 if (cm.isLeaderExpedition(exped)) {
-                    cm.sendSimple("What would you like to do? #b\r\n#L1#View current members#l\r\n#L2#Ban members#l\r\n#L3#Start the battle#l\r\n#L4#Leave the arena#l");
+                    cm.sendSimple("你想干什么? #b\r\n#L1#查看人员#l\r\n#L2#移除人员#l\r\n#L3#开始战斗#l\r\n#L4#离开竞技场#l");
                     status = 1;
                 } else {
-                    var toSend = "Current members inside this arena:\r\n#b";
+                    var toSend = "这个竞技场里有:\r\n#b";
                     toSend += cm.getExpeditionMemberNames(exped);
                     cm.sendOk(toSend);
                     cm.dispose();
                 }
             } else if (status == 1) {
                 if (selection == 1) {
-                    var toSend = "Current members inside this arena:\r\n#b";
+                    var toSend = "当前有这些成员:\r\n#b";
                     toSend += cm.getExpeditionMemberNames(exped);
                     cm.sendOk(toSend);
                     cm.dispose();
                 } else if (selection == 2) {
                     var size = expedMembers.size();
                     if (size == 1) {
-                        cm.sendOk("You are the only member of the expedition.");
+                        cm.sendOk("你是唯一的成员.");
                         cm.dispose();
                         return;
                     }
-                    var text = "The following members make up your expedition (Click on them to expel them):\r\n";
+                    var text = "这些是人员名单 (点击可以移除):\r\n";
                     text += "\r\n\t\t1." + expedicao.getLeader().getName();
                     for (var i = 1; i < size; i++) {
                         text += "\r\n#b#L" + (i + 1) + "#" + (i + 1) + ". " + expedMembers.get(i).getValue() + "#l\n";
@@ -81,11 +81,11 @@ function action(mode, type, selection) {
                     status = 6;
                 } else if (selection == 3) {
                     if (expedicao.getMembers().size() < 1) {
-                        cm.sendOk("Need one more players to start the battle.");
+                        cm.sendOk("需要更多玩家.");
                         cm.dispose();
                     } else {
                         if (cm.getParty() != null) {
-                            cm.sendOk("You cannot enter the battle as a party group.");
+                            cm.sendOk("你不可以组队参加.");
                             cm.dispose();
                             return;
                         }
@@ -98,7 +98,7 @@ function action(mode, type, selection) {
                         cm.dispose();
                     }
                 } else if (selection == 4) {
-                    cm.mapMessage(5, "The Leader of the arena left.");
+                    cm.mapMessage(5, "队长离开了.");
                     expedicao.warpExpeditionTeam(980010000);
                     cm.endExpedition(expedicao);
                     cm.dispose();
@@ -107,7 +107,7 @@ function action(mode, type, selection) {
                 if (selection > 0) {
                     var banned = expedMembers.get(selection - 1);
                     expedicao.ban(banned);
-                    cm.sendOk("You have banned " + banned.getValue() + " from the expedition.");
+                    cm.sendOk("你把" + banned.getValue() + " 从远征队当中移除了.");
                     cm.dispose();
                 } else {
                     cm.sendSimple(list);
@@ -128,21 +128,21 @@ function action(mode, type, selection) {
             if (status == 0) {
                 var gotTheBombs = expedicao.getProperty("gotBomb" + cm.getChar().getId());
                 if (gotTheBombs != null) {
-                    cm.sendOk("I already gave you the bomb, please kill the #bScorpio#k now!");
+                    cm.sendOk("我已经给过你炸弹了,现在去杀死蝎子!");
                     cm.dispose();
                 } else if (cm.canHoldAll([2270002, 2100067], [50, 5])) {
-                    cm.sendOk("I have given you (5) #b#eBombs#k#n and (50) #b#eElement Rock#k#n.\r\nUse the Elementary Rocks to capture the scorpions for #r#eSpirit Jewels#k#n!");
+                    cm.sendOk("我给你5个#b#e炸弹#k#n和50个#b#e速成石#k#n.\r\n使用炸弹攻击蝎子并用速成石收集蝎子的灵魂石!");
                     expedicao.setProperty("gotBomb" + cm.getChar().getId(), "1");
                     cm.gainItem(2270002, 50);
                     cm.gainItem(2100067, 5);
                     cm.dispose();
                 } else {
-                    cm.sendOk("It seems that your inventory is full.");
+                    cm.sendOk("你的背包满了.");
                     cm.dispose();
                 }
             }
         } else {
-            cm.sendOk("Hi there, have you heard of the Ariant Coliseum Battle Arena, it's a competitive event available to players between level 20 to 30!");
+            cm.sendOk("你好,你听说过阿里安特竞技场吗,这是20-30级之间玩家的一个竞赛项目!");
             cm.dispose();
         }
     }

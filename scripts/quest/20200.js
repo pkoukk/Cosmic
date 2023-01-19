@@ -31,7 +31,7 @@ function start(mode, type, selection) {
         qm.dispose();
     } else {
         if (status == 0 && mode == 0) {
-            qm.sendNext("Hmmm... do you feel like you still have missions to take care of as a trainee? I commend your level of patience, but this has gone too far. Cygnus Knights is in dire need of new, more powerful knights.");
+            qm.sendNext("你没发现你还有训练任务没有完成么？我赞扬你的耐心，但这还差的远。冒险骑士团迫切需要的是更强大的骑士。");
             qm.dispose();
             return;
         }
@@ -41,12 +41,12 @@ function start(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendAcceptDecline("#h0#? Wow, your level has sky-rocketed since the last time I saw you. You also look like you've taken care of a number of missions as well... You seem much more ready to move on now than the last time I saw you. What do you think? Are you interested in taking the #bKnighthood Exam#k? It's time for you to grow out of the Knight-in-Training and become a bonafide Knight, right?");
+            qm.sendAcceptDecline("#h0#？哇，自从我上次见到你以来，你的水平直线上升。你看起来也完成了很多任务。。。你现在似乎比我上次见到你时准备好了很多。你怎么认为？你有兴趣参加#b骑士考试#k吗？是时候让你从训练中的骑士成长为一名善良的骑士了，对吧？");
         } else if (status == 1) {
             qm.startQuest();
             qm.completeQuest();
 
-            qm.sendOk("If you wish to take the Knighthood Exam, please come to Ereve. Each Chief Knight will test your abilities, and if you meet their standards, then you will officially become a Knight.");
+            qm.sendOk("如果你想参加骑士等级考试，可以随时来圣地。各个骑士团长会对你的能力进行测试，如果合格，就会任命你为正式的骑士。再见......");
         } else if (status == 2) {
             qm.dispose();
         }

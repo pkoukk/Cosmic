@@ -47,30 +47,30 @@ function start() {
     } else {
         if (cm.getJobId() == 0) {
             actionx["1stJob"] = true;
-            cm.sendNext("Want to be a #rthief#k? There are some standards to meet. because we can't just accept EVERYONE in... #bYour level should be at least 10, with at least your " + cm.getFirstJobStatRequirement(jobType) + "#k. Let's see.");   // thanks Vcoc for noticing a need to state and check requirements on first job adv starting message
+            cm.sendNext("要转职为#r飞侠#k?你需要10级,并且" + cm.getFirstJobStatRequirement(jobType) + "#k.");   // thanks Vcoc for noticing a need to state and check requirements on first job adv starting message
         } else if (cm.getLevel() >= 30 && cm.getJobId() == 400) {
             actionx["2ndJob"] = true;
             if (cm.haveItem(4031012)) {
-                cm.sendNext("I see you have done well. I will allow you to take the next step on your long road.");
+                cm.sendNext("你做得很好,可以开始下一阶段了.");
             } else if (cm.haveItem(4031011)) {
-                cm.sendOk("Go and see the #b#p1072003##k.");
+                cm.sendOk("去找#b#p1072003##k.");
                 cm.dispose();
             } else {
-                cm.sendNext("The progress you have made is astonishing.");
+                cm.sendNext("你的进展是惊人的.");
             }
         } else if (actionx["3thJobI"] || (cm.getPlayer().gotPartyQuestItem("JB3") && cm.getLevel() >= 70 && cm.getJobId() % 10 == 0 && parseInt(cm.getJobId() / 100) == 4 && !cm.getPlayer().gotPartyQuestItem("JBP"))) {
             actionx["3thJobI"] = true;
-            cm.sendNext("There you are. A few days ago, #b#p2020011##k of Ossyria talked to me about you. I see that you are interested in making the leap to the dark world of the third job advancement for thieves. To archieve that goal, I will have to test your strength in orden to see whether you are worthy of the advancement. There is an opening in the middle of a deep swamp in Victoria Island, where it'll lead you to a secret passage. Once inside, you'll face a clone of myself. Your task is to defeat him and bring #b#t4031059##k back with you.");
+            cm.sendNext("几天前,冰封雪域的#b#p2020011##k和我提起了你.我知道你想做飞侠的三转任务.因此,我需要测试以下你的的能力.金银岛藻泽地里面有一条秘密通道.你进去以后会发现一个我的分身.你的任务就是击败我的分身并带回#b#t4031059##k");
         } else if (cm.getPlayer().gotPartyQuestItem("JBP") && !cm.haveItem(4031059)) {
-            cm.sendNext("Please, bring me the #b#t4031059##k.");
+            cm.sendNext("请带回#b#t4031059##k.");
             cm.dispose();
         } else if (cm.haveItem(4031059) && cm.getPlayer().gotPartyQuestItem("JBP")) {
             actionx["3thJobC"] = true;
-            cm.sendNext("Nice work. You have defeated my clone and brought #b#t4031059##k back safely. You have now proven yourself worthy of the 3rd job advancement from the physical standpoint. Now you should give this necklace to #b#p2020011##k in Ossyria to take on the second part of the test. Good luck. You'll need it.");
+            cm.sendNext("做得好.你打败了我的分身并安全的带回了#b#t4031059##k.你现在证明了你拥有三转所需的力量.现在你把这条项链带给冰封雪域的#b#p2020011##k,他会让你进行下一阶段测试.");
         } else if (cm.isQuestStarted(6141)) {
             cm.warp(910300000, 3);
         } else {
-            cm.sendOk("You have chosen wisely.");
+            cm.sendOk("你做了一个明智的选择.");
             cm.dispose();
         }
     }
@@ -92,7 +92,7 @@ function action(mode, type, selection) {
         if (spawnPnpc) {
             if (mode > 0) {
                 if (cm.getMeso() < spawnPnpcFee) {
-                    cm.sendOk("Sorry, you don't have enough mesos to purchase your place on the Hall of Fame.");
+                    cm.sendOk("你的金币不够购买名人堂的位置.");
                     cm.dispose();
                     return;
                 }
@@ -100,10 +100,10 @@ function action(mode, type, selection) {
                 const PlayerNPC = Java.type('server.life.PlayerNPC');
                 const GameConstants = Java.type('constants.game.GameConstants');
                 if (PlayerNPC.spawnPlayerNPC(GameConstants.getHallOfFameMapid(cm.getJob()), cm.getPlayer())) {
-                    cm.sendOk("There you go! Hope you will like it.");
+                    cm.sendOk("好了.希望你会喜欢");
                     cm.gainMeso(-spawnPnpcFee);
                 } else {
-                    cm.sendOk("Sorry, the Hall of Fame is currently full...");
+                    cm.sendOk("满员了...");
                 }
             }
 
@@ -112,7 +112,7 @@ function action(mode, type, selection) {
         } else {
             if (mode != 1 || status == 7 && type != 1 || (actionx["1stJob"] && status == 4) || (cm.haveItem(4031008) && status == 2) || (actionx["3thJobI"] && status == 1)) {
                 if (mode == 0 && status == 2 && type == 1) {
-                    cm.sendOk("You know there is no other choice...");
+                    cm.sendOk("你知道的,别无选择...");
                 }
                 if (!(mode == 0 && type != 1)) {
                     cm.dispose();
@@ -125,9 +125,9 @@ function action(mode, type, selection) {
     if (actionx["1stJob"]) {
         if (status == 0) {
             if (cm.getLevel() >= 10 && cm.canGetFirstJob(jobType)) {
-                cm.sendYesNo("Oh...! You look like someone that can definitely be a part of us... all you need is a little sinister mind, and... yeah... so, what do you think? Wanna be the Rogue?");
+                cm.sendYesNo("嗷...! 你看着可以做飞侠... 现在就要转职成为飞侠吗?");
             } else {
-                cm.sendOk("Train a bit more until you reach the base requirements and I can show you the way of the #rThief#k.");
+                cm.sendOk("不合要求的等级或者属性.");
                 cm.dispose();
             }
         } else if (status == 1) {
@@ -139,24 +139,24 @@ function action(mode, type, selection) {
                     cm.gainItem(1332063, 1);
                     cm.resetStats();
                 }
-                cm.sendNext("Alright, from here out, you are a part of us! You'll be living the life of a wanderer at ..., but just be patient as soon, you'll be living the high life. Alright, it ain't much, but I'll give you some of my abilities... HAAAHHH!!!");
+                cm.sendNext("好吧，从这里开始，你就是飞侠了！");
             } else {
-                cm.sendNext("Make some room in your inventory and talk back to me.");
+                cm.sendNext("请清理一下背包再找我.");
                 cm.dispose();
             }
         } else if (status == 2) {
-            cm.sendNextPrev("You've gotten much stronger now. Plus every single one of your inventories have added slots. A whole row, to be exact. Go see for it yourself. I just gave you a little bit of #bSP#k. When you open up the #bSkill#k menu on the lower left corner of the screen, there are skills you can learn by using SP's. One warning, though: You can't raise it all together all at once. There are also skills you can acquire only after having learned a couple of skills first.");
+            cm.sendNextPrev("你现在更强大了.我给你了一些#b技能点#k.");
         } else if (status == 3) {
-            cm.sendNextPrev("Now a reminder. Once you have chosen, you cannot change up your mind and try to pick another path. Go now, and live as a proud Thief.");
+            cm.sendNextPrev("好了,加油吧.");
         } else {
             cm.dispose();
         }
     } else if (actionx["2ndJob"]) {
         if (status == 0) {
             if (cm.haveItem(4031012)) {
-                cm.sendSimple("Alright, when you have made your decision, click on [I'll choose my occupation] at the bottom.#b\r\n#L0#Please explain to me what being the Assassin is all about.\r\n#L1#Please explain to me what being the Bandit is all about.\r\n#L3#I'll choose my occupation!");
+                cm.sendSimple("#b\r\n#L0#介绍刺客.#l\r\n#L1#介绍侠客.#l\r\n#L3#我要转职!#l");
             } else {
-                cm.sendNext("Good decision. You look strong, but I need to see if you really are strong enough to pass the test, it's not a difficult test, so you'll do just fine. Here, take my letter first... make sure you don't lose it!");
+                cm.sendNext("拿上我的信件进行一个简单的测试!");
                 if (!cm.isQuestStarted(100009)) {
                     cm.startQuest(100009);
                 }
@@ -167,22 +167,22 @@ function action(mode, type, selection) {
                     if (!cm.haveItem(4031011)) {
                         cm.gainItem(4031011, 1);
                     }
-                    cm.sendNextPrev("Please get this letter to #b#p1072003##k who's around #b#m102040000##k near Kerning City. He is taking care of the job of an instructor in place of me. Give him the letter and he'll test you in place of me. Best of luck to you.");
+                    cm.sendNextPrev("把信送到#b#p1072003##k手里,他应该在#b#m102040000##k附近.");
                 } else {
-                    cm.sendNext("Please, make some space in your inventory.");
+                    cm.sendNext("请给背包腾出一些空间.");
                     cm.dispose();
                 }
             } else {
                 if (selection < 3) {
                     if (selection == 0) {    //assassin
-                        cm.sendNext("Thieves that master #rClaws#k.\r\n\r\n#bAssassins#k are far ranged attackers. They are quite Meso efficient and have good damage potential, but cost more than Bandits.");
+                        cm.sendNext("使用#r拳套#k,擅长投掷暗器,是很强大的输出机器.");
                     } else if (selection == 1) {    //bandit
-                        cm.sendNext("Thieves that master #rDaggers#k.\r\n\r\n#bBandits#k are quick melee attackers and are quite powerful among the 2nd jobs. They aren't as Meso efficient as Assassins and do not have the benefit of ranged attack but make up for it in much greater raw power.");
+                        cm.sendNext("使用#r短剑#k,近身攻击.");
                     }
 
                     status -= 2;
                 } else {
-                    cm.sendSimple("Now... have you made up your mind? Please choose the job you'd like to select for your 2nd job advancement. #b\r\n#L0#Assassin\r\n#L1#Bandit");
+                    cm.sendSimple("拿定主意了?请选择职业进行转职. #b\r\n#L0#刺客#l\r\n#L1#侠客#l");
                 }
             }
         } else if (status == 2) {
@@ -191,7 +191,7 @@ function action(mode, type, selection) {
                 return;
             }
             job += selection * 10;
-            cm.sendYesNo("So you want to make the second job advancement as the " + (job == 410 ? "#bAssassin#k" : "#bBandit#k") + "? You know you won't be able to choose a different job for the 2nd job advancement once you make your desicion here, right?");
+            cm.sendYesNo("确认要转职为" + (job == 410 ? "#b刺客#k" : "#b侠客#k") + "?你要知道二转职业一旦选定就无法后悔了，你确定么");
         } else if (status == 3) {
             if (cm.haveItem(4031012)) {
                 cm.gainItem(4031012, -1);
@@ -199,20 +199,20 @@ function action(mode, type, selection) {
             cm.completeQuest(100011);
 
             if (job == 410) {
-                cm.sendNext("Alright, from here on out you are the #bAssassin#k. Assassins have quick hands and quicker feets to dominate the enemies. Please keep training. I'll make you even more powerful than you are right now!");
+                cm.sendNext("好吧，从现在开始，你就是#b刺客#k了。刺客有敏捷的手和灵活的脚来控制敌人。请继续训练。当你需要变得更强的时候我会帮你！");
             } else {
-                cm.sendNext("Alright, you're the #bBandit from here on out. Bandits revel in shadows and darkness, waiting until the right time comes for them to stick a dagger through the enemy's hearth, suddenly and swiftly... please keep training. I'll make you even more powerful than you are right now.");
+                cm.sendNext("好了，从现在开始，你就是#b侠客#k了。侠客陶醉在阴影和黑暗中，等待着合适的时机到来，他们突然而迅速地将匕首插入敌人的胸膛......请继续训练。当你需要变得更强的时候我会帮你。");
             }
 
             if (cm.getJobId() != job) {
                 cm.changeJobById(job);
             }
         } else if (status == 4) {
-            cm.sendNextPrev("I have just given you a book that gives you the list of skills you can acquire as a " + (job == 410 ? "assassin" : "bandit") + ". Also your etc inventory has expanded by adding another row to it. Your max HP and MP have increased, too. Go check and see for it yourself.");
+            cm.sendNextPrev("我刚刚给了你作为" + (job == 410 ? "#b刺客#k" : "#b侠客#k") + "的技能书.还增加了一些你的背包栏位，你的HP和MP也提升了");
         } else if (status == 5) {
-            cm.sendNextPrev("I have also given you a little bit of #bSP#k. Open the #bSkill Menu#k located at the bottomleft corner. you'll be able to boost up the newer acquired 2nd level skills. A word of warning, though. You can't boost them up all at once. Some of the skills are only available after you have learned other skills. Make sure yo remember that.");
+            cm.sendNextPrev("我还给了你一点技能点，你现在可以使用二转技能了，打开技能菜单查看吧。但是你无法一次把它们都升级，有的技能需要先学习基础技能");
         } else if (status == 6) {
-            cm.sendNextPrev((job == 410 ? "Assassin" : "Bandit") + " need to be strong. But remember that you can't abuse that power and use it on a weakling. Please use your enormous power the right way, because... for you to use that the right way, that is much harden than just getting stronger. Please find me after you have advanced much further. I'll be waiting for you.");
+            cm.sendNextPrev((job == 410 ? "#b刺客#k" : "#b侠客#k") + "需要坚强，但是记住你不能使用你的力量去欺凌弱小，如果你的力量没有用在正道上，你将难以变得更强。当你想要更近一步的时候，可以来找我，我会在这等你");
         }
     } else if (actionx["3thJobI"]) {
         if (status == 0) {

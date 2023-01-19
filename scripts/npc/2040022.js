@@ -47,9 +47,9 @@ function action(mode, type, selection) {
         cm.dispose();
     }
     if (status == 0 && mode == 1) {
-        var selStr = "Ah, you've found me! I spend most of my time here, working on weapons to make for travellers like yourself. Did you have a request?#b"
-        var options = ["What's a stimulator?", "Create a Warrior weapon", "Create a Bowman weapon", "Create a Magician weapon", "Create a Thief weapon",
-            "Create a Warrior weapon with a Stimulator", "Create a Bowman weapon with a Stimulator", "Create a Magician weapon with a Stimulator", "Create a Thief weapon with a Stimulator"];
+        var selStr = "你发现我了!我大部分时间都在这里工作，为像你这样的旅行者制造武器。你有什么要求吗?#b"
+        var options = ["什么是促进剂?", "制造战士武器", "制造弓箭手武器", "制造法师武器", "制造飞侠武器",
+            "使用促进剂制造战士武器", "使用促进剂制造弓箭手武器", "使用促进剂制造法师武器", "使用促进剂制造飞侠武器"];
         for (var i = 0; i < options.length; i++) {
             selStr += "\r\n#L" + i + "# " + options[i] + "#l";
         }
@@ -66,29 +66,29 @@ function action(mode, type, selection) {
             stimulator = false;
         }
         if (selectedType == 0) { //What's a stim?
-            cm.sendNext("A stimulator is a special potion that I can add into the process of creating certain items. It gives it stats as though it had dropped from a monster. However, it is possible to have no change, and it is also possible for the item to be below average. There's also a 10% chance of not getting any item when using a stimulator, so please choose wisely.")
+            cm.sendNext("促进剂是一种特殊的药剂，我可以在制作某些物品的过程中加入它。他让制造的物品就像是从怪物身上掉落一样。因此使用促进剂可能使道具属性更好或者更坏。当然,有可能会失败.")
             cm.dispose();
         } else if (selectedType == 1) { //warrior weapon
-            selStr = "Very well, then which Warrior weapon shall I work on?#b";
-            weapon = ["Gladius#k - Lv. 30 One-Handed Sword#b", "Cutlus#k - Lv. 35 One-Handed Sword#b", "Traus#k - Lv. 40 One-Handed Sword#b", "Jeweled Katar#k - Lv. 50 One-Handed Sword#b", "Fireman's Axe#k - Lv. 30 One-Handed Axe#b", "Dankke#k - Lv. 35 One-Handed Axe#b", "Blue Counter#k - Lv. 40 One-Handed Axe#b", "Buck#k - Lv. 50 One-Handed Axe#b",
-                "War Hammer#k - Lv. 30 One-Handed BW#b", "Heavy Hammer#k - Lv. 35 One-Handed BW#b", "Jacker#k - Lv. 40 One-Handed BW#b", "Knuckle Mace#k - Lv. 50 One-Handed BW#b", "Scimitar#k - Lv. 30 Two-Handed Sword#b", "Lionheart#k - Lv. 35 Two-Handed Sword#b", "Zard#k - Lv. 40 Two-Handed Sword#b", "Lion's Fang#k - Lv. 50 Two-Handed Sword#b",
-                "Blue Axe#k - Lv. 30 Two-Handed Axe#b", "Niam#k - Lv. 35 Two-Handed Axe#b", "Sabretooth#k - Lv. 40 Two-Handed Axe#b", "The Rising#k - Lv. 50 Two-Handed Axe#b", "Mithril Maul#k - Lv. 30 Two-Handed BW#b", "Sledgehammer#k - Lv. 35 Two-Handed BW#b", "Titan#k - Lv. 40 Two-Handed BW#b", "Golden Mole#k - Lv. 50 Two-Handed BW#b",
-                "Forked Spear#k - Lv. 30 Spear#b", "Nakimaki#k - Lv. 35 Spear#b", "Zeco#k - Lv. 40 Spear#b", "Serpent's Tongue#k - Lv. 50 Spear#b", "Mithril Polearm#k - Lv. 30 Polearm#b", "Axe Polearm#k - Lv. 35 Polearm#b", "Crescent Polearm#k - Lv. 40 Polearm#b", "The Nine Dragons#k - Lv. 50 Polearm#b"];
+            selStr = "好的,想做什么战士武器?";
+            weapon = ["#z1302008#", "#z1302004#", "#z1302009#", "#z1302010#", "#z1312005#", "#z1312006#", "#z1312007#", "#z1312008#",
+                "#z1322014#", "#z1322015#", "#z1322016#", "#z1322017#", "#z1402002#", "#z1402006#", "#z1402007#", "#z1402003#",
+                "#z1412006#", "#z1412004#", "#z1412005#", "#z1412003#", "#z1422001#", "#z1422008#", "#z1422007#", "#z1422005#",
+                "#z1432002#", "#z1432003#", "#z1432005#", "#z1432004#", "#z1442001#", "#z1442003#", "#z1442009#", "#z1442005#"];
         } else if (selectedType == 2) { //bowman weapon
-            selStr = "Very well, then which Bowman weapon shall I work on?#b";
-            weapon = ["Ryden#k - Lv. 30 Bow#b", "Red Viper#k - Lv. 35 Bow#b", "Vaulter 2000#k - Lv. 40 Bow#b", "Olympus#k - Lv. 50 Bow#b", "Eagle Crow#k - Bowman Lv. 32#b", "Heckler#k - Bowman Lv. 38#b", "Silver Crow#k - Bowman Lv. 42#b", "Rower#k - Bowman Lv. 50#b"];
+            selStr = "你要做什么弓箭手的武器";
+            weapon = ["#z1452005#", "#z1452006#", "#z1452007#", "#z1452008#", "#z1462004#", "#z1462005#", "#z1462006#", "#z1462007#"];
         } else if (selectedType == 3) { //magician weapon
-            selStr = "Very well, then which Magician weapon shall I work on?#b";
-            weapon = ["Mithril Wand#k - Lv. 28 Wand#b", "Wizard Wand#k - Lv. 33 Wand#b", "Fairy Wand#k - Lv. 38 Wand#b", "Cromi#k - Lv. 48 Wand#b", "Wizard Staff#k - Lv. 25 Staff#b", "Arc Staff#k - Lv. 45 Staff#b", "Thorns#k - Lv. 55 Staff#b"];
+            selStr = "你要做什么魔法师的武器？";
+            weapon = ["#z1372003#", "#z1372001#", "#z1372000#", "#z1372007#", "#z1382002#", "#z1382001#", "#z1382006#"];
         } else if (selectedType == 4) { //thief weapon; claws vary depending if stimulator is being used
-            selStr = "Very well, then which Thief weapon shall I work on?#b";
+            selStr = "你要做什么盗贼的武器";
             if (!stimulator) {
-                weapon = ["Reef Claw#k - Lv. 30 LUK Dagger#b", "Cass#k - Lv. 30 STR Dagger#b", "Gephart#k - Lv. 35 LUK Dagger#b", "Bazlud#k - Lv. 40 STR Dagger#b", "Sai#k - Lv. 50 STR Dagger#b", "Shinkita#k - Lv. 50 LUK Dagger#b",
-                    "Steel Guards#k - Lv. 30 Claw#b", "Bronze Guardian#k - Lv. 35 Claw#b", "Steel Avarice#k - Lv. 40 Claw#b", "Steel Slain#k - Lv. 50 Claw#b"];
+                weapon = ["#z1332012#", "#z1332009#", "#z1332014#", "#z1332011#", "#z1332016#", "#z1332003#",
+                    "#z1472009#", "#z1472010#", "#z1472012#", "#z1472013#"];
             } else {
-                weapon = ["Reef Claw#k - Lv. 30 LUK Dagger#b", "Cass#k - Lv. 30 STR Dagger#b", "Gephart#k - Lv. 35 LUK Dagger#b", "Bazlud#k - Lv. 40 STR Dagger#b", "Sai#k - Lv. 50 STR Dagger#b", "Shinkita#k - Lv. 50 LUK Dagger#b",
-                    "Mithril Guards#k - Lv. 30 Claw#b", "Adamantium Guards#k - Lv. 30 Claw#b", "Silver Guardian#k - Lv. 35 Claw#b", "Dark Guardian#k - Lv. 35 Claw#b", "Blood Avarice#k - Lv. 40 Claw#b", "Adamantium Avarice#k - Lv. 40 Claw#b",
-                    "Dark Avarice#k - Lv. 40 Claw#b", "Blood Slain#k - Lv. 50 Claw#b", "Sapphire Slain#k - Lv. 50 Claw#b", "Dark Slain#k - Lv. 50 Claw#b"];
+                weapon = ["#z1472015#", "#z1472016#", "#z1472017#", "#z1472019#", "#z1472020#", "#z1472021#",
+                    "#z1332012#", "#z1332009#", "#z1332014#", "#z1332011#", "#z1332016#", "#z1332003#",
+                    "#z1472008#", "#z1472011#", "#z1472014#", "#z1472018#"];
             }
         }
 
@@ -164,7 +164,7 @@ function action(mode, type, selection) {
             cost = costSet[selectedItem];
         }
 
-        var prompt = "You want me to make a #t" + item + "#? In that case, I'm going to need specific items from you in order to make it. Make sure you have room in your inventory, though!#b";
+        var prompt = "你确定要做一个 #t" + item + "#? 在这种情况下，我需要你的特定物品才能制作。不过，请确保您的库存中有空间!#b";
 
         if (stimulator) {
             stimID = mats[0] - 998; //stim ID for a weapon = manual ID for weapon - 998
@@ -180,7 +180,7 @@ function action(mode, type, selection) {
         }
 
         if (cost > 0) {
-            prompt += "\r\n#i4031138# " + cost + " meso";
+            prompt += "\r\n#i4031138# " + cost + "金币";
         }
 
         cm.sendYesNo(prompt);
@@ -188,11 +188,11 @@ function action(mode, type, selection) {
         var complete = true;
 
         if (!cm.canHold(item, 1)) {
-            cm.sendOk("Verify for a slot in your inventory first.");
+            cm.sendOk("背包空间不足.");
             cm.dispose();
             return;
         } else if (cm.getMeso() < cost) {
-            cm.sendOk("I'm afraid my fees are non-negotiable.");
+            cm.sendOk("你没钱.");
             cm.dispose();
             return;
         } else {
@@ -222,7 +222,7 @@ function action(mode, type, selection) {
         }
 
         if (!complete) {
-            cm.sendOk("Sorry, but you're missing a required item. Possibly a manual? Or one of the ores?");
+            cm.sendOk("你缺材料");
         } else {
             if (mats instanceof Array) {
                 for (var i = 0; i < mats.length; i++) {
@@ -238,14 +238,14 @@ function action(mode, type, selection) {
                 var deleted = Math.floor(Math.random() * 10);
                 if (deleted != 0) {
                     cm.gainItem(item, 1, true, true);
-                    cm.sendOk("Heeere you go! What do you think? Marvellous, isn't it?");
+                    cm.sendOk("给你");
                 } else {
-                    cm.sendOk("...ACK! My attention wandered, and before I knew it... Uh, sorry, but there's nothing I can do for you now.");
+                    cm.sendOk("不好意思,制作失败.");
                 }
             } else //just give basic item
             {
                 cm.gainItem(item, 1);
-                cm.sendOk("Heeere you go! What do you think? Marvellous, isn't it?");
+                cm.sendOk("做好了");
             }
         }
         cm.dispose();

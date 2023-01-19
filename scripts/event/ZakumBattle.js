@@ -109,7 +109,7 @@ function setup(channel) {
 }
 
 function playerEntry(eim, player) {
-    eim.dropMessage(5, "[Expedition] " + player.getName() + " has entered the map.");
+    eim.dropMessage(5, "[远征] " + player.getName() + "进入了地图");
     var map = eim.getMapInstance(entryMap);
     player.changeMap(map, map.getPortal(0));
 }
@@ -120,46 +120,46 @@ function scheduledTimeout(eim) {
 
 function changedMap(eim, player, mapid) {
     if (mapid < minMapId || mapid > maxMapId) {
-        if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+        if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
             eim.unregisterPlayer(player);
-            eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+            eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
             end(eim);
         } else {
-            eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+            eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
             eim.unregisterPlayer(player);
         }
     }
 }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) {
-    if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+    if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
-        eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+        eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
         end(eim);
     } else {
-        eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+        eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
         eim.unregisterPlayer(player);
     }
 }
 
 function playerDisconnected(eim, player) {
-    if (eim.isExpeditionTeamLackingNow(true, minPlayers, player)) {
+    if (eim.is远征TeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
-        eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+        eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
         end(eim);
     } else {
-        eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+        eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
         eim.unregisterPlayer(player);
     }
 }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
@@ -209,9 +209,9 @@ function monsterKilled(mob, eim) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
 function updateGateState(newState) {    // thanks Conrad for noticing missing gate update
     em.getChannelServer().getMapFactory().getMap(211042300).getReactorById(2118002).forceHitReactor(newState);

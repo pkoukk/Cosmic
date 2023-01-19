@@ -42,7 +42,7 @@ function action(mode, type, selection) {
     if (mode == 1) {
         status++;
     } else {
-        cm.sendOk("Very well, see you around.");
+        cm.sendOk("下次见.");
         cm.dispose();
         return;
     }

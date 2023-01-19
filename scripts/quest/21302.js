@@ -26,19 +26,19 @@ function end(mode, type, selection) {
     status++;
     if (mode != 1) {
         if (mode == 0 && type == 1) {
-            qm.sendNext("Hey! At least say you tried!");
+            qm.sendNext("嘿！至少你试过了!");
         }
         qm.dispose();
         return;
     }
     if (status == 0) {
-        qm.sendNext("Wait.. Isn't that.. Did you remember how to make Red Jade?\r\nWow... you may be stupid and prone to amnesia, but this is why I can't abandon you. Now give me the jade!"); //Giant Polearm
+        qm.sendNext("等一下，这不对。。你记得怎么做红珠玉吗？\\r\n好吧。。。你可能很愚蠢，容易失忆，但这就是为什么我不能抛弃你。现在把玉给我！"); //Giant Polearm
     } else if (status == 1) {
-        qm.sendNextPrev("Okay, now that I have the Red Jade back on, let me work on reawakening more of your abilities. I mean, your level's gone much higher since the last time we met, so I am sure I can work my magic a bit more this time!");
+        qm.sendNextPrev("好了，现在我已经恢复了红珠玉，让我来重新唤醒你更多的能力。我的意思是，自从我们上次见面以来，你的水平已经提高了很多，所以我相信这次我可以发挥我的魔法！");
     } else if (status == 2) {
         if (!qm.isQuestCompleted(21302)) {
             if (!qm.canHold(1142131)) {
-                qm.sendOk("Wow, your #bequip#k inventory is full. I need you to make at least 1 empty slot to complete this quest.");
+                qm.sendOk("哇，您的 #b装备#k 库存已满。 我需要您至少腾出1个空位才能完成此任务.");
                 qm.dispose();
                 return;
             }
@@ -58,7 +58,7 @@ function end(mode, type, selection) {
             qm.completeQuest();
         }
 
-        qm.sendNext("Come on, keep training so you can get all your abilities back, and that way we can explore together once more!");
+        qm.sendNext("来吧，继续训练，这样您就可以恢复自己的全部能力，这样我们就可以再次一起探索!");
     } else if (status == 3) {
         qm.dispose();
     }

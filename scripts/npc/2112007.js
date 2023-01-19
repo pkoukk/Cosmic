@@ -43,15 +43,15 @@ function start() {
         } else if (res == 2) {  // letter
             var letter = 4001131;
             if (!cm.canHold(letter)) {
-                cm.sendOk("You got a letter, however it didn't fit on your inventory, so you put it back.");
+                cm.sendOk("你的背包满了.");
                 cm.dispose();
                 return;
             }
 
             cm.gainItem(letter, 1);
-            cm.sendNext("You found a letter, strategically placed here as it seems.");
+            cm.sendNext("你发现了一封信，像它看起来的那样放在这里.");
         } else if (res == 3) {  // pass
-            cm.sendNext("You found the trigger to the next stage.");
+            cm.sendNext("你找到了下一阶段的线索.");
 
             var eim = cm.getEventInstance();
             eim.showClearEffect();
@@ -61,7 +61,7 @@ function start() {
             cm.getMap().getReactorByName("d00").hitReactor(cm.getClient());
         }
     } else {
-        cm.sendNext("There is nothing here.");
+        cm.sendNext("这里什么都没有.");
     }
 
     cm.dispose();

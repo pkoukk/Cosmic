@@ -1,12 +1,12 @@
 var ticket = [4031047, 4031074, 4031331, 4031576];
 var cost = [5000, 6000, 30000, 6000];
-var mapNames = ["Ellinia of Victoria Island", "Ludibrium", "Leafre", "Ariant"];
-var mapName2 = ["Ellinia of Victoria Island", "Ludibrium", "Leafre of Minar Forest", "Nihal Desert"];
+var mapNames = ["金银岛-魔法密林", "玩具城", "神木村", "阿里安特"];
+var mapName2 = ["金银岛-魔法密林", "玩具城", "神木村", "阿里安特"];
 var select;
 var status = 0;
 
 function start() {
-    var where = "Hello, I'm in charge of selling tickets for the ship ride for every destination. Which ticket would you like to purchase?";
+    var where = "你好,我是天空之城旅行售票员. 你要去什么地方吗?";
     for (var i = 0; i < ticket.length; i++) {
         where += "\r\n#L" + i + "##b" + mapNames[i] + "#k#l";
     }
@@ -20,10 +20,10 @@ function action(mode, type, selection) {
         status++;
         if (status == 1) {
             select = selection;
-            cm.sendYesNo("The ride to " + mapName2[select] + " takes off every " + (select == 0 ? 15 : 10) + " minutes, beginning on the hour, and it'll cost you #b" + cost[select] + " mesos#k. Are you sure you want to purchase #b#t" + ticket[select] + "##k?");
+            cm.sendYesNo("去往 " + mapName2[select] + "的路线每" + (select == 0 ? 15 : 10) + "分钟一班,费用是#b" + cost[select] + "金币#k.要购买#b#t" + ticket[select] + "##k吗?");
         } else if (status == 2) {
             if (cm.getMeso() < cost[select] || !cm.canHold(ticket[select])) {
-                cm.sendOk("Are you sure you have #b" + cost[select] + " mesos#k? If so, then I urge you to check you etc. inventory, and see if it's full or not.");
+                cm.sendOk("你确定你有 #b" + cost[select] + " 金币#k吗? 如果有的话，检查下你的其它栏是不是满了.");
             } else {
                 cm.gainMeso(-cost[select]);
                 cm.gainItem(ticket[select], 1);

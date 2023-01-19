@@ -183,13 +183,13 @@ function afterSetup(eim) {
     }
 }
 
-function respawnStages(eim) {}
+function respawnStages(eim) { }
 
 function playerEntry(eim, player) {
     var map = eim.getMapInstance(entryMap);
     player.changeMap(map, map.getPortal(0));
 
-    var texttt = "Hi, my name is Eak, the Chamberlain of the Goddess. Don't be alarmed; you won't be able to see me right now. Back when the Goddess turned into a block of stone, I simultaneously lost my own power. If you gather up the power of the Magic Cloud of Orbis, however, then I'll be able to recover my body and re-transform back to my original self. Please collect #b20#k Magic Clouds and bring them back to me. Right now, you'll only see me as a tiny, flickering light.";
+    var texttt = "嗨，我叫易克，女神的帮佣。不要惊慌,你现在看不到我。当女神变成一块石头时，我同时失去了自己的力量。然而，如果你收集了天空之城魔法云的力量，那么我就可以恢复我的身体，重新回到我原来的自己。请收集#b20个#k魔法云并将它们带回给我。现在，你只会看到我是一盏闪烁的微光。";
     player.getAbstractPlayerInteraction().npcTalk(2013001, texttt);
 }
 
@@ -237,7 +237,7 @@ function changedLeader(eim, leader) {
     }
 }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
@@ -292,10 +292,10 @@ function clearPQ(eim) {
     eim.setEventCleared();
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }

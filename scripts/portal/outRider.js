@@ -5,7 +5,7 @@ function enter(pi) {
         pi.warp(211050000, 4);
         return true;
     } else {
-        pi.playerMessage(5, "Free a slot on your inventory before receiving the couse clear's token.");
+        pi.playerMessage(5, "在接收课程通过凭证前，给其他栏留一个空格.");
         return false;
     }
 }

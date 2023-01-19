@@ -28,7 +28,7 @@ function action(mode, type, selection) {
         var eim = cm.getEventInstance();
         if (!eim.isEventCleared()) {
             if (status == 0) {
-                cm.sendYesNo("Do you want to get out now?");
+                cm.sendYesNo("现在要离开吗?");
             } else if (status == 1) {
                 cm.warp(270050000, 0);
                 cm.dispose();
@@ -36,12 +36,12 @@ function action(mode, type, selection) {
 
         } else {
             if (status == 0) {
-                cm.sendYesNo("Pink Bean has been defeated! You guys sure are true heroes of this land! In no time, Temple of Time will shine again as bright as ever, all thanks to your efforts! Hooray to our heroes!! Are you ready to go now?");
+                cm.sendYesNo("品克缤被击败了!你们是真正的英雄!感谢你们的努力,时间神殿再一次恢复正常了!你们现在就要离开吗?");
             } else if (status == 1) {
                 if (eim.giveEventReward(cm.getPlayer(), 1)) {
                     cm.warp(270050000);
                 } else {
-                    cm.sendOk("You cannot receive an instance prize without having an empty room in your EQUIP, USE, SET-UP and ETC inventory.");
+                    cm.sendOk("背包空间不足.");
                 }
 
                 cm.dispose();

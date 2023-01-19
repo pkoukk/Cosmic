@@ -35,7 +35,7 @@ function enterLeverSequence(pi) {
             map.broadcastMessage(PacketCreator.showEffect("quest/party/wrong_kor"));
             map.broadcastMessage(PacketCreator.playSound("Party1/Failed"));
 
-            pi.playerMessage(5, "The right combination of levers is needed to pass. " + countMiss + " lever(s) are misplaced.");
+            pi.playerMessage(5, "通过正确的开关组合是必要的。 " + countMiss + "个开关错位。");
             return false;
         }
 

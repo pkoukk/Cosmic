@@ -83,7 +83,7 @@ function timeOut(eim) {
         var pIter = eim.getPlayers().iterator();
         while (pIter.hasNext()) {
             var player = pIter.next();
-            player.dropMessage(6, "You have run out of time to complete this event!");
+            player.dropMessage(6, "时间到!");
             playerExit(eim, player);
         }
     }

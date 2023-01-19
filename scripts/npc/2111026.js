@@ -46,10 +46,10 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendAcceptDecline("This Magic Pentagram is incomplete. Would you like to finish off the drawing of the Magic Pentagram?");
+            cm.sendAcceptDecline("这个魔法阵是不完整的。你想画完这个魔法阵吗.");
             return;
         } else if (status == 1) {
-            cm.weakenAreaBoss(8090000, "The Magic Pentagram has been completed. The spell to eliminate Deet and Roi has been summoned.");
+            cm.weakenAreaBoss(8090000, "魔法阵被补全了。上面的咒语召唤出了#o8090000#");
         }
 
         cm.dispose();

@@ -11,16 +11,16 @@ function end(mode, type, selection) {
     status++;
 
     if (status == 0) {
-        qm.sendNext("What the? Are you telling me you've already taken out 150 #o4230120#s? And these ... yes, these really are 120 #t4000122#s. I was wondering how you were going to complete this mission all by yourself, but you took care of it just fine. Alright, here ... this is a very important item for me, but please take it.");
+        qm.sendNext("哎呀？你这么快就打退了#b200个#o4230120##k吗？而且这是。。。确实是#b150个#t4000122##k。其实我正在担心怎么才能解决这个任务呢。谢谢你。这是我珍藏的东西。我就送给你吧。");
     } else if (status == 1) {
         const InventoryType = Java.type('client.inventory.InventoryType');
         if (qm.getPlayer().getInventory(InventoryType.EQUIP).getNumFreeSlot() < 1) {
-            qm.sendOk("Please free a EQUIP inventory slot to receive the reward.");
+            qm.sendOk("装备栏空间不足.");
             qm.dispose();
             return;
         }
 
-        var talkStr = "Do you like the glove? I've kept this for a while, and I was planning on using it someday, but it looks much better on you. Please put it to good use; besides, I got so much stuff from the Sector, that I don't need it anymore.";
+        var talkStr = "你收好了手套吗？这手套本来是我留着自己用的好东西啊，不过我看这个东西对你更有用。而且我有本部发给我的好东西。希望你好好利用它。";
         stance = qm.getPlayer().getJobStyle();
 
         const Job = Java.type('client.Job');
@@ -44,7 +44,7 @@ function end(mode, type, selection) {
         qm.gainItem(item, 1);
         qm.gainItem(4000122, -120);
         qm.gainExp(6100);
-        qm.sendOk("Thank you so much for fulfilling your missions as one of the Mesorangers. I've told the Sector about your successful story, and the Sector seems to be very pleased with you, too. Hopefully you'll keep working with us. Bye~");
+        qm.sendOk("我非常感谢你一直跟着我们冒险勇者一起解决任务。我已经向上面报告了你的功劳。本部对你的评价也很高。希望你以后继续帮助我们地球本部。那再见");
     } else if (status == 3) {
         qm.dispose();
     }

@@ -39,11 +39,11 @@ function start(mode, type, selection) {
             status--;
         }
         if (status == 0) {
-            qm.sendNext("What? Neinheart sent you here? Ahh, you must be a rookie. Welcome, welcome. My name is Kiku, and my job is to train and mold kids like you into bonafide knights. Hmmm.. Why are you looking at me like that... Ahh, you must have never seen Piyos before.");
+            qm.sendNext("什么？南哈特派你来的？啊，你一定是个新手。欢迎，欢迎。我叫奇库，我的工作是训练和塑造像你这样的孩子成为真正的骑士. 额... 你为什么那样看着我。。。啊，你以前一定没见过菲约.");
         } else if (status == 1) {
-            qm.sendNext("We belong to a race called Piyos. You've talked to Shinsoo before, right? The one that stands next to the Empress. Yeah, Shinsoo is a Piyo, too. He may be of a different class, but... oh well. Piyos are only found in Ereve, so you may find us a bit odd at first, but you'll get used to us.");
+            qm.sendNext("我们属于一个叫菲约的种族。你以前和神兽谈过，对吧？站在女皇旁边的那个。是的，神兽也是一个菲约。他可能是另一个类型，但是。。。哦，好吧。菲约只在圣地出现，所以你一开始可能会觉得有点奇怪，但你会和我们熟悉起来的.");
         } else if (status == 2) {
-            qm.sendAcceptDecline("Ah, I don't know if you are aware of this, but you won't find any monsters here in Ereve. Any form of evil will not be able to set foot on this island. Don't worry, you'll still have your opportunity to train here. Shinsoo created a fantasy creature called Mimi, which will be used as your training partners. Shall we begin?");
+            qm.sendAcceptDecline("啊，我不知道你是否意识到了，但你不会在圣地找到任何怪物。任何形式的邪恶都不能踏上这座岛。别担心，你还有机会在这里训练。神兽创造了一个叫做提提的幻想生物，它将被用作你的训练伙伴。我们开始吧?");
         } else if (status == 3) {
             qm.forceStartQuest();
             qm.forceCompleteQuest();
@@ -53,7 +53,7 @@ function start(mode, type, selection) {
             qm.gainItem(2000021, 10); // Blue Potion for Noblesse * 10
             qm.gainItem(1002869, 1);  // Elegant Noblesse Hat * 1
 
-            qm.sendOk("Ha, I like your enthusiasm, but you must prepare yourself for the training first before we start things off. Make sure that you are equipped with weapons, and that your skills are calibrated and ready to be used. I also gave you some potions, so have it ready just in case. Let me know when you're ready. You're going to wish that you didn't sign up to become a Cygnus Knight.");
+            qm.sendOk("哈，我喜欢你的热情，但在我们开始之前，你必须先为训练做好准备。确保你装备了武器，并且你的技能已经校准并准备好使用。我也给了你一些药水，所以准备好以防万一。准备好了就告诉我.");
         } else if (status == 4) {
             qm.dispose();
         }

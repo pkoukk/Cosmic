@@ -11,16 +11,16 @@ function end(mode, type, selection) {
     status++;
 
     if (status == 0) {
-        qm.sendNext("THIS is the deed to the land that my son lost! And you even brought all the necessary materials to build the house! Thank you so much ... my relatives can all move in and live in #m102000000#! As a sign of appreciation ...");
+        qm.sendNext("这...就是我儿子丢失的那张地契呀！而且你给我收集了盖房子需要的材料！ 真是太感谢你呀。这样我可以和我的家人一起住在#m102000000#了...!对了，这是我的一点心意...");
     } else if (status == 1) {
         const InventoryType = Java.type('client.inventory.InventoryType');
         if (qm.getPlayer().getInventory(InventoryType.USE).getNumFreeSlot() < 1) {
-            qm.getPlayer().dropMessage(1, "USE inventory full.");
+            qm.getPlayer().dropMessage(1, "消耗栏已满");
             qm.dispose();
             return;
         }
 
-        var talkStr = "Okay, now choose the scroll of your liking ... The odds of winning are 10% each. \r\n\r\n#rSELECT A ITEM\r\n#b";
+        var talkStr = "好吧，现在选择你喜欢的卷轴。。。成功几率都是10%。 \r\n\r\n#r选择一个道具\r\n#b";
         stance = qm.getPlayer().getJobStyle();
 
         const Job = Java.type('client.Job');

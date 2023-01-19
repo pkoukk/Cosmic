@@ -6,11 +6,11 @@ function enter(pi) {
             pi.warp(925100200, 0); //next
             return true;
         } else {
-            pi.playerMessage(5, "The portal is not opened yet.");
+            pi.playerMessage(5, "传送门还没有打开");
             return false;
         }
     } catch (e) {
-        pi.playerMessage(5, "Error: " + e);
+        pi.playerMessage(5, "错误: " + e);
     }
 
     return false;

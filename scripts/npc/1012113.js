@@ -38,12 +38,12 @@ function action(mode, type, selection) {
         status++;
         if (cm.getPlayer().getMap().getId() == 910010100) { //Clear map
             if (status == 0) {
-                cm.sendNext("Hello, there! I'm Tommy. There's a Pig Town nearby where we're standing. The pigs there are rowdy and uncontrollable to the point where they have stolen numerous weapons from travelers. They were kicked out from their towns, and are currently hiding out at the Pig Town.");
+                cm.sendNext("我是#p1012113#.我这里有一个猪猪农场.里面的猪太讨厌了.你愿意帮我去收拾他们吗.");
             } else if (status == 1) {
                 if (cm.isEventLeader()) {
-                    cm.sendYesNo("What do you think about making your way there with your party members and teach those rowdy pigs a lesson?");
+                    cm.sendYesNo("你想和你的队员一起去那里教训那些吵闹的猪吗？");
                 } else {
-                    cm.sendOk("Interessed? Tell your party leader to talk to me to head there!");
+                    cm.sendOk("有兴趣吗？告诉你的队长跟我谈谈！");
                     cm.dispose();
 
                 }
@@ -56,7 +56,7 @@ function action(mode, type, selection) {
             }
         } else if (cm.getPlayer().getMap().getId() == 910010200) { //Bonus map
             if (status == 0) {
-                cm.sendYesNo("Would you like to exit the bonus now?");
+                cm.sendYesNo("要离开了吗?");
             } else {
                 cm.warp(910010400);
                 cm.dispose();
@@ -64,7 +64,7 @@ function action(mode, type, selection) {
             }
         } else if (cm.getPlayer().getMap().getId() == 910010300) { //Exit map
             if (status == 0) {
-                cm.sendOk("You will now be warped out, thank you for helping us!");
+                cm.sendOk("你现在将会离开,谢谢帮助我!");
             } else {
                 cm.warp(100000200);
                 cm.dispose();

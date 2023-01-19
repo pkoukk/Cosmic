@@ -33,7 +33,7 @@ function enter(pi) {
         pi.warp(990000640, 1);
         return true;
     } else {
-        pi.getPlayer().dropMessage(5, "You cannot proceed past this point.");
+        pi.getPlayer().dropMessage(5, "你不能离开这里。");
         return false;
     }
 }

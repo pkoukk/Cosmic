@@ -15,15 +15,15 @@ function start(mode, type, selection) {
         if (type == 1 && mode == 0) {
             status -= 2;
         } else {
-            qm.sendOk("Okay, then. See you around.");
+            qm.sendOk("好吧，那么。回头见.");
             qm.dispose();
             return;
         }
     }
     if (status == 0) {
-        qm.sendAcceptDecline("Oh, Jack sent you here? Good timing, I'm planning alongside Jack and others to storm the Keep and retake it from the Twisted Masters what is ours by right. You seem ready to fight alongside us, right?");
+        qm.sendAcceptDecline("哦，杰克派你来这里？很好的时机，我正计划与杰克和其他人一起攻占要塞，并从扭曲大师队手中夺回我们的权利。你似乎已经准备好和我们并肩作战了，对吧？");
     } else if (status == 1) {
-        qm.sendOk("Great! Your mission now is to rack down some numbers of their army and weaken their defenses by all effects. Defeat 75 of each: Windraider, Firebrand and Nightshadow, then return to me to report.");
+        qm.sendOk("太好了！你现在的任务是击溃他们的一些军队，削弱他们的防御能力。你需要击败：风之假面，暗夜假面,烈焰假面，每种75个，然后返回我报告.");
         qm.forceStartQuest();
     } else if (status == 2) {
         qm.dispose();

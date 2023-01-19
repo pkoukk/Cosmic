@@ -36,7 +36,7 @@ function start(mode, type, selection) {
         }
 
         if (status == 0) {
-            qm.sendNext("I've just gathered an interesting information, #rDyle looks just like regular Ligators#k, but bigger.");
+            qm.sendNext("我刚收集到一个有趣的信息，#r多尔看起来就像是鳄鱼#k,但更大.");
         } else if (status == 1) {
             qm.forceCompleteQuest();
             qm.gainExp(7000);

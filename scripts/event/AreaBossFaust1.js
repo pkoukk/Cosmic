@@ -1,8 +1,8 @@
 /*
-	This file is part of the OdinMS Maple Story Server
+    This file is part of the OdinMS Maple Story Server
     Copyright (C) 2008 Patrick Huy <patrick.huy@frz.cc> 
-					   Matthias Butz <matze@odinms.de>
-					   Jan Christian Meyer <vimes@odinms.de>
+                       Matthias Butz <matze@odinms.de>
+                       Jan Christian Meyer <vimes@odinms.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -55,39 +55,39 @@ function start() {
     var faust1 = LifeFactory.getMonster(5220002);
     const spawnpoint = new Point(456, 278);
     theForestOfEvil1.spawnMonsterOnGroundBelow(faust1, spawnpoint);
-    theForestOfEvil1.broadcastMessage(PacketCreator.serverNotice(6, "Faust appeared amidst the blue fog."));
+    theForestOfEvil1.broadcastMessage(PacketCreator.serverNotice(6, "浮士德出现在蓝色的雾中。"));
     em.schedule("start", 3 * 60 * 60 * 1000);
 }
 
 // ---------- FILLER FUNCTIONS ----------
 
-function dispose() {}
+function dispose() { }
 
-function setup(eim, leaderid) {}
+function setup(eim, leaderid) { }
 
-function monsterValue(eim, mobid) {return 0;}
+function monsterValue(eim, mobid) { return 0; }
 
-function disbandParty(eim, player) {}
+function disbandParty(eim, player) { }
 
-function playerDisconnected(eim, player) {}
+function playerDisconnected(eim, player) { }
 
-function playerEntry(eim, player) {}
+function playerEntry(eim, player) { }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function scheduledTimeout(eim) {}
+function scheduledTimeout(eim) { }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerExit(eim, player) {}
+function playerExit(eim, player) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function clearPQ(eim) {}
+function clearPQ(eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 

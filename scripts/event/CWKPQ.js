@@ -89,7 +89,7 @@ function setEventRewards(eim) {
     eim.setEventClearStageMeso(mesoStages);
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
 function getNameFromList(index, array) {
     return array[index];
@@ -98,13 +98,13 @@ function getNameFromList(index, array) {
 function generateMapReactors(map) {
 
     var jobReactors = [[0, 0, -1, -1, 0],
-        [-1, 4, 3, 3, 3],
-        [1, 3, 4, 2, 2],
-        [2, -1, 0, 1, -1],
-        [3, 2, 1, 0, -1],
-        [4, 1, -1, 4, 1],
-        [-1, 2, 4],
-        [-1, -1]
+    [-1, 4, 3, 3, 3],
+    [1, 3, 4, 2, 2],
+    [2, -1, 0, 1, -1],
+    [3, 2, 1, 0, -1],
+    [4, 1, -1, 4, 1],
+    [-1, 2, 4],
+    [-1, -1]
     ];
 
     var rndIndex;
@@ -225,7 +225,7 @@ function setup(channel) {
 }
 
 function playerEntry(eim, player) {
-    eim.dropMessage(5, "[Expedition] " + player.getName() + " has entered the map.");
+    eim.dropMessage(5, "[远征] " + player.getName() + "进入了地图");
     var map = eim.getMapInstance(610030100 + (eim.getIntProperty("current_instance") * 100));
     player.changeMap(map, map.getPortal(0));
 }
@@ -235,7 +235,7 @@ function spawnGuardians(eim) {
     if (map.countPlayers() <= 0) {
         return;
     }
-    map.broadcastStringMessage(5, "The Master Guardians have detected you.");
+    map.broadcastStringMessage(5, "精英卫士发现你了");
     for (var i = 0; i < 20; i++) { //spawn 20 guardians
         var mob = eim.getMonster(9400594);
         eim.registerMonster(mob);
@@ -251,10 +251,10 @@ function changedMap(eim, player, mapid) {
     if (mapid < minMapId || mapid > maxMapId) {
         if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
             eim.unregisterPlayer(player);
-            eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+            eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
             end(eim);
         } else {
-            eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+            eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
             eim.unregisterPlayer(player);
         }
     } else {
@@ -299,17 +299,17 @@ function changedMap(eim, player, mapid) {
     }
 }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) {
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
-        eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+        eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
         end(eim);
     } else {
-        eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+        eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
         eim.unregisterPlayer(player);
     }
 }
@@ -317,23 +317,23 @@ function playerRevive(eim, player) {
 function playerDisconnected(eim, player) {
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
         eim.unregisterPlayer(player);
-        eim.dropMessage(5, "[Expedition] Either the leader has quit the expedition or there is no longer the minimum number of members required to continue it.");
+        eim.dropMessage(5, "[远征] 队长离开了远征或者当前队伍人数不满足最低的远征人数要求.");
         end(eim);
     } else {
-        eim.dropMessage(5, "[Expedition] " + player.getName() + " has left the instance.");
+        eim.dropMessage(5, "[远征] " + player.getName() + "离开了");
         eim.unregisterPlayer(player);
     }
 }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function disbandParty(eim) {}
+function disbandParty(eim) { }
 
 function monsterValue(eim, mobId) {
     return 1;
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -357,10 +357,10 @@ function clearPQ(eim) {
     eim.setEventCleared();
 }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }

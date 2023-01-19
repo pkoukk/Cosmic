@@ -31,7 +31,7 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendSimple("#L0#Enter to fight #bKing Pepe#k and #bYeti Brothers#k.#l\r\n#L1#Enter to fight #bPrime Minister#k.#l");
+            cm.sendSimple("#L0#挑战 #b拯救碧欧蕾塔公主#k.#l\r\n#L1#挑战 #b企鹅王#k 与 #b雪人三兄弟#k.#l");
         } else if (status == 1) {
             if (selection == 0) {
                 var pepe = cm.getEventManager("KingPepeAndYetis");
@@ -45,11 +45,11 @@ function action(mode, type, selection) {
                 var party = cm.getPlayer().getParty();
                 if (party != null) {
                     if (!em.startInstance(party, cm.getMap(), 1)) {
-                        cm.sendOk("Another party is already challenging the boss in this channel.");
+                        cm.sendOk("别的队伍已经在这个频道挑战了。");
                     }
                 } else {
                     if (!em.startInstance(cm.getPlayer())) {
-                        cm.sendOk("Another party is already challenging the boss in this channel.");
+                        cm.sendOk("别的队伍已经在这个频道挑战了。");
                     }
                 }
 
@@ -65,7 +65,7 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendSimple("#L1#Enter to fight #bKing Pepe#k and #bYeti Brothers#k.#l");
+            cm.sendSimple("你必须完成<阻止婚礼>任务才可以进入");
         } else if (status == 1) {
             if (selection == 1) {
                 var pepe = cm.getEventManager("KingPepeAndYetis");

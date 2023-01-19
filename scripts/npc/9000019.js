@@ -22,7 +22,7 @@ function action(mode, type, selection) {
         if (status == 0) {
             const InventoryType = Java.type('client.inventory.InventoryType');
             if (cm.getPlayer().getInventory(InventoryType.ETC).getNumFreeSlot() < 1) {
-                cm.sendNext("Check for a available slot on your ETC inventory.");
+                cm.sendNext("其他栏空间不足.");
                 cm.dispose();
                 return;
             }

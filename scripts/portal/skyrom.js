@@ -25,7 +25,7 @@ function enter(pi) {
             pi.warp(926000010, 0);
             return true;
         } else {
-            pi.message("Someone is already trying this map.");
+            pi.message("有人在里面.");
             return false;
         }
     } else {
