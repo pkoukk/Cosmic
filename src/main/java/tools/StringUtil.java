@@ -21,6 +21,9 @@
 */
 package tools;
 
+import java.nio.charset.Charset;
+import constants.string.CharsetConstants;
+
 public class StringUtil {
     /**
      * Gets a string padded from the left to <code>length</code> by
@@ -55,6 +58,22 @@ public class StringUtil {
             builder.append(padchar);
         }
         return builder.toString();
+    }
+
+    public static String getRightPaddedStrWithCharset(String in, char padchar, int length) {
+        Charset set = CharsetConstants.CHARSET;
+        byte padByte = (byte) padchar;
+        byte[] inBytes = in.getBytes(set);
+        byte[] target = new byte[length];
+
+        for (int x = 0; x < length; x++) {
+            if (x < inBytes.length) {
+                target[x] = inBytes[x];
+            } else {
+                target[x] = padByte;
+            }
+        }
+        return new String(target, set);
     }
 
     /**

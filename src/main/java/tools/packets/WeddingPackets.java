@@ -22,38 +22,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * CField_Wedding, CField_WeddingPhoto, CWeddingMan, OnMarriageResult, and all Wedding/Marriage enum/structs.
+ * CField_Wedding, CField_WeddingPhoto, CWeddingMan, OnMarriageResult, and all
+ * Wedding/Marriage enum/structs.
  *
  * @author Eric
- * <p>
- * Wishlists edited by Drago (Dragohe4rt)
+ *         <p>
+ *         Wishlists edited by Drago (Dragohe4rt)
  */
 public class WeddingPackets extends PacketCreator {
     private static final Logger log = LoggerFactory.getLogger(WeddingPackets.class);
 
     /*
-        00000000 CWeddingMan     struc ; (sizeof=0x104)
-        00000000 vfptr           dd ?                    ; offset
-        00000004 ___u1           $01CBC6800BD386B8A8FD818EAD990BEC ?
-        0000000C m_mCharIDToMarriageNo ZMap<unsigned long,unsigned long,unsigned long> ?
-        00000024 m_mReservationPending ZMap<unsigned long,ZRef<GW_WeddingReservation>,unsigned long> ?
-        0000003C m_mReservationPendingGroom ZMap<unsigned long,ZRef<CUser>,unsigned long> ?
-        00000054 m_mReservationPendingBride ZMap<unsigned long,ZRef<CUser>,unsigned long> ?
-        0000006C m_mReservationStartUser ZMap<unsigned long,unsigned long,unsigned long> ?
-        00000084 m_mReservationCompleted ZMap<unsigned long,ZRef<GW_WeddingReservation>,unsigned long> ?
-        0000009C m_mGroomWishList ZMap<unsigned long,ZRef<ZArray<ZXString<char> > >,unsigned long> ?
-        000000B4 m_mBrideWishList ZMap<unsigned long,ZRef<ZArray<ZXString<char> > >,unsigned long> ?
-        000000CC m_mEngagementPending ZMap<unsigned long,ZRef<GW_MarriageRecord>,unsigned long> ?
-        000000E4 m_nCurrentWeddingState dd ?
-        000000E8 m_dwCurrentWeddingNo dd ?
-        000000EC m_dwCurrentWeddingMap dd ?
-        000000F0 m_bIsReservationLoaded dd ?
-        000000F4 m_dwNumGuestBless dd ?
-        000000F8 m_bPhotoSuccess dd ?
-        000000FC m_tLastUpdate   dd ?
-        00000100 m_bStartWeddingCeremony dd ?
-        00000104 CWeddingMan     ends
-    */
+     * 00000000 CWeddingMan struc ; (sizeof=0x104)
+     * 00000000 vfptr dd ? ; offset
+     * 00000004 ___u1 $01CBC6800BD386B8A8FD818EAD990BEC ?
+     * 0000000C m_mCharIDToMarriageNo ZMap<unsigned long,unsigned long,unsigned
+     * long> ?
+     * 00000024 m_mReservationPending ZMap<unsigned
+     * long,ZRef<GW_WeddingReservation>,unsigned long> ?
+     * 0000003C m_mReservationPendingGroom ZMap<unsigned long,ZRef<CUser>,unsigned
+     * long> ?
+     * 00000054 m_mReservationPendingBride ZMap<unsigned long,ZRef<CUser>,unsigned
+     * long> ?
+     * 0000006C m_mReservationStartUser ZMap<unsigned long,unsigned long,unsigned
+     * long> ?
+     * 00000084 m_mReservationCompleted ZMap<unsigned
+     * long,ZRef<GW_WeddingReservation>,unsigned long> ?
+     * 0000009C m_mGroomWishList ZMap<unsigned long,ZRef<ZArray<ZXString<char> >
+     * >,unsigned long> ?
+     * 000000B4 m_mBrideWishList ZMap<unsigned long,ZRef<ZArray<ZXString<char> >
+     * >,unsigned long> ?
+     * 000000CC m_mEngagementPending ZMap<unsigned
+     * long,ZRef<GW_MarriageRecord>,unsigned long> ?
+     * 000000E4 m_nCurrentWeddingState dd ?
+     * 000000E8 m_dwCurrentWeddingNo dd ?
+     * 000000EC m_dwCurrentWeddingMap dd ?
+     * 000000F0 m_bIsReservationLoaded dd ?
+     * 000000F4 m_dwNumGuestBless dd ?
+     * 000000F8 m_bPhotoSuccess dd ?
+     * 000000FC m_tLastUpdate dd ?
+     * 00000100 m_bStartWeddingCeremony dd ?
+     * 00000104 CWeddingMan ends
+     */
 
     public class Field_Wedding {
         public int m_nNoticeCount;
@@ -95,6 +105,7 @@ public class WeddingPackets extends PacketCreator {
         ENGAGED(0x1),
         RESERVED(0x2),
         MARRIED(0x3);
+
         private final int ms;
 
         MarriageStatus(int ms) {
@@ -114,6 +125,7 @@ public class WeddingPackets extends PacketCreator {
         AddReservation(0x4),
         DeleteReservation(0x5),
         GetReservation(0x6);
+
         private final int req;
 
         MarriageRequest(int req) {
@@ -132,6 +144,7 @@ public class WeddingPackets extends PacketCreator {
         CATHEDRAL_NORMAL(0xB),
         VEGAS_PREMIUM(0x14),
         VEGAS_NORMAL(0x15);
+
         private final int wt;
 
         WeddingType(int wt) {
@@ -149,6 +162,7 @@ public class WeddingPackets extends PacketCreator {
         CATHEDRAL_STARTMAP(MapId.CATHEDRAL_WEDDING_ALTAR),
         PHOTOMAP(MapId.WEDDING_PHOTO),
         EXITMAP(MapId.WEDDING_EXIT);
+
         private final int wm;
 
         WeddingMap(int wm) {
@@ -181,10 +195,10 @@ public class WeddingPackets extends PacketCreator {
         OFFICIATORS_PERMISSION(ItemId.OFFICIATORS_PERMISSION), // Officiator's Permission
         WR_CATHEDRAL_PREMIUM(ItemId.PREMIUM_CATHEDRAL_RESERVATION_RECEIPT), // Wedding Ring?
         WR_VEGAS_PREMIUM(ItemId.PREMIUM_CHAPEL_RESERVATION_RECEIPT),
-        IB_VEGAS(ItemId.INVITATION_CHAPEL),      // toSend invitation
-        IB_CATHEDRAL(ItemId.INVITATION_CATHEDRAL),  // toSend invitation
-        IG_VEGAS(ItemId.RECEIVED_INVITATION_CHAPEL),      // rcvd invitation
-        IG_CATHEDRAL(ItemId.RECEIVED_INVITATION_CATHEDRAL),  // rcvd invitation
+        IB_VEGAS(ItemId.INVITATION_CHAPEL), // toSend invitation
+        IB_CATHEDRAL(ItemId.INVITATION_CATHEDRAL), // toSend invitation
+        IG_VEGAS(ItemId.RECEIVED_INVITATION_CHAPEL), // rcvd invitation
+        IG_CATHEDRAL(ItemId.RECEIVED_INVITATION_CATHEDRAL), // rcvd invitation
         OB_FORCOUPLE(ItemId.ONYX_CHEST_FOR_COUPLE), // Onyx Box? For Couple
         WR_CATHEDRAL_NORMAL(ItemId.NORMAL_CATHEDRAL_RESERVATION_RECEIPT), // Wedding Ring?
         WR_VEGAS_NORMAL(ItemId.NORMAL_CHAPEL_RESERVATION_RECEIPT),
@@ -192,6 +206,7 @@ public class WeddingPackets extends PacketCreator {
         WT_VEGAS_NORMAL(ItemId.NORMAL_WEDDING_TICKET_CHAPEL),
         WT_VEGAS_PREMIUM(ItemId.PREMIUM_WEDDING_TICKET_CHAPEL),
         WT_CATHEDRAL_PREMIUM(ItemId.PREMIUM_WEDDING_TICKET_CATHEDRAL);
+
         private final int wi;
 
         WeddingItem(int wi) {
@@ -212,33 +227,46 @@ public class WeddingPackets extends PacketCreator {
      */
     public static Packet onMarriageRequest(String name, int playerid) {
         OutPacket p = OutPacket.create(SendOpcode.MARRIAGE_REQUEST);
-        p.writeByte(0); //mode, 0 = engage, 1 = cancel, 2 = answer.. etc
+        p.writeByte(0); // mode, 0 = engage, 1 = cancel, 2 = answer.. etc
         p.writeString(name); // name
         p.writeInt(playerid); // playerid
         return p;
     }
 
     /**
-     * A quick rundown of how (I think based off of enough BMS searching) WeddingPhoto_OnTakePhoto works:
+     * A quick rundown of how (I think based off of enough BMS searching)
+     * WeddingPhoto_OnTakePhoto works:
      * - We send this packet with (first) the Groom / Bride IGNs
-     * - We then send a fieldId (unsure about this part at the moment, 90% sure it's the id of the map)
-     * - After this, we write an integer of the amount of characters within the current map (which is the Cake Map -- exclude users within Exit Map)
-     * - Once we've retrieved the size of the characters, we begin to write information about them (Encode their name, guild, etc info)
-     * - Now that we've Encoded our character data, we begin to Encode the ScreenShotPacket which requires a TemplateID, IGN, and their positioning
-     * - Finally, after encoding all of our data, we send this packet out to a MapGen application server
-     * - The MapGen server will then retrieve the packet byte array and convert the bytes into a ImageIO 2D JPG output
-     * - The result after converting into a JPG will then be remotely uploaded to /weddings/ with ReservedGroomName_ReservedBrideName to be displayed on the web server.
+     * - We then send a fieldId (unsure about this part at the moment, 90% sure it's
+     * the id of the map)
+     * - After this, we write an integer of the amount of characters within the
+     * current map (which is the Cake Map -- exclude users within Exit Map)
+     * - Once we've retrieved the size of the characters, we begin to write
+     * information about them (Encode their name, guild, etc info)
+     * - Now that we've Encoded our character data, we begin to Encode the
+     * ScreenShotPacket which requires a TemplateID, IGN, and their positioning
+     * - Finally, after encoding all of our data, we send this packet out to a
+     * MapGen application server
+     * - The MapGen server will then retrieve the packet byte array and convert the
+     * bytes into a ImageIO 2D JPG output
+     * - The result after converting into a JPG will then be remotely uploaded to
+     * /weddings/ with ReservedGroomName_ReservedBrideName to be displayed on the
+     * web server.
      * <p>
      * - Will no longer continue Wedding Photos, needs a WvsMapGen :(
      *
      * @param ReservedGroomName The groom IGN of the wedding
      * @param ReservedBrideName The bride IGN of the wedding
-     * @param m_dwField         The current field id (the id of the cake map, ex. 680000300)
+     * @param m_dwField         The current field id (the id of the cake map, ex.
+     *                          680000300)
      * @param m_uCount          The current user count (equal to m_dwUsers.size)
-     * @param m_dwUsers         The List of all Character guests within the current cake map to be encoded
-     * @return mplew (MaplePacket) Byte array to be converted and read for byte[]->ImageIO
+     * @param m_dwUsers         The List of all Character guests within the current
+     *                          cake map to be encoded
+     * @return mplew (MaplePacket) Byte array to be converted and read for
+     *         byte[]->ImageIO
      */
-    public static Packet onTakePhoto(String ReservedGroomName, String ReservedBrideName, int m_dwField, List<Character> m_dwUsers) { // OnIFailedAtWeddingPhotos
+    public static Packet onTakePhoto(String ReservedGroomName, String ReservedBrideName, int m_dwField,
+            List<Character> m_dwUsers) { // OnIFailedAtWeddingPhotos
         OutPacket p = OutPacket.create(SendOpcode.WEDDING_PHOTO);// v53 header, convert -> v83
         p.writeString(ReservedGroomName);
         p.writeString(ReservedBrideName);
@@ -293,14 +321,17 @@ public class WeddingPackets extends PacketCreator {
             p.writeInt(ItemId.WEDDING_RING_MOONSTONE); // Engagement Ring's Outcome (doesn't matter for engagement)
             p.writeInt(ItemId.WEDDING_RING_MOONSTONE); // Engagement Ring's Outcome (doesn't matter for engagement)
         }
-        p.writeFixedString(StringUtil.getRightPaddedStr(chr.getGender() == 0 ? chr.getName() : Character.getNameById(chr.getPartnerId()), '\0', 13));
-        p.writeFixedString(StringUtil.getRightPaddedStr(chr.getGender() == 0 ? Character.getNameById(chr.getPartnerId()) : chr.getName(), '\0', 13));
+        p.writeFixedString(StringUtil.getRightPaddedStrWithCharset(
+                chr.getGender() == 0 ? chr.getName() : Character.getNameById(chr.getPartnerId()), '\0', 13));
+        p.writeFixedString(StringUtil.getRightPaddedStrWithCharset(
+                chr.getGender() == 0 ? Character.getNameById(chr.getPartnerId()) : chr.getName(), '\0', 13));
 
         return p;
     }
 
     /**
-     * To exit the Engagement Window (Waiting for her response...), we send a GMS-like pop-up.
+     * To exit the Engagement Window (Waiting for her response...), we send a
+     * GMS-like pop-up.
      *
      * @param msg
      * @return mplew
@@ -330,7 +361,8 @@ public class WeddingPackets extends PacketCreator {
     }
 
     /**
-     * The wedding packet to display Pelvis Bebop and enable the Wedding Ceremony Effect between two characters
+     * The wedding packet to display Pelvis Bebop and enable the Wedding Ceremony
+     * Effect between two characters
      * CField_Wedding::OnWeddingProgress - Stages
      * CField_Wedding::OnWeddingCeremonyEnd - Wedding Ceremony Effect
      *
@@ -384,7 +416,7 @@ public class WeddingPackets extends PacketCreator {
         OutPacket p = OutPacket.create(SendOpcode.WEDDING_GIFT_RESULT);
         p.writeByte(mode);
         switch (mode) {
-            case 0xC: // 12 : You cannot give more than one present for each wishlist 
+            case 0xC: // 12 : You cannot give more than one present for each wishlist
             case 0xE: // 14 : Failed to send the gift.
                 break;
 
@@ -395,10 +427,10 @@ public class WeddingPackets extends PacketCreator {
                 }
                 break;
             }
-            case 0xA: // Load Bride's Wishlist 
+            case 0xA: // Load Bride's Wishlist
             case 0xF: // 10, 15, 16 = CWishListRecvDlg::OnPacket
-            case 0xB: { // Add Item to Wedding Registry 
-                // 11 : You have sent a gift | | 13 : Failed to send the gift. | 
+            case 0xB: { // Add Item to Wedding Registry
+                // 11 : You have sent a gift | | 13 : Failed to send the gift. |
                 if (mode == 0xB) {
                     p.writeByte(itemnames.size());
                     for (String names : itemnames) {
@@ -419,4 +451,4 @@ public class WeddingPackets extends PacketCreator {
         }
         return p;
     }
-} 
+}
