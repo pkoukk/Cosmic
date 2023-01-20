@@ -29,13 +29,13 @@ import client.processor.action.BuybackProcessor;
 
 public class BuyBackCommand extends Command {
     {
-        setDescription("Revive yourself after a death.");
+        setDescription("买活.");
     }
 
     @Override
     public void execute(Client c, String[] params) {
         if (params.length < 1) {
-            c.getPlayer().yellowMessage("Syntax: @buyback <info|now>");
+            c.getPlayer().yellowMessage("用法: @buyback <info|now>");
             return;
         }
 

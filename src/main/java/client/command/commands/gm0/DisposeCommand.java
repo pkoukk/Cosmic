@@ -31,7 +31,7 @@ import tools.PacketCreator;
 
 public class DisposeCommand extends Command {
     {
-        setDescription("Dispose to fix NPC chat.");
+        setDescription("关闭NPC对话。被NPC卡住的时候用");
     }
 
     @Override

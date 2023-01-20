@@ -39,13 +39,14 @@ import java.util.Map.Entry;
 public class GotoCommand extends Command {
 
     {
-        setDescription("Warp to a predefined map.");
+        setDescription("传送到指定的地图.");
 
         List<Entry<String, Integer>> towns = new ArrayList<>(GameConstants.GOTO_TOWNS.entrySet());
         sortGotoEntries(towns);
 
         try {
-            // thanks shavit for noticing goto areas getting loaded from wz needlessly only for the name retrieval
+            // thanks shavit for noticing goto areas getting loaded from wz needlessly only
+            // for the name retrieval
 
             for (Map.Entry<String, Integer> e : towns) {
                 GOTO_TOWNS_INFO += ("'" + e.getKey() + "' - #b" + (MapFactory.loadPlaceName(e.getValue())) + "#k\r\n");
@@ -76,7 +77,7 @@ public class GotoCommand extends Command {
     public void execute(Client c, String[] params) {
         Character player = c.getPlayer();
         if (params.length < 1) {
-            String sendStr = "Syntax: #b@goto <map name>#k. Available areas:\r\n\r\n#rTowns:#k\r\n" + GOTO_TOWNS_INFO;
+            String sendStr = "语法: #b@goto <地图名>#k. Available areas:\r\n\r\n#rTowns:#k\r\n" + GOTO_TOWNS_INFO;
             if (player.isGM()) {
                 sendStr += ("\r\n#rAreas:#k\r\n" + GOTO_AREAS_INFO);
             }
@@ -86,23 +87,28 @@ public class GotoCommand extends Command {
         }
 
         if (!player.isAlive()) {
-            player.dropMessage(1, "This command cannot be used when you're dead.");
+            player.dropMessage(1, "死后不能传送.");
             return;
         }
 
         if (!player.isGM()) {
-            if (player.getEventInstance() != null || MiniDungeonInfo.isDungeonMap(player.getMapId()) || FieldLimit.CANNOTMIGRATE.check(player.getMap().getFieldLimit())) {
-                player.dropMessage(1, "This command can not be used in this map.");
+            if (player.getEventInstance() != null || MiniDungeonInfo.isDungeonMap(player.getMapId())
+                    || FieldLimit.CANNOTMIGRATE.check(player.getMap().getFieldLimit())) {
+                player.dropMessage(1, "这张地图不能传送.");
                 return;
             }
         }
 
         Map<String, Integer> gotomaps;
         if (player.isGM()) {
-            gotomaps = new HashMap<>(GameConstants.GOTO_AREAS);     // distinct map registry for GM/users suggested thanks to Vcoc
-            gotomaps.putAll(GameConstants.GOTO_TOWNS);  // thanks Halcyon (UltimateMors) for pointing out duplicates on listed entries functionality
+            gotomaps = new HashMap<>(GameConstants.GOTO_AREAS); // distinct map registry for GM/users suggested thanks
+                                                                // to Vcoc
+            gotomaps.putAll(GameConstants.GOTO_TOWNS); // thanks Halcyon (UltimateMors) for pointing out duplicates on
+                                                       // listed entries functionality
         } else {
-            gotomaps = GameConstants.GOTO_TOWNS;
+            gotomaps = new HashMap<>();
+            gotomaps.put("射手村", constants.id.MapId.HENESYS);
+            gotomaps.put("冰封雪域", constants.id.MapId.EL_NATH);
         }
 
         if (gotomaps.containsKey(params[0])) {
@@ -114,7 +120,8 @@ public class GotoCommand extends Command {
             player.changeMap(target, targetPortal);
         } else {
             // detailed info on goto available areas suggested thanks to Vcoc
-            String sendStr = "Area '#r" + params[0] + "#k' is not available. Available areas:\r\n\r\n#rTowns:#k" + GOTO_TOWNS_INFO;
+            String sendStr = "Area '#r" + params[0] + "#k' is not available. Available areas:\r\n\r\n#rTowns:#k"
+                    + GOTO_TOWNS_INFO;
             if (player.isGM()) {
                 sendStr += ("\r\n#rAreas:#k\r\n" + GOTO_AREAS_INFO);
             }

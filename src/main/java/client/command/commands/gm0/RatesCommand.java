@@ -37,10 +37,12 @@ public class RatesCommand extends Command {
     public void execute(Client c, String[] params) {
         Character player = c.getPlayer();
 
-        // travel rates not applicable since it's intrinsically a server/environment rate rather than a character rate
-        String showMsg_ = "#eCHARACTER RATES#n" + "\r\n\r\n";
-        showMsg_ += "EXP Rate: #e#b" + player.getExpRate() + "x#k#n" + (player.hasNoviceExpRate() ? " - novice rate" : "") + "\r\n";
-        showMsg_ += "MESO Rate: #e#b" + player.getMesoRate() + "x#k#n" + "\r\n";
+        // travel rates not applicable since it's intrinsically a server/environment
+        // rate rather than a character rate
+        String showMsg_ = "#e角色排名情况#n" + "\r\n\r\n";
+        showMsg_ += "经验排行: #e#b" + player.getExpRate() + "x#k#n" + (player.hasNoviceExpRate() ? " - novice rate" : "")
+                + "\r\n";
+        showMsg_ += "金币排行: #e#b" + player.getMesoRate() + "x#k#n" + "\r\n";
         showMsg_ += "DROP Rate: #e#b" + player.getDropRate() + "x#k#n" + "\r\n";
         showMsg_ += "BOSS DROP Rate: #e#b" + player.getBossDropRate() + "x#k#n" + "\r\n";
         if (YamlConfig.config.server.USE_QUEST_RATE) {

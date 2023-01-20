@@ -30,7 +30,7 @@ import server.life.Monster;
 
 public class MobHpCommand extends Command {
     {
-        setDescription("Show HP of mobs on current map.");
+        setDescription("显示当前地图的怪物血量.");
     }
 
     @Override
@@ -38,7 +38,8 @@ public class MobHpCommand extends Command {
         Character player = c.getPlayer();
         for (Monster monster : player.getMap().getAllMonsters()) {
             if (monster != null && monster.getHp() > 0) {
-                player.yellowMessage(monster.getName() + " (" + monster.getId() + ") has " + monster.getHp() + " / " + monster.getMaxHp() + " HP.");
+                player.yellowMessage(monster.getName() + " (" + monster.getId() + ") has " + monster.getHp() + " / "
+                        + monster.getMaxHp() + " HP.");
 
             }
         }

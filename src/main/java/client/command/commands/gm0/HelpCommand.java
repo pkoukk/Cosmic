@@ -29,7 +29,7 @@ import constants.id.NpcId;
 
 public class HelpCommand extends Command {
     {
-        setDescription("Show available commands.");
+        setDescription("显示所有可用的命令.");
     }
 
     @Override

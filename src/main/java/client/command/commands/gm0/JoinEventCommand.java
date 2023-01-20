@@ -32,7 +32,7 @@ import server.maps.FieldLimit;
 
 public class JoinEventCommand extends Command {
     {
-        setDescription("Join active event.");
+        setDescription("加入活动.");
     }
 
     @Override
@@ -45,7 +45,8 @@ public class JoinEventCommand extends Command {
                     if (event.getLimit() > 0) {
                         player.saveLocation("EVENT");
 
-                        if (event.getMapId() == MapId.EVENT_COCONUT_HARVEST || event.getMapId() == MapId.EVENT_SNOWBALL_ENTRANCE) {
+                        if (event.getMapId() == MapId.EVENT_COCONUT_HARVEST
+                                || event.getMapId() == MapId.EVENT_SNOWBALL_ENTRANCE) {
                             player.setTeam(event.getLimit() % 2);
                         }
 
@@ -54,16 +55,16 @@ public class JoinEventCommand extends Command {
                         player.saveLocationOnWarp();
                         player.changeMap(event.getMapId());
                     } else {
-                        player.dropMessage(5, "The limit of players for the event has already been reached.");
+                        player.dropMessage(5, "活动人满了.");
                     }
                 } else {
-                    player.dropMessage(5, "You are already in the event.");
+                    player.dropMessage(5, "你已经加入活动了");
                 }
             } else {
-                player.dropMessage(5, "There is currently no event in progress.");
+                player.dropMessage(5, "现在没有活动发生.");
             }
         } else {
-            player.dropMessage(5, "You are currently in a map where you can't join an event.");
+            player.dropMessage(5, "你当前所在的地图不能参加活动.");
         }
     }
 }

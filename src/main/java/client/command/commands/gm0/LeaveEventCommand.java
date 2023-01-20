@@ -29,7 +29,7 @@ import client.command.Command;
 
 public class LeaveEventCommand extends Command {
     {
-        setDescription("Leave active event.");
+        setDescription("离开当前地图事件.");
     }
 
     @Override
@@ -52,7 +52,7 @@ public class LeaveEventCommand extends Command {
                 c.getChannelServer().getEvent().addLimit();
             }
         } else {
-            player.dropMessage(5, "You are not currently in an event.");
+            player.dropMessage(5, "你现在没在活动里.");
         }
 
     }

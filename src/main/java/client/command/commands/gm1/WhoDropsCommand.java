@@ -39,14 +39,14 @@ import java.util.Iterator;
 
 public class WhoDropsCommand extends Command {
     {
-        setDescription("Show what drops an item.");
+        setDescription("查询物品掉落");
     }
 
     @Override
     public void execute(Client c, String[] params) {
         Character player = c.getPlayer();
         if (params.length < 1) {
-            player.dropMessage(5, "Please do @whodrops <item name>");
+            player.dropMessage(5, "@wd <物品名称>");
             return;
         }
 
@@ -54,26 +54,29 @@ public class WhoDropsCommand extends Command {
             try {
                 String searchString = player.getLastCommandMessage();
                 String output = "";
-                Iterator<Pair<Integer, String>> listIterator = ItemInformationProvider.getInstance().getItemDataByName(searchString).iterator();
+                Iterator<Pair<Integer, String>> listIterator = ItemInformationProvider.getInstance()
+                        .getItemDataByName(searchString).iterator();
                 if (listIterator.hasNext()) {
                     int count = 1;
                     while (listIterator.hasNext() && count <= 3) {
                         Pair<Integer, String> data = listIterator.next();
-                        output += "#b" + data.getRight() + "#k is dropped by:\r\n";
+                        output += "#b" + data.getRight() + "#k 可以由以下怪物掉落 :\r\n";
                         try (Connection con = DatabaseConnection.getConnection();
-                             PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50")) {
+                                PreparedStatement ps = con.prepareStatement(
+                                        "SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50")) {
                             ps.setInt(1, data.getLeft());
 
                             try (ResultSet rs = ps.executeQuery()) {
                                 while (rs.next()) {
-                                    String resultName = MonsterInformationProvider.getInstance().getMobNameFromId(rs.getInt("dropperid"));
+                                    String resultName = MonsterInformationProvider.getInstance()
+                                            .getMobNameFromId(rs.getInt("dropperid"));
                                     if (resultName != null) {
                                         output += resultName + ", ";
                                     }
                                 }
                             }
                         } catch (Exception e) {
-                            player.dropMessage(6, "There was a problem retrieving the required data. Please try again.");
+                            player.dropMessage(6, "读取数据失败，等会再试");
                             e.printStackTrace();
                             return;
                         }
@@ -81,7 +84,7 @@ public class WhoDropsCommand extends Command {
                         count++;
                     }
                 } else {
-                    player.dropMessage(5, "The item you searched for doesn't exist.");
+                    player.dropMessage(5, "没有你要找的道具.");
                     return;
                 }
 
@@ -90,7 +93,7 @@ public class WhoDropsCommand extends Command {
                 c.releaseClient();
             }
         } else {
-            player.dropMessage(5, "Please wait a while for your request to be processed.");
+            player.dropMessage(5, "处理中，等一会儿.");
         }
     }
 }

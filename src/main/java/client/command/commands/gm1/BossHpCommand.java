@@ -30,7 +30,7 @@ import server.life.Monster;
 
 public class BossHpCommand extends Command {
     {
-        setDescription("Show HP of bosses on current map.");
+        setDescription("显示当前地图的BOSS血量.");
     }
 
     @Override
