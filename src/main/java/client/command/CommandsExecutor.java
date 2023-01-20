@@ -208,7 +208,7 @@ public class CommandsExecutor {
 
         addCommand("wdf", WhatDropsFromCommand.class);
         addCommand("wd", WhoDropsCommand.class);
-        addCommand("goto", GotoCommand.class);
+        addCommand("home", HomeCommand.class);
 
         commandsNameDesc.add(levelCommandsCursor);
     }

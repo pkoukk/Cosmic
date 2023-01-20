@@ -1,0 +1,46 @@
+/*
+    This file is part of the HeavenMS MapleStory Server, commands OdinMS-based
+    Copyleft (L) 2016 - 2019 RonanLana
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU Affero General Public License as
+    published by the Free Software Foundation version 3 as published by
+    the Free Software Foundation. You may not use, modify or distribute
+    this program under any other version of the GNU Affero General Public
+    License.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU Affero General Public License for more details.
+
+    You should have received a copy of the GNU Affero General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+*/
+
+/*
+   @Author: Arthur L - Refactored command content into modules
+*/
+package client.command.commands.gm0;
+
+import client.Character;
+import client.Client;
+import client.command.Command;
+import server.maps.*;
+
+public class HomeCommand extends Command {
+    {
+        setDescription("传送回射手村.");
+    }
+
+    @Override
+    public void execute(Client c, String[] params) {
+        Character player = c.getPlayer();
+        MapleMap target = c.getChannelServer().getMapFactory().getMap(constants.id.MapId.HENESYS);
+
+        // expedition issue with this command detected thanks to Masterrulax
+        Portal targetPortal = target.getRandomPlayerSpawnpoint();
+        player.saveLocationOnWarp();
+        player.changeMap(target, targetPortal);
+    }
+}

@@ -106,9 +106,7 @@ public class GotoCommand extends Command {
             gotomaps.putAll(GameConstants.GOTO_TOWNS); // thanks Halcyon (UltimateMors) for pointing out duplicates on
                                                        // listed entries functionality
         } else {
-            gotomaps = new HashMap<>();
-            gotomaps.put("射手村", constants.id.MapId.HENESYS);
-            gotomaps.put("冰封雪域", constants.id.MapId.EL_NATH);
+            gotomaps = GameConstants.GOTO_TOWNS;
         }
 
         if (gotomaps.containsKey(params[0])) {

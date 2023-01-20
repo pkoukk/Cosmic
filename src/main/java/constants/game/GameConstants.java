@@ -64,7 +64,7 @@ public class GameConstants {
         {
             put("southperry", MapId.SOUTHPERRY);
             put("amherst", MapId.AMHERST);
-            put("射手村", MapId.HENESYS);
+            put("henesys", MapId.HENESYS);
             put("ellinia", MapId.ELLINIA);
             put("perion", MapId.PERION);
             put("kerning", MapId.KERNING_CITY);
@@ -76,7 +76,7 @@ public class GameConstants {
             put("rien", MapId.RIEN);
             put("orbis", MapId.ORBIS);
             put("happy", MapId.HAPPYVILLE);
-            put("冰封雪域", MapId.EL_NATH);
+            put("elnath", MapId.EL_NATH);
             put("ludi", MapId.LUDIBRIUM);
             put("aqua", MapId.AQUARIUM);
             put("leafre", MapId.LEAFRE);
@@ -97,7 +97,7 @@ public class GameConstants {
             put("temple", MapId.TEMPLE_OF_TIME);
             put("square", MapId.KERNING_SQUARE);
             put("neo", MapId.NEO_CITY);
-            put("蘑菇王国", MapId.MUSHROOM_KINGDOM);
+            put("mushroom", MapId.MUSHROOM_KINGDOM);
         }
     };
 
