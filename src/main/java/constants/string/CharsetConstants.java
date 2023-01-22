@@ -65,7 +65,7 @@ public class CharsetConstants {
     private static String loadCharsetFromConfig() {
         try {
             YamlReader reader = new YamlReader(
-                    Files.newBufferedReader(Path.of(YamlConfig.CONFIG_FILE_NAME), StandardCharsets.US_ASCII));
+                    Files.newBufferedReader(Path.of(YamlConfig.CONFIG_FILE_NAME), StandardCharsets.UTF_8));
             reader.getConfig().readConfig.setIgnoreUnknownProperties(true);
             StrippedYamlConfig charsetConfig = reader.read(StrippedYamlConfig.class);
             reader.close();
@@ -86,7 +86,7 @@ public class CharsetConstants {
             return Charset.forName(language.getCharset());
         }
 
-        return StandardCharsets.US_ASCII;
+        return StandardCharsets.UTF_8;
     }
 
     private static class StrippedYamlConfig {
