@@ -25,6 +25,7 @@ import client.Character;
 import client.*;
 import client.autoban.AutobanFactory;
 import client.inventory.*;
+import config.ServerConfig;
 import config.YamlConfig;
 import constants.id.ItemId;
 import constants.inventory.EquipSlot;
@@ -1214,25 +1215,28 @@ public class ItemInformationProvider {
         if (defaultValue == 0) {
             return 0;
         }
-        int lMaxRange = (int) Math.min(Math.ceil(defaultValue * 0.1), maxRange);
-        return (short) ((defaultValue - lMaxRange) + Math.floor(Randomizer.nextDouble() * (lMaxRange * 2 + 1)));
+
+        int lMaxRange = (int) Math.min(Math.ceil(defaultValue * 0.15), maxRange);
+        int multi =YamlConfig.config.server.MAX_EQUIPMNT_BOUNS_MUTI;
+        return (short) ((defaultValue - lMaxRange) + Math.floor(Randomizer.nextDouble() * (lMaxRange * multi + 1)));
     }
 
     public Equip randomizeStats(Equip equip) {
-        equip.setStr(getRandStat(equip.getStr(), 5));
-        equip.setDex(getRandStat(equip.getDex(), 5));
-        equip.setInt(getRandStat(equip.getInt(), 5));
-        equip.setLuk(getRandStat(equip.getLuk(), 5));
-        equip.setMatk(getRandStat(equip.getMatk(), 5));
-        equip.setWatk(getRandStat(equip.getWatk(), 5));
-        equip.setAcc(getRandStat(equip.getAcc(), 5));
-        equip.setAvoid(getRandStat(equip.getAvoid(), 5));
-        equip.setJump(getRandStat(equip.getJump(), 5));
-        equip.setSpeed(getRandStat(equip.getSpeed(), 5));
-        equip.setWdef(getRandStat(equip.getWdef(), 10));
-        equip.setMdef(getRandStat(equip.getMdef(), 10));
-        equip.setHp(getRandStat(equip.getHp(), 10));
-        equip.setMp(getRandStat(equip.getMp(), 10));
+        int max =YamlConfig.config.server.MAX_EQUIPMNT_BOUNS_STAT;
+        equip.setStr(getRandStat(equip.getStr(), max));
+        equip.setDex(getRandStat(equip.getDex(), max));
+        equip.setInt(getRandStat(equip.getInt(), max));
+        equip.setLuk(getRandStat(equip.getLuk(), max));
+        equip.setMatk(getRandStat(equip.getMatk(), max));
+        equip.setWatk(getRandStat(equip.getWatk(), max));
+        equip.setAcc(getRandStat(equip.getAcc(), max));
+        equip.setAvoid(getRandStat(equip.getAvoid(), max));
+        equip.setJump(getRandStat(equip.getJump(), max));
+        equip.setSpeed(getRandStat(equip.getSpeed(), max));
+        equip.setWdef(getRandStat(equip.getWdef(), 2*max));
+        equip.setMdef(getRandStat(equip.getMdef(), 2*max));
+        equip.setHp(getRandStat(equip.getHp(), 2*max));
+        equip.setMp(getRandStat(equip.getMp(), 2*max));
         return equip;
     }
 

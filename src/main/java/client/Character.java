@@ -2022,8 +2022,8 @@ public class Character extends AbstractCharacterObject {
                                 this.getCashShop().gainCash(1, nxGain);
 
                                 if (YamlConfig.config.server.USE_ANNOUNCE_NX_COUPON_LOOT) {
-                                    showHint("You have earned #e#b" + nxGain + " NX#k#n. ("
-                                            + this.getCashShop().getCash(1) + " NX)", 300);
+                                    showHint("你获得了 #e#b" + nxGain + " 点券#k#n. ("
+                                            + this.getCashShop().getCash(1) + " 点券)", 300);
                                 }
 
                                 this.getMap().pickItemDrop(pickupPacket, mapitem);
@@ -2075,8 +2075,8 @@ public class Character extends AbstractCharacterObject {
                         this.getCashShop().gainCash(1, nxGain);
 
                         if (YamlConfig.config.server.USE_ANNOUNCE_NX_COUPON_LOOT) {
-                            showHint("You have earned #e#b" + nxGain + " NX#k#n. (" + this.getCashShop().getCash(1)
-                                    + " NX)", 300);
+                            showHint("你获得了 #e#b" + nxGain + " 点#k#n. (" + this.getCashShop().getCash(1)
+                                    + " 点)", 300);
                         }
                     } else if (applyConsumeOnPickup(mItem.getItemId())) {
                     } else if (InventoryManipulator.addFromDrop(client, mItem, true)) {
@@ -6193,8 +6193,8 @@ public class Character extends AbstractCharacterObject {
     }
 
     public void showBuybackInfo() {
-        String s = "#eBUYBACK STATUS#n\r\n\r\nCurrent buyback fee: #b" + getBuybackFee() + " "
-                + (YamlConfig.config.server.USE_BUYBACK_WITH_MESOS ? "mesos" : "NX") + "#k\r\n\r\n";
+        String s = "#e买活状态#n\r\n\r\n当前买活价格: #b" + getBuybackFee() + " "
+                + (YamlConfig.config.server.USE_BUYBACK_WITH_MESOS ? "金币" : "点券") + "#k\r\n\r\n";
 
         long timeNow = Server.getInstance().getCurrentTime();
         boolean avail = true;
@@ -6218,7 +6218,7 @@ public class Character extends AbstractCharacterObject {
             s += "Buyback available in #r" + getTimeRemaining(getNextBuybackTime() - timeNow) + "#k";
             s += "\r\n";
         } else {
-            s += "Buyback #bavailable#k";
+            s += "买活 #b可用#k";
         }
 
         this.showHint(s);
@@ -6251,7 +6251,7 @@ public class Character extends AbstractCharacterObject {
         int fee = getBuybackFee();
 
         if (!canBuyback(fee, usingMesos)) {
-            this.dropMessage(5, "You don't have " + fee + " " + (usingMesos ? "mesos" : "NX") + " to buyback.");
+            this.dropMessage(5, "You don't have " + fee + " " + (usingMesos ? "mesos" : "点券") + " to buyback.");
             return false;
         }
 
@@ -11114,7 +11114,7 @@ public class Character extends AbstractCharacterObject {
          * }
          * 
          * try (PreparedStatement ps =
-         * con.prepareStatement("UPDATE nxcode SET retriever = ? WHERE retriever = ?"))
+         * con.prepareStatement("UPDATE 点券code SET retriever = ? WHERE retriever = ?"))
          * {
          * ps.setString(1, newName);
          * ps.setString(2, oldName);

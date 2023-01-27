@@ -116,7 +116,10 @@ public class MapFactory {
 
             if (mobTime == -1) { //does not respawn, force spawn once
                 map.spawnMonster(monster);
+                
             } else {
+                AbstractLoadedLife doubleLife = loadLife(id, type, cy, f, fh, rx0, rx1, x, y, hide);
+                map.addMonsterSpawn((Monster)doubleLife, mobTime, team);
                 map.addMonsterSpawn(monster, mobTime, team);
             }
 

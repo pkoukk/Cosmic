@@ -248,6 +248,8 @@ public class ServerConfig {
     public int MAX_EQUIPMNT_LVLUP_STAT_UP;
     public int MAX_EQUIPMNT_STAT;
     public int USE_EQUIPMNT_LVLUP;
+    public int MAX_EQUIPMNT_BOUNS_STAT;
+    public int MAX_EQUIPMNT_BOUNS_MUTI;
 
     //Map-Chair Configuration
     public boolean USE_CHAIR_EXTRAHEAL;

@@ -126,8 +126,8 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
         StringBuilder smp = new StringBuilder();
         StringBuilder etm = new StringBuilder();
         if (status.equals(infoex)) {
-            etm.append("Earned the ").append(questName).append(" title!");
-            smp.append("You have earned the <").append(questName).append(">").append(rewardstring);
+            etm.append("获得了 ").append(questName).append(" 头衔!");
+            smp.append("你获得了 <").append(questName).append(">").append(rewardstring);
             getPlayer().sendPacket(PacketCreator.getShowQuestCompletion(quest.getId()));
         } else {
             getPlayer().sendPacket(PacketCreator.earnTitleMessage(status + "/" + infoex + " regions explored."));

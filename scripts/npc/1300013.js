@@ -65,7 +65,7 @@ function action(mode, type, selection) {
         }
 
         if (status == 0) {
-            cm.sendSimple("你必须完成<阻止婚礼>任务才可以进入");
+            cm.sendSimple("#L1#与企鹅王和雪人兄弟战斗#k.#l");
         } else if (status == 1) {
             if (selection == 1) {
                 var pepe = cm.getEventManager("KingPepeAndYetis");
