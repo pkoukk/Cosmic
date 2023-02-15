@@ -7,7 +7,7 @@ var boatType = ["船", "列车", "鸟", "鹤", "精灵", "船"];
 function start() {
     var message = "天空之城可以去往很多地方. 你需要选择以要去的目的地.你想去哪里?\r\n";
     for (var i = 0; i < destinations.length; i++) {
-        message += "\r\n#L" + i + "##b这个" + boatType[i] + "是去往" + destinations[i] + ".#l";
+        message += "\r\n#L" + i + "##b乘" + boatType[i] + "去" + destinations[i] + ".#l";
     }
     cm.sendSimple(message);
 }
