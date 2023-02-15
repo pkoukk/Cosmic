@@ -34,7 +34,7 @@ function playerEntry(eim, player) {
     player.changeMap(onRide, onRide.getPortal(0));
 
     const PacketCreator = Java.type('tools.PacketCreator');
-    player.sendPacket(PacketCreator.getClock(rideTime / 1000));
+    player.sendPacket(PacketCreator.getClock(Math.floor(rideTime / 1000)));
     player.sendPacket(PacketCreator.earnTitleMessage("下一站是废弃都市 " + (myRide == 0 ? "广场" : "地铁") + " 站. 出口在你的左侧."));
     eim.schedule("timeOut", rideTime);
 }

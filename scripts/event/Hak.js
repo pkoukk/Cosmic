@@ -19,7 +19,7 @@ function setup(level, lobbyid) {
     return eim;
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
 function playerEntry(eim, player) {
     if (player.getMapId() == returnTo[0]) {
@@ -33,7 +33,7 @@ function playerEntry(eim, player) {
     player.changeMap(onRide, onRide.getPortal(0));
 
     const PacketCreator = Java.type('tools.PacketCreator');
-    player.sendPacket(PacketCreator.getClock(rideTime / 1000));
+    player.sendPacket(PacketCreator.getClock(Math.floor(rideTime / 1000)));
     eim.schedule("timeOut", rideTime);
 }
 
@@ -41,7 +41,7 @@ function timeOut(eim) {
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player, success) {
     eim.unregisterPlayer(player);
@@ -60,26 +60,26 @@ function playerDisconnected(eim, player) {
     playerExit(eim, player, false);
 }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }
 
 
 // ---------- FILLER FUNCTIONS ----------
 
-function monsterValue(eim, mobid) {return 0;}
+function monsterValue(eim, mobid) { return 0; }
 
-function disbandParty(eim, player) {}
+function disbandParty(eim, player) { }
 
-function monsterKilled(mob, eim) {}
+function monsterKilled(mob, eim) { }
 
-function scheduledTimeout(eim) {}
+function scheduledTimeout(eim) { }
 
-function changedLeader(eim, leader) {}
+function changedLeader(eim, leader) { }
 
-function leftParty(eim, player) {}
+function leftParty(eim, player) { }
 
-function clearPQ(eim) {}
+function clearPQ(eim) { }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
