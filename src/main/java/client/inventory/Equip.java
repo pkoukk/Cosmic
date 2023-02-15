@@ -43,6 +43,7 @@ public class Equip extends Item {
     public enum ScrollResult {
 
         FAIL(0), SUCCESS(1), CURSE(2);
+
         private int value = -1;
 
         ScrollResult(int value) {
@@ -60,6 +61,7 @@ public class Equip extends Item {
         incMHP(4), incMMP(5), incPAD(6), incMAD(7),
         incPDD(8), incMDD(9), incEVA(10), incACC(11),
         incSpeed(12), incJump(13), incVicious(14), incSlot(15);
+
         private int value = -1;
 
         StatUpgrade(int value) {
@@ -74,7 +76,8 @@ public class Equip extends Item {
     private float itemExp;
     private int ringid = -1;
     private boolean wear = false;
-    private boolean isUpgradeable, isElemental = false;    // timeless or reverse, or any equip that could levelup on GMS for all effects
+    private boolean isUpgradeable, isElemental = false; // timeless or reverse, or any equip that could levelup on GMS
+                                                        // for all effects
 
     public Equip(int id, short position) {
         this(id, position, 0);
@@ -281,7 +284,8 @@ public class Equip extends Item {
     }
 
     private static int getStatModifier(boolean isAttribute) {
-        // each set of stat points grants a chance for a bonus stat point upgrade at equip level up.
+        // each set of stat points grants a chance for a bonus stat point upgrade at
+        // equip level up.
 
         if (YamlConfig.config.server.USE_EQUIPMNT_LVLUP_POWER) {
             if (isAttribute) {
@@ -293,7 +297,7 @@ public class Equip extends Item {
             if (isAttribute) {
                 return 4;
             } else {
-                return 16;
+                return 10;
             }
         }
     }
@@ -307,7 +311,9 @@ public class Equip extends Item {
         int stat = 0;
         if (rnd >= limit) {
             rnd -= limit;
-            stat = 1 + (int) Math.floor((-1 + Math.sqrt((8 * rnd) + 1)) / 2);    // optimized randomizeStatUpgrade author: David A.
+            stat = 1 + (int) Math.floor((-1 + Math.sqrt((10 * rnd) + 1)) / 2.2); // optimized randomizeStatUpgrade
+                                                                                 // author:
+                                                                                 // David A.
         }
 
         return stat;
@@ -319,7 +325,8 @@ public class Equip extends Item {
     }
 
     private boolean isNotWeaponAffinity(StatUpgrade name) {
-        // Vcoc's idea - WATK/MATK expected gains lessens outside of weapon affinity (physical/magic)
+        // Vcoc's idea - WATK/MATK expected gains lessens outside of weapon affinity
+        // (physical/magic)
 
         if (ItemConstants.isWeapon(this.getItemId())) {
             if (name.equals(StatUpgrade.incPAD)) {
@@ -332,9 +339,11 @@ public class Equip extends Item {
         return false;
     }
 
-    private void getUnitStatUpgrade(List<Pair<StatUpgrade, Integer>> stats, StatUpgrade name, int curStat, boolean isAttribute) {
+    private void getUnitStatUpgrade(List<Pair<StatUpgrade, Integer>> stats, StatUpgrade name, int curStat,
+            boolean isAttribute) {
         isUpgradeable = true;
-        int maxUpgrade = randomizeStatUpgrade((int) (1 + (curStat / (getStatModifier(isAttribute) * (isNotWeaponAffinity(name) ? 2.7 : 1)))));
+        int maxUpgrade = randomizeStatUpgrade(
+                (int) (1 + (curStat / (getStatModifier(isAttribute) * (isNotWeaponAffinity(name) ? 2.7 : 1.25)))));
         if (maxUpgrade == 0) {
             return;
         }
@@ -344,7 +353,7 @@ public class Equip extends Item {
 
     private static void getUnitSlotUpgrade(List<Pair<StatUpgrade, Integer>> stats, StatUpgrade name) {
         if (Math.random() < 0.1) {
-            stats.add(new Pair<>(name, 1));  // 10% success on getting a slot upgrade.
+            stats.add(new Pair<>(name, 1)); // 10% success on getting a slot upgrade.
         }
     }
 
@@ -537,7 +546,8 @@ public class Equip extends Item {
         List<Pair<StatUpgrade, Integer>> stats = new LinkedList<>();
 
         if (isElemental) {
-            List<Pair<String, Integer>> elementalStats = ItemInformationProvider.getInstance().getItemLevelupStats(getItemId(), itemLevel);
+            List<Pair<String, Integer>> elementalStats = ItemInformationProvider.getInstance()
+                    .getItemLevelupStats(getItemId(), itemLevel);
 
             for (Pair<String, Integer> p : elementalStats) {
                 if (p.getRight() > 0) {
@@ -579,8 +589,10 @@ public class Equip extends Item {
 
         itemLevel++;
 
-        String lvupStr = "'" + ItemInformationProvider.getInstance().getName(this.getItemId()) + "' 升到 " + itemLevel + "级了! ";
-        String showStr = "#e'" + ItemInformationProvider.getInstance().getName(this.getItemId()) + "'#b 升到 #e#r" + itemLevel + "级了#k#b!";
+        String lvupStr = "'" + ItemInformationProvider.getInstance().getName(this.getItemId()) + "' 升到 " + itemLevel
+                + "级了! ";
+        String showStr = "#e'" + ItemInformationProvider.getInstance().getName(this.getItemId()) + "'#b 升到 #e#r"
+                + itemLevel + "级了#k#b!";
 
         Pair<String, Pair<Boolean, Boolean>> res = this.gainStats(stats);
         lvupStr += res.getLeft();
@@ -588,11 +600,14 @@ public class Equip extends Item {
         boolean gotVicious = res.getRight().getRight();
 
         if (gotVicious) {
-            //c.getPlayer().dropMessage(6, "A new Vicious Hammer opportunity has been found on the '" + ItemInformationProvider.getInstance().getName(getItemId()) + "'!");
+            // c.getPlayer().dropMessage(6, "A new Vicious Hammer opportunity has been found
+            // on the '" + ItemInformationProvider.getInstance().getName(getItemId()) +
+            // "'!");
             lvupStr += "+VICIOUS ";
         }
         if (gotSlot) {
-            //c.getPlayer().dropMessage(6, "A new upgrade slot has been found on the '" + ItemInformationProvider.getInstance().getName(getItemId()) + "'!");
+            // c.getPlayer().dropMessage(6, "A new upgrade slot has been found on the '" +
+            // ItemInformationProvider.getInstance().getName(getItemId()) + "'!");
             lvupStr += "+UPGSLOT ";
         }
 
@@ -602,7 +617,8 @@ public class Equip extends Item {
         c.getPlayer().dropMessage(6, lvupStr);
 
         c.sendPacket(PacketCreator.showEquipmentLevelUp());
-        c.getPlayer().getMap().broadcastPacket(c.getPlayer(), PacketCreator.showForeignEffect(c.getPlayer().getId(), 15));
+        c.getPlayer().getMap().broadcastPacket(c.getPlayer(),
+                PacketCreator.showForeignEffect(c.getPlayer().getId(), 15));
         c.getPlayer().forceUpdateItem(this);
     }
 
@@ -611,8 +627,10 @@ public class Equip extends Item {
     }
 
     private static double normalizedMasteryExp(int reqLevel) {
-        // Conversion factor between mob exp and equip exp gain. Through many calculations, the expected for equipment levelup
-        // from level 1 to 2 is killing about 100~200 mobs of the same level range, on a 1x EXP rate scenario.
+        // Conversion factor between mob exp and equip exp gain. Through many
+        // calculations, the expected for equipment levelup
+        // from level 1 to 2 is killing about 100~200 mobs of the same level range, on a
+        // 1x EXP rate scenario.
 
         if (reqLevel < 5) {
             return 42;
@@ -627,20 +645,22 @@ public class Equip extends Item {
         }
     }
 
-    public synchronized void gainItemExp(Client c, int gain) {  // Ronan's Equip Exp gain method
+    public synchronized void gainItemExp(Client c, int gain) { // Ronan's Equip Exp gain method
         ItemInformationProvider ii = ItemInformationProvider.getInstance();
         if (!ii.isUpgradeable(this.getItemId())) {
             return;
         }
 
-        int equipMaxLevel = Math.min(30, Math.max(ii.getEquipLevel(this.getItemId(), true), YamlConfig.config.server.USE_EQUIPMNT_LVLUP));
+        int equipMaxLevel = Math.min(30,
+                Math.max(ii.getEquipLevel(this.getItemId(), true), YamlConfig.config.server.USE_EQUIPMNT_LVLUP));
         if (itemLevel >= equipMaxLevel) {
             return;
         }
 
         int reqLevel = ii.getEquipLevelReq(this.getItemId());
 
-        float masteryModifier = (float) (YamlConfig.config.server.EQUIP_EXP_RATE * ExpTable.getExpNeededForLevel(1)) / (float) normalizedMasteryExp(reqLevel);
+        float masteryModifier = (float) (YamlConfig.config.server.EQUIP_EXP_RATE * ExpTable.getExpNeededForLevel(1))
+                / (float) normalizedMasteryExp(reqLevel);
         float elementModifier = (isElemental) ? 0.85f : 0.6f;
 
         float baseExpGain = gain * elementModifier * masteryModifier;
@@ -649,8 +669,10 @@ public class Equip extends Item {
         int expNeeded = ExpTable.getEquipExpNeededForLevel(itemLevel);
 
         if (YamlConfig.config.server.USE_DEBUG_SHOW_INFO_EQPEXP) {
-            log.debug("{} -> EXP Gain: {}, Mastery: {}, Base gain: {}, exp: {} / {}, Kills TNL: {}", ii.getName(getItemId()),
-                    gain, masteryModifier, baseExpGain, itemExp, expNeeded, expNeeded / (baseExpGain / c.getPlayer().getExpRate()));
+            log.debug("{} -> EXP Gain: {}, Mastery: {}, Base gain: {}, exp: {} / {}, Kills TNL: {}",
+                    ii.getName(getItemId()),
+                    gain, masteryModifier, baseExpGain, itemExp, expNeeded,
+                    expNeeded / (baseExpGain / c.getPlayer().getExpRate()));
         }
 
         if (itemExp >= expNeeded) {
@@ -668,7 +690,8 @@ public class Equip extends Item {
         }
 
         c.getPlayer().forceUpdateItem(this);
-        //if(YamlConfig.config.server.USE_DEBUG) c.getPlayer().dropMessage("'" + ii.getName(this.getItemId()) + "': " + itemExp + " / " + expNeeded);
+        // if(YamlConfig.config.server.USE_DEBUG) c.getPlayer().dropMessage("'" +
+        // ii.getName(this.getItemId()) + "': " + itemExp + " / " + expNeeded);
     }
 
     private boolean reachedMaxLevel() {
@@ -688,7 +711,8 @@ public class Equip extends Item {
         }
 
         String eqpName = ii.getName(getItemId());
-        String eqpInfo = reachedMaxLevel() ? " #e#rMAX LEVEL#k#n" : (" EXP: #e#b" + (int) itemExp + "#k#n / " + ExpTable.getEquipExpNeededForLevel(itemLevel));
+        String eqpInfo = reachedMaxLevel() ? " #e#rMAX LEVEL#k#n"
+                : (" EXP: #e#b" + (int) itemExp + "#k#n / " + ExpTable.getEquipExpNeededForLevel(itemLevel));
 
         return "'" + eqpName + "' -> LV: #e#b" + itemLevel + "#k#n    " + eqpInfo + "\r\n";
     }
@@ -708,7 +732,8 @@ public class Equip extends Item {
     @Override
     public void setQuantity(short quantity) {
         if (quantity < 0 || quantity > 1) {
-            throw new RuntimeException("Setting the quantity to " + quantity + " on an equip (itemid: " + getItemId() + ")");
+            throw new RuntimeException(
+                    "Setting the quantity to " + quantity + " on an equip (itemid: " + getItemId() + ")");
         }
         super.setQuantity(quantity);
     }

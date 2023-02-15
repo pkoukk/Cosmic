@@ -135,7 +135,6 @@ public class ItemInformationProvider {
         isPartyQuestItemCache.put(0, false);
     }
 
-
     public List<Pair<Integer, String>> getAllItems() {
         if (!itemNameCache.isEmpty()) {
             return itemNameCache;
@@ -144,29 +143,35 @@ public class ItemInformationProvider {
         Data itemsData;
         itemsData = stringData.getData("Cash.img");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         itemsData = stringData.getData("Consume.img");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         itemsData = stringData.getData("Eqp.img").getChildByPath("Eqp");
         for (Data eqpType : itemsData.getChildren()) {
             for (Data itemFolder : eqpType.getChildren()) {
-                itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+                itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                        DataTool.getString("name", itemFolder, "NO-NAME")));
             }
         }
         itemsData = stringData.getData("Etc.img").getChildByPath("Etc");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         itemsData = stringData.getData("Ins.img");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         itemsData = stringData.getData("Pet.img");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         return itemPairs;
     }
@@ -181,7 +186,8 @@ public class ItemInformationProvider {
 
         itemsData = stringData.getData("Etc.img").getChildByPath("Etc");
         for (Data itemFolder : itemsData.getChildren()) {
-            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()), DataTool.getString("name", itemFolder, "NO-NAME")));
+            itemPairs.add(new Pair<>(Integer.parseInt(itemFolder.getName()),
+                    DataTool.getString("name", itemFolder, "NO-NAME")));
         }
         return itemPairs;
     }
@@ -193,7 +199,8 @@ public class ItemInformationProvider {
             theData = cashStringData;
         } else if (itemId >= 2000000 && itemId < 3000000) {
             theData = consumeStringData;
-        } else if ((itemId >= 1010000 && itemId < 1040000) || (itemId >= 1122000 && itemId < 1123000) || (itemId >= 1132000 && itemId < 1133000) || (itemId >= 1142000 && itemId < 1143000)) {
+        } else if ((itemId >= 1010000 && itemId < 1040000) || (itemId >= 1122000 && itemId < 1123000)
+                || (itemId >= 1132000 && itemId < 1133000) || (itemId >= 1142000 && itemId < 1143000)) {
             theData = eqpStringData;
             cat = "Eqp/Accessory";
         } else if (itemId >= 1000000 && itemId < 1010000) {
@@ -317,14 +324,14 @@ public class ItemInformationProvider {
             }
         }
 
-
         return list;
     }
 
     private static short getExtraSlotMaxFromPlayer(Client c, int itemId) {
         short ret = 0;
 
-        // thanks GMChuck for detecting player sensitive data being cached into getSlotMax
+        // thanks GMChuck for detecting player sensitive data being cached into
+        // getSlotMax
         if (ItemConstants.isThrowingStar(itemId)) {
             if (c.getPlayer().getJob().isA(Job.NIGHTWALKER1)) {
                 ret += c.getPlayer().getSkillLevel(SkillFactory.getSkill(NightWalker.CLAW_MASTERY)) * 10;
@@ -477,7 +484,7 @@ public class ItemInformationProvider {
         return retPrice;
     }
 
-    public Pair<Integer, String> getReplaceOnExpire(int itemId) {   // thanks to GabrielSin
+    public Pair<Integer, String> getReplaceOnExpire(int itemId) { // thanks to GabrielSin
         if (replaceOnExpireCache.containsKey(itemId)) {
             return replaceOnExpireCache.get(itemId);
         }
@@ -535,8 +542,10 @@ public class ItemInformationProvider {
             if (data.getName().startsWith("inc")) {
                 ret.put(data.getName().substring(3), DataTool.getIntConvert(data));
             }
-            /*else if (data.getName().startsWith("req"))
-             ret.put(data.getName(), DataTool.getInt(data.getName(), info, 0));*/
+            /*
+             * else if (data.getName().startsWith("req"))
+             * ret.put(data.getName(), DataTool.getInt(data.getName(), info, 0));
+             */
         }
         ret.put("reqJob", DataTool.getInt("reqJob", info, 0));
         ret.put("reqLevel", DataTool.getInt("reqLevel", info, 0));
@@ -592,14 +601,19 @@ public class ItemInformationProvider {
 
     public WeaponType getWeaponType(int itemId) {
         int cat = (itemId / 10000) % 100;
-        WeaponType[] type = {WeaponType.SWORD1H, WeaponType.GENERAL1H_SWING, WeaponType.GENERAL1H_SWING, WeaponType.DAGGER_OTHER, WeaponType.NOT_A_WEAPON, WeaponType.NOT_A_WEAPON, WeaponType.NOT_A_WEAPON, WeaponType.WAND, WeaponType.STAFF, WeaponType.NOT_A_WEAPON, WeaponType.SWORD2H, WeaponType.GENERAL2H_SWING, WeaponType.GENERAL2H_SWING, WeaponType.SPEAR_STAB, WeaponType.POLE_ARM_SWING, WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.CLAW, WeaponType.KNUCKLE, WeaponType.GUN};
+        WeaponType[] type = { WeaponType.SWORD1H, WeaponType.GENERAL1H_SWING, WeaponType.GENERAL1H_SWING,
+                WeaponType.DAGGER_OTHER, WeaponType.NOT_A_WEAPON, WeaponType.NOT_A_WEAPON, WeaponType.NOT_A_WEAPON,
+                WeaponType.WAND, WeaponType.STAFF, WeaponType.NOT_A_WEAPON, WeaponType.SWORD2H,
+                WeaponType.GENERAL2H_SWING, WeaponType.GENERAL2H_SWING, WeaponType.SPEAR_STAB,
+                WeaponType.POLE_ARM_SWING, WeaponType.BOW, WeaponType.CROSSBOW, WeaponType.CLAW, WeaponType.KNUCKLE,
+                WeaponType.GUN };
         if (cat < 30 || cat > 49) {
             return WeaponType.NOT_A_WEAPON;
         }
         return type[cat - 30];
     }
 
-    private static double testYourLuck(double prop, int dices) {   // revamped testYourLuck author: David A.
+    private static double testYourLuck(double prop, int dices) { // revamped testYourLuck author: David A.
         return Math.pow(1.0 - prop, dices);
     }
 
@@ -621,76 +635,87 @@ public class ItemInformationProvider {
 
     public void scrollOptionEquipWithChaos(Equip nEquip, int range, boolean option) {
         // option: watk, matk, wdef, mdef, spd, jump, hp, mp
-        //   stat: dex, luk, str, int, avoid, acc
+        // stat: dex, luk, str, int, avoid, acc
 
         if (!option) {
             if (nEquip.getStr() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
+                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(),
+                            (nEquip.getStr() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setStr(getMaximumShortMaxIfOverflow(0, (nEquip.getStr() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getDex() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
+                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(),
+                            (nEquip.getDex() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setDex(getMaximumShortMaxIfOverflow(0, (nEquip.getDex() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getInt() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
+                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(),
+                            (nEquip.getInt() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setInt(getMaximumShortMaxIfOverflow(0, (nEquip.getInt() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getLuk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
+                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(),
+                            (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setLuk(getMaximumShortMaxIfOverflow(0, (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getAcc() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
+                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(),
+                            (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setAcc(getMaximumShortMaxIfOverflow(0, (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getAvoid() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(),
+                            (nEquip.getAvoid() + chscrollRandomizedStat(range))));
                 } else {
-                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                    nEquip.setAvoid(
+                            getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
                 }
             }
         } else {
             if (nEquip.getWatk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(),
+                            (nEquip.getWatk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getWdef() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(),
+                            (nEquip.getWdef() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMatk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(),
+                            (nEquip.getMatk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMdef() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(),
+                            (nEquip.getMdef() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
                 }
@@ -698,28 +723,33 @@ public class ItemInformationProvider {
 
             if (nEquip.getSpeed() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(),
+                            (nEquip.getSpeed() + chscrollRandomizedStat(range))));
                 } else {
-                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                    nEquip.setSpeed(
+                            getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getJump() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(),
+                            (nEquip.getJump() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getHp() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
+                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(),
+                            (nEquip.getHp() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setHp(getMaximumShortMaxIfOverflow(0, (nEquip.getHp() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMp() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
+                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(),
+                            (nEquip.getMp() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMp(getMaximumShortMaxIfOverflow(0, (nEquip.getMp() + chscrollRandomizedStat(range))));
                 }
@@ -730,7 +760,8 @@ public class ItemInformationProvider {
     private void scrollEquipWithChaos(Equip nEquip, int range) {
         if (YamlConfig.config.server.CHSCROLL_STAT_RATE > 0) {
             int temp;
-            short curStr, curDex, curInt, curLuk, curWatk, curWdef, curMatk, curMdef, curAcc, curAvoid, curSpeed, curJump, curHp, curMp;
+            short curStr, curDex, curInt, curLuk, curWatk, curWdef, curMatk, curMdef, curAcc, curAvoid, curSpeed,
+                    curJump, curHp, curMp;
 
             if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
                 curStr = nEquip.getStr();
@@ -923,98 +954,114 @@ public class ItemInformationProvider {
         } else {
             if (nEquip.getStr() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(), (nEquip.getStr() + chscrollRandomizedStat(range))));
+                    nEquip.setStr(getMaximumShortMaxIfOverflow(nEquip.getStr(),
+                            (nEquip.getStr() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setStr(getMaximumShortMaxIfOverflow(0, (nEquip.getStr() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getDex() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(), (nEquip.getDex() + chscrollRandomizedStat(range))));
+                    nEquip.setDex(getMaximumShortMaxIfOverflow(nEquip.getDex(),
+                            (nEquip.getDex() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setDex(getMaximumShortMaxIfOverflow(0, (nEquip.getDex() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getInt() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(), (nEquip.getInt() + chscrollRandomizedStat(range))));
+                    nEquip.setInt(getMaximumShortMaxIfOverflow(nEquip.getInt(),
+                            (nEquip.getInt() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setInt(getMaximumShortMaxIfOverflow(0, (nEquip.getInt() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getLuk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(), (nEquip.getLuk() + chscrollRandomizedStat(range))));
+                    nEquip.setLuk(getMaximumShortMaxIfOverflow(nEquip.getLuk(),
+                            (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setLuk(getMaximumShortMaxIfOverflow(0, (nEquip.getLuk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getWatk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(), (nEquip.getWatk() + chscrollRandomizedStat(range))));
+                    nEquip.setWatk(getMaximumShortMaxIfOverflow(nEquip.getWatk(),
+                            (nEquip.getWatk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setWatk(getMaximumShortMaxIfOverflow(0, (nEquip.getWatk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getWdef() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(), (nEquip.getWdef() + chscrollRandomizedStat(range))));
+                    nEquip.setWdef(getMaximumShortMaxIfOverflow(nEquip.getWdef(),
+                            (nEquip.getWdef() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setWdef(getMaximumShortMaxIfOverflow(0, (nEquip.getWdef() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMatk() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(), (nEquip.getMatk() + chscrollRandomizedStat(range))));
+                    nEquip.setMatk(getMaximumShortMaxIfOverflow(nEquip.getMatk(),
+                            (nEquip.getMatk() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMatk(getMaximumShortMaxIfOverflow(0, (nEquip.getMatk() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMdef() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(), (nEquip.getMdef() + chscrollRandomizedStat(range))));
+                    nEquip.setMdef(getMaximumShortMaxIfOverflow(nEquip.getMdef(),
+                            (nEquip.getMdef() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMdef(getMaximumShortMaxIfOverflow(0, (nEquip.getMdef() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getAcc() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(), (nEquip.getAcc() + chscrollRandomizedStat(range))));
+                    nEquip.setAcc(getMaximumShortMaxIfOverflow(nEquip.getAcc(),
+                            (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setAcc(getMaximumShortMaxIfOverflow(0, (nEquip.getAcc() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getAvoid() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(), (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(nEquip.getAvoid(),
+                            (nEquip.getAvoid() + chscrollRandomizedStat(range))));
                 } else {
-                    nEquip.setAvoid(getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
+                    nEquip.setAvoid(
+                            getMaximumShortMaxIfOverflow(0, (nEquip.getAvoid() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getSpeed() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(), (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(nEquip.getSpeed(),
+                            (nEquip.getSpeed() + chscrollRandomizedStat(range))));
                 } else {
-                    nEquip.setSpeed(getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
+                    nEquip.setSpeed(
+                            getMaximumShortMaxIfOverflow(0, (nEquip.getSpeed() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getJump() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(), (nEquip.getJump() + chscrollRandomizedStat(range))));
+                    nEquip.setJump(getMaximumShortMaxIfOverflow(nEquip.getJump(),
+                            (nEquip.getJump() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setJump(getMaximumShortMaxIfOverflow(0, (nEquip.getJump() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getHp() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(), (nEquip.getHp() + chscrollRandomizedStat(range))));
+                    nEquip.setHp(getMaximumShortMaxIfOverflow(nEquip.getHp(),
+                            (nEquip.getHp() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setHp(getMaximumShortMaxIfOverflow(0, (nEquip.getHp() + chscrollRandomizedStat(range))));
                 }
             }
             if (nEquip.getMp() > 0) {
                 if (YamlConfig.config.server.USE_ENHANCED_CHSCROLL) {
-                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(), (nEquip.getMp() + chscrollRandomizedStat(range))));
+                    nEquip.setMp(getMaximumShortMaxIfOverflow(nEquip.getMp(),
+                            (nEquip.getMp() + chscrollRandomizedStat(range))));
                 } else {
                     nEquip.setMp(getMaximumShortMaxIfOverflow(0, (nEquip.getMp() + chscrollRandomizedStat(range))));
                 }
@@ -1023,12 +1070,13 @@ public class ItemInformationProvider {
     }
 
     /*
-        Issue with clean slate found thanks to Masterrulax
-        Vicious added in the clean slate check thanks to Crypter (CrypterDEV)
-    */
+     * Issue with clean slate found thanks to Masterrulax
+     * Vicious added in the clean slate check thanks to Crypter (CrypterDEV)
+     */
     public boolean canUseCleanSlate(Equip nEquip) {
         Map<String, Integer> eqstats = this.getEquipStats(nEquip.getItemId());
-        return YamlConfig.config.server.USE_ENHANCED_CLNSLATE || nEquip.getUpgradeSlots() < (byte) (eqstats.get("tuc") + nEquip.getVicious());
+        return YamlConfig.config.server.USE_ENHANCED_CLNSLATE
+                || nEquip.getUpgradeSlots() < (byte) (eqstats.get("tuc") + nEquip.getVicious());
     }
 
     public Item scrollEquipWithId(Item equip, int scrollId, boolean usingWhiteScroll, int vegaItemId, boolean isGM) {
@@ -1086,13 +1134,17 @@ public class ItemInformationProvider {
                             break;
                     }
                     if (!ItemConstants.isCleanSlate(scrollId)) {
-                        if (!assertGM && !ItemConstants.isModifierScroll(scrollId)) {   // issue with modifier scrolls taking slots found thanks to Masterrulax, justin, BakaKnyx
+                        if (!assertGM && !ItemConstants.isModifierScroll(scrollId)) { // issue with modifier scrolls
+                                                                                      // taking slots found thanks to
+                                                                                      // Masterrulax, justin, BakaKnyx
                             nEquip.setUpgradeSlots((byte) (nEquip.getUpgradeSlots() - 1));
                         }
                         nEquip.setLevel((byte) (nEquip.getLevel() + 1));
                     }
                 } else {
-                    if (!YamlConfig.config.server.USE_PERFECT_SCROLLING && !usingWhiteScroll && !ItemConstants.isCleanSlate(scrollId) && !assertGM && !ItemConstants.isModifierScroll(scrollId)) {
+                    if (!YamlConfig.config.server.USE_PERFECT_SCROLLING && !usingWhiteScroll
+                            && !ItemConstants.isCleanSlate(scrollId) && !assertGM
+                            && !ItemConstants.isModifierScroll(scrollId)) {
                         nEquip.setUpgradeSlots((byte) (nEquip.getUpgradeSlots() - 1));
                     }
                     if (Randomizer.nextInt(100) < stats.get("cursed")) {
@@ -1196,7 +1248,9 @@ public class ItemInformationProvider {
                     nEquip.setMp((short) stat.getValue().intValue());
                 } else if (stat.getKey().equals("tuc")) {
                     nEquip.setUpgradeSlots((byte) stat.getValue().intValue());
-                } else if (isUntradeableRestricted(equipId)) {  // thanks Hyun & Thora for showing an issue with more than only "Untradeable" items being flagged as such here
+                } else if (isUntradeableRestricted(equipId)) { // thanks Hyun & Thora for showing an issue with more
+                                                               // than only "Untradeable" items being flagged as such
+                                                               // here
                     short flag = nEquip.getFlag();
                     flag |= ItemConstants.UNTRADEABLE;
                     nEquip.setFlag(flag);
@@ -1217,12 +1271,30 @@ public class ItemInformationProvider {
         }
 
         int lMaxRange = (int) Math.min(Math.ceil(defaultValue * 0.15), maxRange);
-        int multi =YamlConfig.config.server.MAX_EQUIPMNT_BOUNS_MUTI;
-        return (short) ((defaultValue - lMaxRange) + Math.floor(Randomizer.nextDouble() * (lMaxRange * multi + 1)));
+        double multi;
+        float stage = Randomizer.nextFloat();
+        if (stage > 0.90) {
+            // 5 - 8
+            multi = 5 + 3 * Randomizer.nextDouble();
+        } else if (stage > 0.75) {
+            // 3-6
+            multi = 3 + 3 * Randomizer.nextDouble();
+        } else if (stage > 0.5) {
+            // 2-4
+            multi = 2 + 2 * Randomizer.nextDouble();
+        } else if (stage > 0.2) {
+            // 1-3
+            multi = 1 + 2 * Randomizer.nextDouble();
+        } else {
+            // 0 - 2
+            multi = 2 * Randomizer.nextDouble();
+        }
+
+        return (short) ((defaultValue - lMaxRange) + Math.floor(multi * (lMaxRange + 1)));
     }
 
     public Equip randomizeStats(Equip equip) {
-        int max =YamlConfig.config.server.MAX_EQUIPMNT_BOUNS_STAT;
+        int max = YamlConfig.config.server.MAX_EQUIPMNT_BOUNS_STAT;
         equip.setStr(getRandStat(equip.getStr(), max));
         equip.setDex(getRandStat(equip.getDex(), max));
         equip.setInt(getRandStat(equip.getInt(), max));
@@ -1233,10 +1305,10 @@ public class ItemInformationProvider {
         equip.setAvoid(getRandStat(equip.getAvoid(), max));
         equip.setJump(getRandStat(equip.getJump(), max));
         equip.setSpeed(getRandStat(equip.getSpeed(), max));
-        equip.setWdef(getRandStat(equip.getWdef(), 2*max));
-        equip.setMdef(getRandStat(equip.getMdef(), 2*max));
-        equip.setHp(getRandStat(equip.getHp(), 2*max));
-        equip.setMp(getRandStat(equip.getMp(), 2*max));
+        equip.setWdef(getRandStat(equip.getWdef(), 2 * max));
+        equip.setMdef(getRandStat(equip.getMdef(), 2 * max));
+        equip.setHp(getRandStat(equip.getHp(), 2 * max));
+        equip.setMp(getRandStat(equip.getMp(), 2 * max));
         return equip;
     }
 
@@ -1517,8 +1589,8 @@ public class ItemInformationProvider {
 
     private void loadCardIdData() {
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT cardid, mobid FROM monstercarddata");
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = con.prepareStatement("SELECT cardid, mobid FROM monstercarddata");
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 monsterBookID.put(rs.getInt(1), rs.getInt(2));
             }
@@ -1634,7 +1706,7 @@ public class ItemInformationProvider {
         }
     }
 
-    public Pair<Integer, List<RewardItem>> getItemReward(int itemId) {//Thanks Celino - used some stuffs :)
+    public Pair<Integer, List<RewardItem>> getItemReward(int itemId) {// Thanks Celino - used some stuffs :)
         if (rewardCache.containsKey(itemId)) {
             return rewardCache.get(itemId);
         }
@@ -1663,7 +1735,8 @@ public class ItemInformationProvider {
             return consumeOnPickupCache.get(itemId);
         }
         Data data = getItemData(itemId);
-        boolean consume = DataTool.getIntConvert("spec/consumeOnPickup", data, 0) == 1 || DataTool.getIntConvert("specEx/consumeOnPickup", data, 0) == 1;
+        boolean consume = DataTool.getIntConvert("spec/consumeOnPickup", data, 0) == 1
+                || DataTool.getIntConvert("specEx/consumeOnPickup", data, 0) == 1;
         consumeOnPickupCache.put(itemId, consume);
         return consume;
     }
@@ -1730,18 +1803,22 @@ public class ItemInformationProvider {
             return itemz;
         }
         boolean highfivestamp = false;
-        /* Removed because players shouldn't even get this, and gm's should just be gm job.
-         try {
-         for (Pair<Item, InventoryType> ii : ItemFactory.INVENTORY.loadItems(chr.getId(), false)) {
-         if (ii.getRight() == InventoryType.CASH) {
-         if (ii.getLeft().getItemId() == 5590000) {
-         highfivestamp = true;
-         }
-         }
-         }
-         } catch (SQLException ex) {
-            ex.printStackTrace();
-         }*/
+        /*
+         * Removed because players shouldn't even get this, and gm's should just be gm
+         * job.
+         * try {
+         * for (Pair<Item, InventoryType> ii :
+         * ItemFactory.INVENTORY.loadItems(chr.getId(), false)) {
+         * if (ii.getRight() == InventoryType.CASH) {
+         * if (ii.getLeft().getItemId() == 5590000) {
+         * highfivestamp = true;
+         * }
+         * }
+         * }
+         * } catch (SQLException ex) {
+         * ex.printStackTrace();
+         * }
+         */
         int tdex = chr.getDex(), tstr = chr.getStr(), tint = chr.getInt(), tluk = chr.getLuk(), fame = chr.getFame();
         if (chr.getJob() != Job.SUPERGM || chr.getJob() != Job.GM) {
             for (Item item : inv.list()) {
@@ -1762,11 +1839,12 @@ public class ItemInformationProvider {
                 }
             }
             /*
-             int reqJob = getEquipStats(equip.getItemId()).get("reqJob");
-             if (reqJob != 0) {
-             Really hard check, and not really needed in this one
-             Gm's should just be GM job, and players cannot change jobs.
-             }*/
+             * int reqJob = getEquipStats(equip.getItemId()).get("reqJob");
+             * if (reqJob != 0) {
+             * Really hard check, and not really needed in this one
+             * Gm's should just be GM job, and players cannot change jobs.
+             * }
+             */
             if (reqLevel > chr.getLevel()) {
                 continue;
             } else if (getEquipStats(equip.getItemId()).get("reqDEX") > tdex) {
@@ -1795,7 +1873,8 @@ public class ItemInformationProvider {
         int id = equip.getItemId();
 
         if (ItemId.isWeddingRing(id) && chr.hasJustMarried()) {
-            chr.dropMessage(5, "The Wedding Ring cannot be equipped on this map.");  // will dc everyone due to doubled couple effect
+            chr.dropMessage(5, "The Wedding Ring cannot be equipped on this map."); // will dc everyone due to doubled
+                                                                                    // couple effect
             return false;
         }
 
@@ -1803,7 +1882,8 @@ public class ItemInformationProvider {
         if (!EquipSlot.getFromTextSlot(islot).isAllowed(dst, isCash(id))) {
             equip.wear(false);
             String itemName = ItemInformationProvider.getInstance().getName(equip.getItemId());
-            Server.getInstance().broadcastGMMessage(chr.getWorld(), PacketCreator.sendYellowTip("[Warning]: " + chr.getName() + " tried to equip " + itemName + " into slot " + dst + "."));
+            Server.getInstance().broadcastGMMessage(chr.getWorld(), PacketCreator.sendYellowTip(
+                    "[Warning]: " + chr.getName() + " tried to equip " + itemName + " into slot " + dst + "."));
             AutobanFactory.PACKET_EDIT.alert(chr, chr.getName() + " tried to forcibly equip an item.");
             log.warn("Chr {} tried to equip {} into slot {}", chr.getName(), itemName, dst);
             return false;
@@ -1814,27 +1894,29 @@ public class ItemInformationProvider {
             return true;
         }
 
-
         boolean highfivestamp = false;
-        /* Removed check above for message ><
-         try {
-         for (Pair<Item, InventoryType> ii : ItemFactory.INVENTORY.loadItems(chr.getId(), false)) {
-         if (ii.getRight() == InventoryType.CASH) {
-         if (ii.getLeft().getItemId() == 5590000) {
-         highfivestamp = true;
-         }
-         }
-         }
-         } catch (SQLException ex) {
-            ex.printStackTrace();
-         }*/
+        /*
+         * Removed check above for message ><
+         * try {
+         * for (Pair<Item, InventoryType> ii :
+         * ItemFactory.INVENTORY.loadItems(chr.getId(), false)) {
+         * if (ii.getRight() == InventoryType.CASH) {
+         * if (ii.getLeft().getItemId() == 5590000) {
+         * highfivestamp = true;
+         * }
+         * }
+         * }
+         * } catch (SQLException ex) {
+         * ex.printStackTrace();
+         * }
+         */
 
         int reqLevel = getEquipLevelReq(equip.getItemId());
         if (highfivestamp) {
             reqLevel -= 5;
         }
-        int i = 0; //lol xD
-        //Removed job check. Shouldn't really be needed.
+        int i = 0; // lol xD
+        // Removed job check. Shouldn't really be needed.
         if (reqLevel > chr.getLevel()) {
             i++;
         } else if (getEquipStats(equip.getItemId()).get("reqDEX") > chr.getTotalDex()) {
@@ -1895,7 +1977,7 @@ public class ItemInformationProvider {
     public int getEquipLevel(int itemId, boolean getMaxLevel) {
         Integer eqLevel = equipMaxLevelCache.get(itemId);
         if (eqLevel == null) {
-            eqLevel = 1;    // greater than 1 means that it was supposed to levelup on GMS
+            eqLevel = 1; // greater than 1 means that it was supposed to levelup on GMS
 
             Data data = getEquipLevelInfo(itemId);
             if (data != null) {
@@ -1933,33 +2015,47 @@ public class ItemInformationProvider {
                 for (Data da : data2.getChildren()) {
                     if (Math.random() < 0.9) {
                         if (da.getName().startsWith("incDEXMin")) {
-                            list.add(new Pair<>("incDEX", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incDEXMax")))));
+                            list.add(new Pair<>("incDEX", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incDEXMax")))));
                         } else if (da.getName().startsWith("incSTRMin")) {
-                            list.add(new Pair<>("incSTR", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incSTRMax")))));
+                            list.add(new Pair<>("incSTR", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incSTRMax")))));
                         } else if (da.getName().startsWith("incINTMin")) {
-                            list.add(new Pair<>("incINT", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incINTMax")))));
+                            list.add(new Pair<>("incINT", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incINTMax")))));
                         } else if (da.getName().startsWith("incLUKMin")) {
-                            list.add(new Pair<>("incLUK", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incLUKMax")))));
+                            list.add(new Pair<>("incLUK", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incLUKMax")))));
                         } else if (da.getName().startsWith("incMHPMin")) {
-                            list.add(new Pair<>("incMHP", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incMHPMax")))));
+                            list.add(new Pair<>("incMHP", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incMHPMax")))));
                         } else if (da.getName().startsWith("incMMPMin")) {
-                            list.add(new Pair<>("incMMP", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incMMPMax")))));
+                            list.add(new Pair<>("incMMP", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incMMPMax")))));
                         } else if (da.getName().startsWith("incPADMin")) {
-                            list.add(new Pair<>("incPAD", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incPADMax")))));
+                            list.add(new Pair<>("incPAD", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incPADMax")))));
                         } else if (da.getName().startsWith("incMADMin")) {
-                            list.add(new Pair<>("incMAD", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incMADMax")))));
+                            list.add(new Pair<>("incMAD", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incMADMax")))));
                         } else if (da.getName().startsWith("incPDDMin")) {
-                            list.add(new Pair<>("incPDD", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incPDDMax")))));
+                            list.add(new Pair<>("incPDD", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incPDDMax")))));
                         } else if (da.getName().startsWith("incMDDMin")) {
-                            list.add(new Pair<>("incMDD", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incMDDMax")))));
+                            list.add(new Pair<>("incMDD", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incMDDMax")))));
                         } else if (da.getName().startsWith("incACCMin")) {
-                            list.add(new Pair<>("incACC", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incACCMax")))));
+                            list.add(new Pair<>("incACC", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incACCMax")))));
                         } else if (da.getName().startsWith("incEVAMin")) {
-                            list.add(new Pair<>("incEVA", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incEVAMax")))));
+                            list.add(new Pair<>("incEVA", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incEVAMax")))));
                         } else if (da.getName().startsWith("incSpeedMin")) {
-                            list.add(new Pair<>("incSpeed", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incSpeedMax")))));
+                            list.add(new Pair<>("incSpeed", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incSpeedMax")))));
                         } else if (da.getName().startsWith("incJumpMin")) {
-                            list.add(new Pair<>("incJump", Randomizer.rand(DataTool.getInt(da), DataTool.getInt(data2.getChildByPath("incJumpMax")))));
+                            list.add(new Pair<>("incJump", Randomizer.rand(DataTool.getInt(da),
+                                    DataTool.getInt(data2.getChildByPath("incJumpMax")))));
                         }
                     }
                 }
@@ -1999,7 +2095,8 @@ public class ItemInformationProvider {
             }
 
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("SELECT stat, value FROM makerreagentdata WHERE itemid = ?")) {
+                    PreparedStatement ps = con
+                            .prepareStatement("SELECT stat, value FROM makerreagentdata WHERE itemid = ?")) {
                 ps.setInt(1, itemId);
 
                 try (ResultSet rs = ps.executeQuery()) {
@@ -2030,7 +2127,8 @@ public class ItemInformationProvider {
             itemid = -1;
 
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? ORDER BY dropperid;")) {
+                    PreparedStatement ps = con
+                            .prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? ORDER BY dropperid;")) {
                 ps.setInt(1, leftoverId);
 
                 try (ResultSet rs = ps.executeQuery()) {
@@ -2061,7 +2159,8 @@ public class ItemInformationProvider {
                 int reqMakerLevel = -1;
                 int cost = -1;
                 int toGive = -1;
-                try (PreparedStatement ps = con.prepareStatement("SELECT req_level, req_maker_level, req_meso, quantity FROM makercreatedata WHERE itemid = ?")) {
+                try (PreparedStatement ps = con.prepareStatement(
+                        "SELECT req_level, req_maker_level, req_meso, quantity FROM makercreatedata WHERE itemid = ?")) {
                     ps.setInt(1, toCreate);
                     try (ResultSet rs = ps.executeQuery()) {
                         if (rs.next()) {
@@ -2076,7 +2175,8 @@ public class ItemInformationProvider {
                 makerEntry = new MakerItemCreateEntry(cost, reqLevel, reqMakerLevel);
                 makerEntry.addGainItem(toCreate, toGive);
 
-                try (PreparedStatement ps = con.prepareStatement("SELECT req_item, count FROM makerrecipedata WHERE itemid = ?")) {
+                try (PreparedStatement ps = con
+                        .prepareStatement("SELECT req_item, count FROM makerrecipedata WHERE itemid = ?")) {
                     ps.setInt(1, toCreate);
 
                     try (ResultSet rs = ps.executeQuery()) {
@@ -2119,12 +2219,14 @@ public class ItemInformationProvider {
         List<Pair<Integer, Integer>> items = new LinkedList<>();
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT req_item, count FROM makerrecipedata WHERE itemid = ? AND req_item >= 4260000 AND req_item < 4270000")) {
+                PreparedStatement ps = con.prepareStatement(
+                        "SELECT req_item, count FROM makerrecipedata WHERE itemid = ? AND req_item >= 4260000 AND req_item < 4270000")) {
             ps.setInt(1, itemId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    items.add(new Pair<>(rs.getInt("req_item"), rs.getInt("count") / 2));   // return to the player half of the crystals needed
+                    items.add(new Pair<>(rs.getInt("req_item"), rs.getInt("count") / 2)); // return to the player half
+                                                                                          // of the crystals needed
                 }
             }
         } catch (Exception e) {
@@ -2137,11 +2239,11 @@ public class ItemInformationProvider {
     public int getMakerDisassembledFee(Integer itemId) {
         int fee = -1;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT req_meso FROM makercreatedata WHERE itemid = ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT req_meso FROM makercreatedata WHERE itemid = ?")) {
             ps.setInt(1, itemId);
 
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {   // cost is 13.6363~ % of the original value, trim by 1000.
+                if (rs.next()) { // cost is 13.6363~ % of the original value, trim by 1000.
                     float val = (float) (rs.getInt("req_meso") * 0.13636363636364);
                     fee = (int) (val / 1000);
                     fee *= 1000;
@@ -2154,7 +2256,7 @@ public class ItemInformationProvider {
         return fee;
     }
 
-    public int getMakerStimulant(int itemId) {  // thanks to Arnah
+    public int getMakerStimulant(int itemId) { // thanks to Arnah
         Integer itemid = makerCatalystCache.get(itemId);
         if (itemid != null) {
             return itemid;
@@ -2177,12 +2279,14 @@ public class ItemInformationProvider {
     public Set<String> getWhoDrops(Integer itemId) {
         Set<String> list = new HashSet<>();
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50")) {
+                PreparedStatement ps = con
+                        .prepareStatement("SELECT dropperid FROM drop_data WHERE itemid = ? LIMIT 50")) {
             ps.setInt(1, itemId);
 
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    String resultName = MonsterInformationProvider.getInstance().getMobNameFromId(rs.getInt("dropperid"));
+                    String resultName = MonsterInformationProvider.getInstance()
+                            .getMobNameFromId(rs.getInt("dropperid"));
                     if (!resultName.isEmpty()) {
                         list.add(resultName);
                     }
@@ -2202,7 +2306,9 @@ public class ItemInformationProvider {
         }
 
         Skill skill2 = SkillFactory.getSkill(skilldata.get("skillid"));
-        return (skilldata.get("skillid") != 0 && ((player.getSkillLevel(skill2) >= skilldata.get("reqSkillLevel") || skilldata.get("reqSkillLevel") == 0) && player.getMasterLevel(skill2) < skilldata.get("masterLevel")));
+        return (skilldata.get("skillid") != 0 && ((player.getSkillLevel(skill2) >= skilldata.get("reqSkillLevel")
+                || skilldata.get("reqSkillLevel") == 0)
+                && player.getMasterLevel(skill2) < skilldata.get("masterLevel")));
     }
 
     public List<Integer> usableMasteryBooks(Character player) {
