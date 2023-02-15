@@ -17,6 +17,7 @@
 # JDT-specific (Eclipse Java Development Tools)
 .classpath
 
-scripts_cn
-wz.bak
+scripts_cn/**
+/wz.bak/**
+/wz/**
 config.yaml
