@@ -31,7 +31,7 @@ import tools.PacketCreator;
 
 public class MapScriptMethods extends AbstractPlayerInteraction {
 
-    private final String rewardstring = " title has been rewarded. Please see NPC Dalair to receive your Medal.";
+    private final String rewardstring = " 去找NPC领取你的勋章吧.";
 
     public MapScriptMethods(Client c) {
         super(c);
@@ -43,11 +43,16 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
                 lockUI();
                 c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene0"));
             }
-            case MapId.CYGNUS_INTRO_WARRIOR -> c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene1"));
-            case MapId.CYGNUS_INTRO_BOWMAN -> c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene2"));
-            case MapId.CYGNUS_INTRO_MAGE -> c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene3"));
-            case MapId.CYGNUS_INTRO_PIRATE -> c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene4"));
-            case MapId.CYGNUS_INTRO_THIEF -> c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene5"));
+            case MapId.CYGNUS_INTRO_WARRIOR ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene1"));
+            case MapId.CYGNUS_INTRO_BOWMAN ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene2"));
+            case MapId.CYGNUS_INTRO_MAGE ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene3"));
+            case MapId.CYGNUS_INTRO_PIRATE ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene4"));
+            case MapId.CYGNUS_INTRO_THIEF ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene5"));
             case MapId.CYGNUS_INTRO_CONCLUSION -> {
                 lockUI();
                 c.sendPacket(PacketCreator.showIntro("Effect/Direction.img/cygnusJobTutorial/Scene6"));
@@ -61,33 +66,39 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
                 lockUI();
                 c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene0"));
             }
-            case MapId.ARAN_TUTO_2 -> c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene1" + c.getPlayer().getGender()));
-            case MapId.ARAN_TUTO_3 -> c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene2" + c.getPlayer().getGender()));
-            case MapId.ARAN_TUTO_4 -> c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene3"));
+            case MapId.ARAN_TUTO_2 -> c.sendPacket(
+                    PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene1" + c.getPlayer().getGender()));
+            case MapId.ARAN_TUTO_3 -> c.sendPacket(
+                    PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene2" + c.getPlayer().getGender()));
+            case MapId.ARAN_TUTO_4 ->
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/Scene3"));
             case MapId.ARAN_POLEARM -> {
                 lockUI();
-                c.sendPacket(PacketCreator.showIntro("Effect/Direction1.img/aranTutorial/HandedPoleArm" + c.getPlayer().getGender()));
+                c.sendPacket(PacketCreator
+                        .showIntro("Effect/Direction1.img/aranTutorial/HandedPoleArm" + c.getPlayer().getGender()));
             }
         }
     }
 
     public void startExplorerExperience() {
         switch (c.getPlayer().getMapId()) {
-        case 1020100: //Swordman
-            c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/swordman/Scene" + c.getPlayer().getGender()));
-            break;
-        case 1020200: //Magician
-            c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/magician/Scene" + c.getPlayer().getGender()));
-            break;
-        case 1020300: //Archer
-            c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/archer/Scene" + c.getPlayer().getGender()));
-            break;
-        case 1020400: //Rogue
-            c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/rogue/Scene" + c.getPlayer().getGender()));
-            break;
-        case 1020500: //Pirate
-            c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/pirate/Scene" + c.getPlayer().getGender()));
-            break;
+            case 1020100: // Swordman
+                c.sendPacket(
+                        PacketCreator.showIntro("Effect/Direction3.img/swordman/Scene" + c.getPlayer().getGender()));
+                break;
+            case 1020200: // Magician
+                c.sendPacket(
+                        PacketCreator.showIntro("Effect/Direction3.img/magician/Scene" + c.getPlayer().getGender()));
+                break;
+            case 1020300: // Archer
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/archer/Scene" + c.getPlayer().getGender()));
+                break;
+            case 1020400: // Rogue
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/rogue/Scene" + c.getPlayer().getGender()));
+                break;
+            case 1020500: // Pirate
+                c.sendPacket(PacketCreator.showIntro("Effect/Direction3.img/pirate/Scene" + c.getPlayer().getGender()));
+                break;
         }
     }
 
@@ -106,7 +117,7 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
         if (isQuestCompleted(questid)) {
             return;
         }
-        
+
         if (!isQuestStarted(questid)) {
             if (!quest.forceStart(getPlayer(), 9000066)) {
                 return;
@@ -119,9 +130,11 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
         String status = Integer.toString(qs.getMedalProgress());
         String infoex = qs.getInfoEx(0);
 
-        // explorer quests all have an infoex/infonumber requirement that points to another quest
-        // THAT quest's progress needs to be updated for Quest.canComplete() to return true
-        getPlayer().setQuestProgress(quest.getId(), (int)quest.getInfoNumber(qs.getStatus()), status);
+        // explorer quests all have an infoex/infonumber requirement that points to
+        // another quest
+        // THAT quest's progress needs to be updated for Quest.canComplete() to return
+        // true
+        getPlayer().setQuestProgress(quest.getId(), (int) quest.getInfoNumber(qs.getStatus()), status);
 
         StringBuilder smp = new StringBuilder();
         StringBuilder etm = new StringBuilder();
@@ -130,15 +143,17 @@ public class MapScriptMethods extends AbstractPlayerInteraction {
             smp.append("你获得了 <").append(questName).append(">").append(rewardstring);
             getPlayer().sendPacket(PacketCreator.getShowQuestCompletion(quest.getId()));
         } else {
-            getPlayer().sendPacket(PacketCreator.earnTitleMessage(status + "/" + infoex + " regions explored."));
+            getPlayer()
+                    .sendPacket(PacketCreator.earnTitleMessage("已探索" + status + "/" + infoex + " 地区 ."));
             etm.append("Trying for the ").append(questName).append(" title.");
-            smp.append("You made progress on the ").append(questName).append(" title. ").append(status).append("/").append(infoex);
+            smp.append("称号 ").append(questName).append(" 进度 ").append(status).append("/")
+                    .append(infoex);
         }
         getPlayer().sendPacket(PacketCreator.earnTitleMessage(etm.toString()));
         showInfoText(smp.toString());
     }
 
-    public void touchTheSky() { //29004
+    public void touchTheSky() { // 29004
         Quest quest = Quest.getInstance(29004);
         if (!isQuestStarted(29004)) {
             if (!quest.forceStart(getPlayer(), 9000066)) {

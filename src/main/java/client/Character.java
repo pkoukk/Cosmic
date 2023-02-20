@@ -6663,22 +6663,22 @@ public class Character extends AbstractCharacterObject {
             return;
         }
         if (level == 5) {
-            yellowMessage("Aww, you're level 5, how cute!");
+            yellowMessage("啊哈，你已经5级了，真棒");
         } else if (level == 10) {
             yellowMessage(
-                    "Henesys Party Quest is now open to you! Head over to Henesys, find some friends, and try it out!");
+                    "你现在已经可以参加射手村的组队任务了！去射手村找些朋友一起试试吧");
         } else if (level == 15) {
-            yellowMessage("Half-way to your 2nd job advancement, nice work!");
+            yellowMessage("干的不错，再升15级就可以二转了");
         } else if (level == 20) {
-            yellowMessage("You can almost Kerning Party Quest!");
+            yellowMessage("你可以参加废弃都市的组队任务了!");
         } else if (level == 25) {
-            yellowMessage("You seem to be improving, but you are still not ready to move on to the next step.");
+            yellowMessage("你进步了不少，但是离转职还差一点.");
         } else if (level == 30) {
-            yellowMessage("You have finally reached level 30! Try job advancing, after that try the Mushroom Castle!");
+            yellowMessage("你终于升到30级了! 去转职吧, 然后试试蘑菇城堡!");
         } else if (level == 35) {
-            yellowMessage("Hey did you hear about this mall that opened in Kerning? Try visiting the Kerning Mall.");
+            yellowMessage("你听说过废弃都市的购物中心么? 去那看看吧.");
         } else if (level == 40) {
-            yellowMessage("Do @rates to see what all your rates are!");
+            yellowMessage("用 @rates 可以看到你现在的排名!");
         } else if (level == 45) {
             yellowMessage(
                     "I heard that a rock and roll artist died during the grand opening of the Kerning Mall. People are naming him the Spirit of Rock.");
