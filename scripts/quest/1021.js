@@ -1,8 +1,8 @@
 /*
-	This file is part of the OdinMS Maple Story Server
+    This file is part of the OdinMS Maple Story Server
     Copyright (C) 2008 Patrick Huy <patrick.huy@frz.cc>
-		       Matthias Butz <matze@odinms.de>
-		       Jan Christian Meyer <vimes@odinms.de>
+               Matthias Butz <matze@odinms.de>
+               Jan Christian Meyer <vimes@odinms.de>
 
     This program is free software: you can redistribute it and/or modify
     it under the terms of the GNU Affero General Public License as
@@ -22,9 +22,9 @@
 /* Author: Xterminator
  * Edited by XxOsirisxX
 
-	NPC Name: 		Roger
-	Map(s): 		Maple Road : Lower level of the Training Camp (2)
-	Description: 		Quest - Roger's Apple
+    NPC Name: 		Roger
+    Map(s): 		Maple Road : Lower level of the Training Camp (2)
+    Description: 		Quest - Roger's Apple
 */
 var status = -1;
 

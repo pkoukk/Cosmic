@@ -124,7 +124,8 @@ public class Client extends ChannelInboundHandlerAdapter {
     private final Lock lock = new ReentrantLock(true);
     private final Lock encoderLock = new ReentrantLock(true);
     private final Lock announcerLock = new ReentrantLock(true);
-    // thanks Masterrulax & try2hack for pointing out a bottleneck issue with shared locks, shavit for noticing an opportunity for improvement
+    // thanks Masterrulax & try2hack for pointing out a bottleneck issue with shared
+    // locks, shavit for noticing an opportunity for improvement
     private Calendar tempBanCalendar;
     private int votePoints;
     private int voteTime = -1;
@@ -138,7 +139,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         CHANNEL
     }
 
-    public Client(Type type, long sessionId, String remoteAddress, PacketProcessor packetProcessor, int world, int channel) {
+    public Client(Type type, long sessionId, String remoteAddress, PacketProcessor packetProcessor, int world,
+            int channel) {
         this.type = type;
         this.sessionId = sessionId;
         this.remoteAddress = remoteAddress;
@@ -148,12 +150,12 @@ public class Client extends ChannelInboundHandlerAdapter {
     }
 
     public static Client createLoginClient(long sessionId, String remoteAddress, PacketProcessor packetProcessor,
-                                           int world, int channel) {
+            int world, int channel) {
         return new Client(Type.LOGIN, sessionId, remoteAddress, packetProcessor, world, channel);
     }
 
     public static Client createChannelClient(long sessionId, String remoteAddress, PacketProcessor packetProcessor,
-                                             int world, int channel) {
+            int world, int channel) {
         return new Client(Type.CHANNEL, sessionId, remoteAddress, packetProcessor, world, channel);
     }
 
@@ -178,7 +180,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         try {
             String hostAddress = ((InetSocketAddress) channel.remoteAddress()).getAddress().getHostAddress();
             if (hostAddress != null) {
-                remoteAddress = IpAddresses.evaluateRemoteAddress(hostAddress); // thanks dyz for noticing Local/LAN/WAN connections not interacting properly
+                remoteAddress = IpAddresses.evaluateRemoteAddress(hostAddress); // thanks dyz for noticing Local/LAN/WAN
+                                                                                // connections not interacting properly
             }
         } catch (NullPointerException npe) {
             log.warn("Unable to get remote address for client", npe);
@@ -207,9 +210,10 @@ public class Client extends ChannelInboundHandlerAdapter {
                 handler.handlePacket(packet, this);
             } catch (final Throwable t) {
                 final String chrInfo = player != null ? player.getName() + " on map " + player.getMapId() : "?";
-                log.warn("Error in packet handler {}. Chr {}, account {}. Packet: {}", handler.getClass().getSimpleName(),
+                log.warn("Error in packet handler {}. Chr {}, account {}. Packet: {}",
+                        handler.getClass().getSimpleName(),
                         chrInfo, getAccountName(), packet, t);
-                //client.sendPacket(PacketCreator.enableActions());//bugs sometimes
+                // client.sendPacket(PacketCreator.enableActions());//bugs sometimes
             }
         }
 
@@ -226,7 +230,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     @Override
     public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
         if (player != null) {
-            log.warn("Exception caught by {}", player, cause);
+            log.warn("Exception caught by {},handler", player, ctx.handler().toString(), cause);
         }
 
         if (cause instanceof InvalidPacketHeaderException) {
@@ -248,7 +252,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
 
         try {
-            // client freeze issues on session transition states found thanks to yolinlin, Omo Oppa, Nozphex
+            // client freeze issues on session transition states found thanks to yolinlin,
+            // Omo Oppa, Nozphex
             if (!inTransition) {
                 disconnect(false, false);
             }
@@ -334,7 +339,8 @@ public class Client extends ChannelInboundHandlerAdapter {
     private List<CharNameAndId> loadCharactersInternal(int worldId) {
         List<CharNameAndId> chars = new ArrayList<>(15);
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT id, name FROM characters WHERE accountid = ? AND world = ?")) {
+                PreparedStatement ps = con
+                        .prepareStatement("SELECT id, name FROM characters WHERE accountid = ? AND world = ?")) {
             ps.setInt(1, this.getAccID());
             ps.setInt(2, worldId);
 
@@ -356,7 +362,8 @@ public class Client extends ChannelInboundHandlerAdapter {
     public boolean hasBannedIP() {
         boolean ret = false;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM ipbans WHERE ? LIKE CONCAT(ip, '%')")) {
+                PreparedStatement ps = con
+                        .prepareStatement("SELECT COUNT(*) FROM ipbans WHERE ? LIKE CONCAT(ip, '%')")) {
             ps.setString(1, remoteAddress);
             try (ResultSet rs = ps.executeQuery()) {
                 rs.next();
@@ -376,7 +383,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT date FROM bit_votingrecords WHERE UPPER(account) = UPPER(?)")) {
+                PreparedStatement ps = con
+                        .prepareStatement("SELECT date FROM bit_votingrecords WHERE UPPER(account) = UPPER(?)")) {
             ps.setString(1, accountName);
             try (ResultSet rs = ps.executeQuery()) {
                 if (!rs.next()) {
@@ -409,7 +417,7 @@ public class Client extends ChannelInboundHandlerAdapter {
 
         boolean ret = false;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM hwidbans WHERE hwid LIKE ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT COUNT(*) FROM hwidbans WHERE hwid LIKE ?")) {
             ps.setString(1, hwid.hwid());
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -442,7 +450,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         sql.append(")");
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement(sql.toString())) {
+                PreparedStatement ps = con.prepareStatement(sql.toString())) {
             i = 0;
             for (String mac : macs) {
                 ps.setString(++i, mac);
@@ -463,7 +471,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     private void loadHWIDIfNescessary() throws SQLException {
         if (hwid == null) {
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("SELECT hwid FROM accounts WHERE id = ?")) {
+                    PreparedStatement ps = con.prepareStatement("SELECT hwid FROM accounts WHERE id = ?")) {
                 ps.setInt(1, accId);
 
                 try (ResultSet rs = ps.executeQuery()) {
@@ -479,7 +487,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     private void loadMacsIfNescessary() throws SQLException {
         if (macs.isEmpty()) {
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("SELECT macs FROM accounts WHERE id = ?")) {
+                    PreparedStatement ps = con.prepareStatement("SELECT macs FROM accounts WHERE id = ?")) {
                 ps.setInt(1, accId);
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
@@ -499,7 +507,7 @@ public class Client extends ChannelInboundHandlerAdapter {
             loadHWIDIfNescessary();
 
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("INSERT INTO hwidbans (hwid) VALUES (?)")) {
+                    PreparedStatement ps = con.prepareStatement("INSERT INTO hwidbans (hwid) VALUES (?)")) {
                 ps.setString(1, hwid.hwid());
                 ps.executeUpdate();
             }
@@ -515,7 +523,7 @@ public class Client extends ChannelInboundHandlerAdapter {
             List<String> filtered = new LinkedList<>();
             try (Connection con = DatabaseConnection.getConnection()) {
                 try (PreparedStatement ps = con.prepareStatement("SELECT filter FROM macfilters");
-                     ResultSet rs = ps.executeQuery()) {
+                        ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         filtered.add(rs.getString("filter"));
                     }
@@ -546,7 +554,8 @@ public class Client extends ChannelInboundHandlerAdapter {
     public int finishLogin() {
         encoderLock.lock();
         try {
-            if (getLoginState() > LOGIN_NOTLOGGEDIN) { // 0 = LOGIN_NOTLOGGEDIN, 1= LOGIN_SERVER_TRANSITION, 2 = LOGIN_LOGGEDIN
+            if (getLoginState() > LOGIN_NOTLOGGEDIN) { // 0 = LOGIN_NOTLOGGEDIN, 1= LOGIN_SERVER_TRANSITION, 2 =
+                                                       // LOGIN_LOGGEDIN
                 loggedIn = false;
                 return 7;
             }
@@ -561,7 +570,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     public void setPin(String pin) {
         this.pin = pin;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET pin = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET pin = ? WHERE id = ?")) {
             ps.setString(1, pin);
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -594,7 +603,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     public void setPic(String pic) {
         this.pic = pic;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET pic = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET pic = ? WHERE id = ?")) {
             ps.setString(1, pic);
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -616,7 +625,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         if (picattempt > 5) {
             SessionCoordinator.getInstance().closeSession(this, false);
         }
-        if (pic.equals(other)) {    // thanks ryantpayton (HeavenClient) for noticing null pics being checked here
+        if (pic.equals(other)) { // thanks ryantpayton (HeavenClient) for noticing null pics being checked here
             picattempt = 0;
             LoginBypassCoordinator.getInstance().registerLoginBypassEntry(hwid, accId, true);
             return true;
@@ -631,11 +640,12 @@ public class Client extends ChannelInboundHandlerAdapter {
         if (loginattempt > 4) {
             loggedIn = false;
             SessionCoordinator.getInstance().closeSession(this, false);
-            return 6;   // thanks Survival_Project for finding out an issue with AUTOMATIC_REGISTER here
+            return 6; // thanks Survival_Project for finding out an issue with AUTOMATIC_REGISTER here
         }
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT id, password, gender, banned, pin, pic, characterslots, tos, language FROM accounts WHERE name = ?")) {
+                PreparedStatement ps = con.prepareStatement(
+                        "SELECT id, password, gender, banned, pin, pic, characterslots, tos, language FROM accounts WHERE name = ?")) {
             ps.setString(1, login);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -664,11 +674,14 @@ public class Client extends ChannelInboundHandlerAdapter {
                     if (getLoginState() > LOGIN_NOTLOGGEDIN) { // already loggedin
                         loggedIn = false;
                         loginok = 7;
-                    } else if (passhash.charAt(0) == '$' && passhash.charAt(1) == '2' && BCrypt.checkpw(pwd, passhash)) {
+                    } else if (passhash.charAt(0) == '$' && passhash.charAt(1) == '2'
+                            && BCrypt.checkpw(pwd, passhash)) {
                         loginok = (tos == 0) ? 23 : 0;
-                    } else if (pwd.equals(passhash) || checkHash(passhash, "SHA-1", pwd) || checkHash(passhash, "SHA-512", pwd)) {
+                    } else if (pwd.equals(passhash) || checkHash(passhash, "SHA-1", pwd)
+                            || checkHash(passhash, "SHA-512", pwd)) {
                         // thanks GabrielSin for detecting some no-bcrypt inconsistencies here
-                        loginok = (tos == 0) ? (!YamlConfig.config.server.BCRYPT_MIGRATION ? 23 : -23) : (!YamlConfig.config.server.BCRYPT_MIGRATION ? 0 : -10); // migrate to bcrypt
+                        loginok = (tos == 0) ? (!YamlConfig.config.server.BCRYPT_MIGRATION ? 23 : -23)
+                                : (!YamlConfig.config.server.BCRYPT_MIGRATION ? 0 : -10); // migrate to bcrypt
                     } else {
                         loggedIn = false;
                         loginok = 4;
@@ -682,7 +695,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
 
         if (loginok == 0 || loginok == 4) {
-            AntiMulticlientResult res = SessionCoordinator.getInstance().attemptLoginSession(this, hwid, accId, loginok == 4);
+            AntiMulticlientResult res = SessionCoordinator.getInstance().attemptLoginSession(this, hwid, accId,
+                    loginok == 4);
 
             switch (res) {
                 case SUCCESS:
@@ -716,7 +730,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         final Calendar lTempban = Calendar.getInstance();
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT `tempban` FROM accounts WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT `tempban` FROM accounts WHERE id = ?")) {
             ps.setInt(1, getAccID());
 
             final Timestamp tempban;
@@ -738,7 +752,7 @@ public class Client extends ChannelInboundHandlerAdapter {
             e.printStackTrace();
         }
 
-        return null;//why oh why!?!
+        return null;// why oh why!?!
     }
 
     public Calendar getTempBanCalendar() {
@@ -766,7 +780,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         this.hwid = hwid;
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET hwid = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET hwid = ? WHERE id = ?")) {
             ps.setString(1, hwid.hwid());
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -788,7 +802,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET macs = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET macs = ? WHERE id = ?")) {
             ps.setString(1, newMacData.toString());
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -812,8 +826,10 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET loggedin = ?, lastlogin = ? WHERE id = ?")) {
-            // using sql currenttime here could potentially break the login, thanks Arnah for pointing this out
+                PreparedStatement ps = con
+                        .prepareStatement("UPDATE accounts SET loggedin = ?, lastlogin = ? WHERE id = ?")) {
+            // using sql currenttime here could potentially break the login, thanks Arnah
+            // for pointing this out
 
             ps.setInt(1, newState);
             ps.setTimestamp(2, new java.sql.Timestamp(Server.getInstance().getCurrentTime()));
@@ -833,10 +849,11 @@ public class Client extends ChannelInboundHandlerAdapter {
         }
     }
 
-    public int getLoginState() {  // 0 = LOGIN_NOTLOGGEDIN, 1= LOGIN_SERVER_TRANSITION, 2 = LOGIN_LOGGEDIN
+    public int getLoginState() { // 0 = LOGIN_NOTLOGGEDIN, 1= LOGIN_SERVER_TRANSITION, 2 = LOGIN_LOGGEDIN
         try (Connection con = DatabaseConnection.getConnection()) {
             int state;
-            try (PreparedStatement ps = con.prepareStatement("SELECT loggedin, lastlogin, birthday FROM accounts WHERE id = ?")) {
+            try (PreparedStatement ps = con
+                    .prepareStatement("SELECT loggedin, lastlogin, birthday FROM accounts WHERE id = ?")) {
                 ps.setInt(1, getAccID());
 
                 try (ResultSet rs = ps.executeQuery()) {
@@ -855,7 +872,8 @@ public class Client extends ChannelInboundHandlerAdapter {
                         if (rs.getTimestamp("lastlogin").getTime() + 30000 < Server.getInstance().getCurrentTime()) {
                             int accountId = accId;
                             state = LOGIN_NOTLOGGEDIN;
-                            updateLoginState(Client.LOGIN_NOTLOGGEDIN);   // ACCID = 0, issue found thanks to Tochi & K u ssss o & Thora & Omo Oppa
+                            updateLoginState(Client.LOGIN_NOTLOGGEDIN); // ACCID = 0, issue found thanks to Tochi & K u
+                                                                        // ssss o & Thora & Omo Oppa
                             this.setAccID(accountId);
                         }
                     }
@@ -880,7 +898,9 @@ public class Client extends ChannelInboundHandlerAdapter {
     }
 
     public boolean checkBirthDate(Calendar date) {
-        return date.get(Calendar.YEAR) == birthday.get(Calendar.YEAR) && date.get(Calendar.MONTH) == birthday.get(Calendar.MONTH) && date.get(Calendar.DAY_OF_MONTH) == birthday.get(Calendar.DAY_OF_MONTH);
+        return date.get(Calendar.YEAR) == birthday.get(Calendar.YEAR)
+                && date.get(Calendar.MONTH) == birthday.get(Calendar.MONTH)
+                && date.get(Calendar.DAY_OF_MONTH) == birthday.get(Calendar.DAY_OF_MONTH);
     }
 
     private void removePartyPlayer(World wserv) {
@@ -895,7 +915,8 @@ public class Client extends ChannelInboundHandlerAdapter {
             if (party.getLeader().getId() == idz && map != null) {
                 PartyCharacter lchr = null;
                 for (PartyCharacter pchr : party.getMembers()) {
-                    if (pchr != null && pchr.getId() != idz && (lchr == null || lchr.getLevel() <= pchr.getLevel()) && map.getCharacterById(pchr.getId()) != null) {
+                    if (pchr != null && pchr.getId() != idz && (lchr == null || lchr.getLevel() <= pchr.getLevel())
+                            && map.getCharacterById(pchr.getId()) != null) {
                         lchr = pchr;
                     }
                 }
@@ -916,7 +937,8 @@ public class Client extends ChannelInboundHandlerAdapter {
             player.closePlayerInteractions();
             player.closePartySearchInteractions();
 
-            if (!serverTransition) {    // thanks MedicOP for detecting an issue with party leader change on changing channels
+            if (!serverTransition) { // thanks MedicOP for detecting an issue with party leader change on changing
+                                     // channels
                 removePartyPlayer(wserv);
 
                 EventInstanceManager eim = player.getEventInstance();
@@ -939,7 +961,7 @@ public class Client extends ChannelInboundHandlerAdapter {
                 if (MapId.isDojo(mapId)) {
                     this.getChannelServer().freeDojoSectionIfEmpty(mapId);
                 }
-                
+
                 if (player.getMap().getHPDec() > 0) {
                     getWorldServer().removePlayerHpDecrease(player);
                 }
@@ -971,10 +993,10 @@ public class Client extends ChannelInboundHandlerAdapter {
         return true;
     }
 
-    private void disconnectInternal(boolean shutdown, boolean cashshop) {//once per Client instance
+    private void disconnectInternal(boolean shutdown, boolean cashshop) {// once per Client instance
         if (player != null && player.isLoggedin() && player.getClient() != null) {
             final int messengerid = player.getMessenger() == null ? 0 : player.getMessenger().getId();
-            //final int fid = player.getFamilyId();
+            // final int fid = player.getFamilyId();
             final BuddyList bl = player.getBuddylist();
             final MessengerCharacter chrm = new MessengerCharacter(player, 0);
             final GuildCharacter chrg = player.getMGC();
@@ -982,7 +1004,7 @@ public class Client extends ChannelInboundHandlerAdapter {
 
             player.cancelMagicDoor();
 
-            final World wserv = getWorldServer();   // obviously wserv is NOT null if this player was online on it
+            final World wserv = getWorldServer(); // obviously wserv is NOT null if this player was online on it
             try {
                 removePlayer(wserv, this.serverTransition);
 
@@ -992,14 +1014,15 @@ public class Client extends ChannelInboundHandlerAdapter {
                             if (messengerid > 0) {
                                 wserv.leaveMessenger(messengerid, chrm);
                             }
-                                                        /*      
-                                                        if (fid > 0) {
-                                                                final Family family = worlda.getFamily(fid);
-                                                                family.
-                                                        }
-                                                        */
+                            /*
+                             * if (fid > 0) {
+                             * final Family family = worlda.getFamily(fid);
+                             * family.
+                             * }
+                             */
 
-                            player.forfeitExpirableQuests();    //This is for those quests that you have to stay logged in for a certain amount of time
+                            player.forfeitExpirableQuests(); // This is for those quests that you have to stay logged in
+                                                             // for a certain amount of time
 
                             if (guild != null) {
                                 final Server server = Server.getInstance();
@@ -1007,13 +1030,15 @@ public class Client extends ChannelInboundHandlerAdapter {
                                 player.sendPacket(GuildPackets.showGuildInfo(player));
                             }
                             if (bl != null) {
-                                wserv.loggedOff(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+                                wserv.loggedOff(player.getName(), player.getId(), channel,
+                                        player.getBuddylist().getBuddyIds());
                             }
                         }
                     } else {
                         if (!this.serverTransition) { // if dc inside of cash shop.
                             if (bl != null) {
-                                wserv.loggedOff(player.getName(), player.getId(), channel, player.getBuddylist().getBuddyIds());
+                                wserv.loggedOff(player.getName(), player.getId(), channel,
+                                        player.getBuddylist().getBuddyIds());
                             }
                         }
                     }
@@ -1026,7 +1051,7 @@ public class Client extends ChannelInboundHandlerAdapter {
                         chrg.setCharacter(null);
                     }
                     wserv.removePlayer(player);
-                    //getChannelServer().removePlayer(player); already being done
+                    // getChannelServer().removePlayer(player); already being done
 
                     player.saveCooldowns();
                     player.cancelAllDebuffs();
@@ -1111,7 +1136,7 @@ public class Client extends ChannelInboundHandlerAdapter {
                 Party party = chr.getWorldServer().getParty(partyid);
                 chr.setParty(party);
                 chr.getMPC();
-                chr.leaveParty();   // thanks Vcoc for pointing out deleted characters would still stay in a party
+                chr.leaveParty(); // thanks Vcoc for pointing out deleted characters would still stay in a party
 
                 this.setPlayer(null);
             }
@@ -1226,7 +1251,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         return disconnect;
     }
 
-    public void checkChar(int accid) {  /// issue with multiple chars from same account login found by shavit, resinate
+    public void checkChar(int accid) { /// issue with multiple chars from same account login found by shavit, resinate
         if (!YamlConfig.config.server.USE_CHARACTER_ACCOUNT_CHECK) {
             return;
         }
@@ -1234,7 +1259,8 @@ public class Client extends ChannelInboundHandlerAdapter {
         for (World w : Server.getInstance().getWorlds()) {
             for (Character chr : w.getPlayerStorage().getAllCharacters()) {
                 if (accid == chr.getAccountID()) {
-                    log.warn("Chr {} has been removed from world {}. Possible Dupe attempt.", chr.getName(), GameConstants.WORLD_NAMES[w.getId()]);
+                    log.warn("Chr {} has been removed from world {}. Possible Dupe attempt.", chr.getName(),
+                            GameConstants.WORLD_NAMES[w.getId()]);
                     chr.getClient().forceDisconnect();
                     w.getPlayerStorage().removePlayer(chr.getId());
                 }
@@ -1245,7 +1271,7 @@ public class Client extends ChannelInboundHandlerAdapter {
     public int getVotePoints() {
         int points = 0;
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT `votepoints` FROM accounts WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT `votepoints` FROM accounts WHERE id = ?")) {
             ps.setInt(1, accId);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -1267,7 +1293,7 @@ public class Client extends ChannelInboundHandlerAdapter {
 
     public void useVotePoints(int points) {
         if (points > votePoints) {
-            //Should not happen, should probably log this
+            // Should not happen, should probably log this
             return;
         }
         votePoints -= points;
@@ -1277,7 +1303,7 @@ public class Client extends ChannelInboundHandlerAdapter {
 
     private void saveVotePoints() {
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET votepoints = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET votepoints = ? WHERE id = ?")) {
             ps.setInt(1, votePoints);
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -1371,7 +1397,8 @@ public class Client extends ChannelInboundHandlerAdapter {
     public synchronized boolean gainCharacterSlot() {
         if (canGainCharacterSlot()) {
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("UPDATE accounts SET characterslots = ? WHERE id = ?")) {
+                    PreparedStatement ps = con
+                            .prepareStatement("UPDATE accounts SET characterslots = ? WHERE id = ?")) {
                 ps.setInt(1, this.characterSlots += 1);
                 ps.setInt(2, accId);
                 ps.executeUpdate();
@@ -1386,7 +1413,7 @@ public class Client extends ChannelInboundHandlerAdapter {
 
     public final byte getGReason() {
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT `greason` FROM `accounts` WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT `greason` FROM `accounts` WHERE id = ?")) {
             ps.setInt(1, accId);
 
             try (ResultSet rs = ps.executeQuery()) {
@@ -1408,7 +1435,7 @@ public class Client extends ChannelInboundHandlerAdapter {
         this.gender = m;
 
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("UPDATE accounts SET gender = ? WHERE id = ?")) {
+                PreparedStatement ps = con.prepareStatement("UPDATE accounts SET gender = ? WHERE id = ?")) {
             ps.setByte(1, gender);
             ps.setInt(2, accId);
             ps.executeUpdate();
@@ -1433,7 +1460,8 @@ public class Client extends ChannelInboundHandlerAdapter {
 
         if (mobHash != targetHash) {
             if (timeNow - player.getTargetHpBarTime() >= SECONDS.toMillis(5)) {
-                // is there a way to INTERRUPT this annoying thread running on the client that drops the boss bar after some time at every attack?
+                // is there a way to INTERRUPT this annoying thread running on the client that
+                // drops the boss bar after some time at every attack?
                 announceDisableServerMessage();
                 sendPacket(packet);
 
@@ -1472,14 +1500,16 @@ public class Client extends ChannelInboundHandlerAdapter {
             sendPacket(PacketCreator.enableActions());
             return;
         } else if (MiniDungeonInfo.isDungeonMap(player.getMapId())) {
-            sendPacket(PacketCreator.serverNotice(5, "Changing channels or entering Cash Shop or MTS are disabled when inside a Mini-Dungeon."));
+            sendPacket(PacketCreator.serverNotice(5,
+                    "Changing channels or entering Cash Shop or MTS are disabled when inside a Mini-Dungeon."));
             sendPacket(PacketCreator.enableActions());
             return;
         }
 
         String[] socket = Server.getInstance().getInetSocket(this, getWorld(), channel);
         if (socket == null) {
-            sendPacket(PacketCreator.serverNotice(1, "Channel " + channel + " is currently disabled. Try another channel."));
+            sendPacket(PacketCreator.serverNotice(1,
+                    "Channel " + channel + " is currently disabled. Try another channel."));
             sendPacket(PacketCreator.enableActions());
             return;
         }
@@ -1499,10 +1529,10 @@ public class Client extends ChannelInboundHandlerAdapter {
         player.cancelDiseaseExpireTask();
         player.cancelSkillCooldownTask();
         player.cancelQuestExpirationTask();
-        //Cancelling magicdoor? Nope
-        //Cancelling mounts? Noty
+        // Cancelling magicdoor? Nope
+        // Cancelling mounts? Noty
 
-        player.getInventory(InventoryType.EQUIPPED).checked(false); //test
+        player.getInventory(InventoryType.EQUIPPED).checked(false); // test
         player.getMap().removePlayer(player);
         player.clearBanishPlayerData();
         player.getClient().getChannelServer().removePlayer(player);

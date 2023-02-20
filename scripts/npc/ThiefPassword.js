@@ -19,7 +19,7 @@ function action(mode, type, selection) {
     if (status == 0) {
         cm.sendGetText("一个可疑的声音穿透寂静. #b密码#k!");
     } else if (status == 1) {
-        if (cm.getText() == "Open Sesame") {
+        if (cm.getText() == "123456") {
             if (cm.isQuestCompleted(3925)) {
                 cm.warp(260010402, 1);
             } else {

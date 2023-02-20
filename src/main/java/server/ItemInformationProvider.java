@@ -1270,19 +1270,19 @@ public class ItemInformationProvider {
             return 0;
         }
 
-        int lMaxRange = (int) Math.min(Math.ceil(defaultValue * 0.15), maxRange);
+        int lMaxRange = (int) Math.min(Math.ceil(defaultValue * 0.10), maxRange);
         double multi;
         float stage = Randomizer.nextFloat();
-        if (stage > 0.90) {
-            // 5 - 8
-            multi = 5 + 3 * Randomizer.nextDouble();
-        } else if (stage > 0.75) {
-            // 3-6
-            multi = 3 + 3 * Randomizer.nextDouble();
-        } else if (stage > 0.5) {
+        if (stage > 0.95) {
+            // 5 - 6
+            multi = 4 + 1 * Randomizer.nextDouble();
+        } else if (stage > 0.80) {
+            // 3-5
+            multi = 3 + 2 * Randomizer.nextDouble();
+        } else if (stage > 0.60) {
             // 2-4
             multi = 2 + 2 * Randomizer.nextDouble();
-        } else if (stage > 0.2) {
+        } else if (stage > 0.40) {
             // 1-3
             multi = 1 + 2 * Randomizer.nextDouble();
         } else {
@@ -1290,7 +1290,7 @@ public class ItemInformationProvider {
             multi = 2 * Randomizer.nextDouble();
         }
 
-        return (short) ((defaultValue - lMaxRange) + Math.floor(multi * (lMaxRange + 1)));
+        return (short) ((defaultValue - lMaxRange) + Math.floor(multi * (lMaxRange) + 1));
     }
 
     public Equip randomizeStats(Equip equip) {

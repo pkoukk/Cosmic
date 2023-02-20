@@ -297,7 +297,7 @@ public class Equip extends Item {
             if (isAttribute) {
                 return 4;
             } else {
-                return 10;
+                return 12;
             }
         }
     }

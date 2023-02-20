@@ -36,6 +36,7 @@ public class CharsetConstants {
         LANGUAGE_PT_BR("ISO-8859-1"),
         LANGUAGE_THAI("TIS620"),
         LANGUAGE_CN("GBK"),
+        LANGUAGE_ZHCN("GB2312"),
         LANGUAGE_UN("UTF-8"),
         LANGUAGE_KOREAN("MS949");
 

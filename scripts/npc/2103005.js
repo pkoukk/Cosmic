@@ -18,7 +18,7 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 /* 
-	Food depot on Ariant Residential area
+    Food depot on Ariant Residential area
  */
 
 var status;
@@ -53,6 +53,18 @@ function action(mode, type, selection) {
 
                     cm.gainItem(4031580, -1);
                     cm.setQuestProgress(3929, nextProgress);
+                }
+            }
+            if (cm.isQuestStarted(3926)) {
+                var progress = cm.getQuestProgress(3926);
+                var slot = 1;
+
+                var ch = progress[slot];
+                if (ch == '2') {
+                    var nextProgress = progress.substr(0, slot) + '3' + progress.substr(slot + 1);
+
+                    cm.gainItem(4031579, -1);
+                    cm.setQuestProgress(3926, nextProgress);
                 }
             }
 
