@@ -135,6 +135,7 @@ public class ItemId {
     public static final int LEISURE_LOOK_HAZEL = 20402;
     public static final int MOTIVATED_LOOK_AMETHYST = 21700;
     public static final int MOTIVATED_LOOK_BLUE = 20100;
+    public static final int Panda_Special_Package = 9101183;
 
     // Warrior
     public static final int RED_HWARANG_SHIRT = 1040021;
@@ -243,7 +244,7 @@ public class ItemId {
     private static final int PERMA_MINI_YETI = 5000102;
 
     public static int[] getPermaPets() {
-        return new int[]{PERMA_PINK_BEAN, PERMA_KINO, PERMA_WHITE_TIGER, PERMA_MINI_YETI};
+        return new int[] { PERMA_PINK_BEAN, PERMA_KINO, PERMA_WHITE_TIGER, PERMA_MINI_YETI };
     }
 
     // Maker
@@ -377,8 +378,9 @@ public class ItemId {
     private static final int GLOVES_ATT_60_SCROLL = 2040804;
 
     public static int[] getOwlItems() {
-        return new int[]{WORK_GLOVES, STEELY_THROWING_KNIVES, ILBI_THROWING_STARS, OWL_BALL_MASK, PINK_ADVENTURER_CAPE,
-                CLAW_30_SCROLL, WHITE_SCROLL, HELMET_60_ACC_SCROLL, MAPLE_SHIELD, GLOVES_ATT_60_SCROLL};
+        return new int[] { WORK_GLOVES, STEELY_THROWING_KNIVES, ILBI_THROWING_STARS, OWL_BALL_MASK,
+                PINK_ADVENTURER_CAPE,
+                CLAW_30_SCROLL, WHITE_SCROLL, HELMET_60_ACC_SCROLL, MAPLE_SHIELD, GLOVES_ATT_60_SCROLL };
     }
 
     // Henesys PQ

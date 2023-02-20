@@ -36,12 +36,15 @@ import server.ItemInformationProvider;
  * @author RonanLana
  */
 public class WarriorCreator extends CharacterFactory {
-    private static final int[] equips = {ItemId.RED_HWARANG_SHIRT, 0, ItemId.BLACK_MARTIAL_ARTS_PANTS, 0, ItemId.MITHRIL_BATTLE_GRIEVES};
-    private static final int[] weapons = {ItemId.GLADIUS, ItemId.MITHRIL_POLE_ARM, ItemId.MITHRIL_MAUL, ItemId.FIREMANS_AXE};
-    private static final int[] startingHpMp = {905, 208};
-    private static final int[] hpGain = {0, 72, 144, 212, 280, 348, 412, 476, 540, 600, 660};
+    private static final int[] equips = { ItemId.RED_HWARANG_SHIRT, 0, ItemId.BLACK_MARTIAL_ARTS_PANTS, 0,
+            ItemId.MITHRIL_BATTLE_GRIEVES };
+    private static final int[] weapons = { ItemId.GLADIUS, ItemId.MITHRIL_POLE_ARM, ItemId.MITHRIL_MAUL,
+            ItemId.FIREMANS_AXE };
+    private static final int[] startingHpMp = { 905, 208 };
+    private static final int[] hpGain = { 0, 72, 144, 212, 280, 348, 412, 476, 540, 600, 660 };
 
-    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes, int weapon, int gender, int improveSp) {
+    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes,
+            int weapon, int gender, int improveSp) {
         CharacterFactoryRecipe recipe = new CharacterFactoryRecipe(job, level, map, top, bottom, shoes, weapon);
         ItemInformationProvider ii = ItemInformationProvider.getInstance();
 
@@ -80,6 +83,7 @@ public class WarriorCreator extends CharacterFactory {
         giveItem(recipe, ItemId.WHITE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.BLUE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.RELAXER, 1, InventoryType.SETUP);
+        giveItem(recipe, ItemId.Panda_Special_Package, 1, InventoryType.CASH);
 
         return recipe;
     }
@@ -94,6 +98,7 @@ public class WarriorCreator extends CharacterFactory {
     }
 
     public static int createCharacter(Client c, String name, int face, int hair, int skin, int gender, int improveSp) {
-        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.WARRIOR, 30, MapId.PERION, equips[gender], equips[2 + gender], equips[4], weapons[0], gender, improveSp));
+        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.WARRIOR, 30, MapId.PERION,
+                equips[gender], equips[2 + gender], equips[4], weapons[0], gender, improveSp));
     }
 }

@@ -33,11 +33,12 @@ import server.ItemInformationProvider;
  * @author RonanLana
  */
 public class PirateCreator extends CharacterFactory {
-    private static final int[] equips = {0, 0, 0, 0, ItemId.BROWN_PAULIE_BOOTS};
-    private static final int[] weapons = {ItemId.PRIME_HANDS, ItemId.COLD_MIND};
-    private static final int[] startingHpMp = {846, 503};
+    private static final int[] equips = { 0, 0, 0, 0, ItemId.BROWN_PAULIE_BOOTS };
+    private static final int[] weapons = { ItemId.PRIME_HANDS, ItemId.COLD_MIND };
+    private static final int[] startingHpMp = { 846, 503 };
 
-    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes, int weapon) {
+    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes,
+            int weapon) {
         CharacterFactoryRecipe recipe = new CharacterFactoryRecipe(job, level, map, top, bottom, shoes, weapon);
         ItemInformationProvider ii = ItemInformationProvider.getInstance();
 
@@ -61,6 +62,7 @@ public class PirateCreator extends CharacterFactory {
         giveItem(recipe, ItemId.WHITE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.BLUE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.RELAXER, 1, InventoryType.SETUP);
+        giveItem(recipe, ItemId.Panda_Special_Package, 1, InventoryType.CASH);
 
         return recipe;
     }
@@ -75,6 +77,7 @@ public class PirateCreator extends CharacterFactory {
     }
 
     public static int createCharacter(Client c, String name, int face, int hair, int skin, int gender, int improveSp) {
-        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.PIRATE, 30, MapId.NAUTILUS_HARBOR, equips[gender], equips[2 + gender], equips[4], weapons[0]));
+        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.PIRATE, 30, MapId.NAUTILUS_HARBOR,
+                equips[gender], equips[2 + gender], equips[4], weapons[0]));
     }
 }

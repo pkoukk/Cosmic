@@ -32,9 +32,11 @@ import constants.id.MapId;
  */
 public class NoblesseCreator extends CharacterFactory {
 
-    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes, int weapon) {
+    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes,
+            int weapon) {
         CharacterFactoryRecipe recipe = new CharacterFactoryRecipe(job, level, map, top, bottom, shoes, weapon);
         giveItem(recipe, ItemId.NOBLESSE_GUIDE, 1, InventoryType.ETC);
+        giveItem(recipe, ItemId.Panda_Special_Package, 1, InventoryType.CASH);
         return recipe;
     }
 
@@ -42,8 +44,10 @@ public class NoblesseCreator extends CharacterFactory {
         recipe.addStartingItem(itemid, quantity, itemType);
     }
 
-    public static int createCharacter(Client c, String name, int face, int hair, int skin, int top, int bottom, int shoes, int weapon, int gender) {
-        int status = createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.NOBLESSE, 1, MapId.STARTING_MAP_NOBLESSE, top, bottom, shoes, weapon));
+    public static int createCharacter(Client c, String name, int face, int hair, int skin, int top, int bottom,
+            int shoes, int weapon, int gender) {
+        int status = createNewCharacter(c, name, face, hair, skin, gender,
+                createRecipe(Job.NOBLESSE, 1, MapId.STARTING_MAP_NOBLESSE, top, bottom, shoes, weapon));
         return status;
     }
 }
