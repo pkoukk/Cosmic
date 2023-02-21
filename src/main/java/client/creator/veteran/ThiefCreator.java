@@ -33,13 +33,12 @@ import server.ItemInformationProvider;
  * @author RonanLana
  */
 public class ThiefCreator extends CharacterFactory {
-    private static final int[] equips = { ItemId.DARK_BROWN_STEALER, ItemId.RED_STEAL, ItemId.DARK_BROWN_STEALER_PANTS,
-            ItemId.RED_STEAL_PANTS, ItemId.BRONZE_CHAIN_BOOTS };
-    private static final int[] weapons = { ItemId.STEEL_GUARDS, ItemId.REEF_CLAW };
-    private static final int[] startingHpMp = { 794, 407 };
+    private static final int[] equips = {ItemId.DARK_BROWN_STEALER, ItemId.RED_STEAL, ItemId.DARK_BROWN_STEALER_PANTS,
+            ItemId.RED_STEAL_PANTS, ItemId.BRONZE_CHAIN_BOOTS};
+    private static final int[] weapons = {ItemId.STEEL_GUARDS, ItemId.REEF_CLAW};
+    private static final int[] startingHpMp = {794, 407};
 
-    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes,
-            int weapon) {
+    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes, int weapon) {
         CharacterFactoryRecipe recipe = new CharacterFactoryRecipe(job, level, map, top, bottom, shoes, weapon);
         ItemInformationProvider ii = ItemInformationProvider.getInstance();
 
@@ -61,7 +60,6 @@ public class ThiefCreator extends CharacterFactory {
         giveItem(recipe, ItemId.WHITE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.BLUE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.RELAXER, 1, InventoryType.SETUP);
-        giveItem(recipe, ItemId.Panda_Special_Package, 1, InventoryType.CASH);
 
         return recipe;
     }
@@ -76,7 +74,6 @@ public class ThiefCreator extends CharacterFactory {
     }
 
     public static int createCharacter(Client c, String name, int face, int hair, int skin, int gender, int improveSp) {
-        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.THIEF, 30, MapId.KERNING_CITY,
-                equips[gender], equips[2 + gender], equips[4], weapons[0]));
+        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.THIEF, 30, MapId.KERNING_CITY, equips[gender], equips[2 + gender], equips[4], weapons[0]));
     }
 }

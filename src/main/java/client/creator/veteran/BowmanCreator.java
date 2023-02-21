@@ -33,13 +33,12 @@ import server.ItemInformationProvider;
  * @author RonanLana
  */
 public class BowmanCreator extends CharacterFactory {
-    private static final int[] equips = { ItemId.GREEN_HUNTERS_ARMOR, ItemId.GREEN_HUNTRESS_ARMOR,
-            ItemId.GREEN_HUNTERS_PANTS, ItemId.GREEN_HUNTRESS_PANTS, ItemId.GREEN_HUNTER_BOOTS };
-    private static final int[] weapons = { ItemId.RYDEN, ItemId.MOUNTAIN_CROSSBOW };
-    private static final int[] startingHpMp = { 797, 404 };
+    private static final int[] equips = {ItemId.GREEN_HUNTERS_ARMOR, ItemId.GREEN_HUNTRESS_ARMOR,
+            ItemId.GREEN_HUNTERS_PANTS, ItemId.GREEN_HUNTRESS_PANTS, ItemId.GREEN_HUNTER_BOOTS};
+    private static final int[] weapons = {ItemId.RYDEN, ItemId.MOUNTAIN_CROSSBOW};
+    private static final int[] startingHpMp = {797, 404};
 
-    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes,
-            int weapon) {
+    private static CharacterFactoryRecipe createRecipe(Job job, int level, int map, int top, int bottom, int shoes, int weapon) {
         CharacterFactoryRecipe recipe = new CharacterFactoryRecipe(job, level, map, top, bottom, shoes, weapon);
         ItemInformationProvider ii = ItemInformationProvider.getInstance();
 
@@ -59,7 +58,6 @@ public class BowmanCreator extends CharacterFactory {
         giveItem(recipe, ItemId.WHITE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.BLUE_POTION, 100, InventoryType.USE);
         giveItem(recipe, ItemId.RELAXER, 1, InventoryType.SETUP);
-        giveItem(recipe, ItemId.Panda_Special_Package, 1, InventoryType.CASH);
 
         return recipe;
     }
@@ -74,7 +72,6 @@ public class BowmanCreator extends CharacterFactory {
     }
 
     public static int createCharacter(Client c, String name, int face, int hair, int skin, int gender, int improveSp) {
-        return createNewCharacter(c, name, face, hair, skin, gender,
-                createRecipe(Job.BOWMAN, 30, MapId.HENESYS, equips[gender], equips[2 + gender], equips[4], weapons[0]));
+        return createNewCharacter(c, name, face, hair, skin, gender, createRecipe(Job.BOWMAN, 30, MapId.HENESYS, equips[gender], equips[2 + gender], equips[4], weapons[0]));
     }
 }
