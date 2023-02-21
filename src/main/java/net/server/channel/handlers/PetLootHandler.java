@@ -28,9 +28,12 @@ import net.AbstractPacketHandler;
 import net.packet.InPacket;
 import server.maps.MapItem;
 import server.maps.MapObject;
+import server.maps.MapObjectType;
 import tools.PacketCreator;
 
+import java.util.List;
 import java.util.Set;
+import java.util.Arrays;
 
 /**
  * @author TheRamon
@@ -53,37 +56,83 @@ public final class PetLootHandler extends AbstractPacketHandler {
         MapObject ob = chr.getMap().getMapObject(oid);
         try {
             MapItem mapitem = (MapItem) ob;
-            if (mapitem.getMeso() > 0) {
-                if (!chr.isEquippedMesoMagnet()) {
-                    c.sendPacket(PacketCreator.enableActions());
-                    return;
-                }
+            if (mapitem == null || mapitem.isPickedUp()) {
+                c.sendPacket(PacketCreator.enableActions());
+                return;
+            }
+            handlePickup(chr, mapitem, petIndex);
 
-                if (chr.isEquippedPetItemIgnore()) {
-                    final Set<Integer> petIgnore = chr.getExcludedItems();
-                    if (!petIgnore.isEmpty() && petIgnore.contains(Integer.MAX_VALUE)) {
-                        c.sendPacket(PacketCreator.enableActions());
-                        return;
-                    }
+            List<MapObject> mapobjects = chr.getMap().getMapObjectsInRange(chr.getPosition(), 10,
+                    Arrays.asList(MapObjectType.ITEM));
+            for (MapObject mapobject : mapobjects) {
+                MapItem mapitem2 = (MapItem) mapobject;
+                if (mapitem2.isPickedUp()) {
+                    continue;
                 }
-            } else {
-                if (!chr.isEquippedItemPouch()) {
-                    c.sendPacket(PacketCreator.enableActions());
-                    return;
-                }
-
-                if (chr.isEquippedPetItemIgnore()) {
-                    final Set<Integer> petIgnore = chr.getExcludedItems();
-                    if (!petIgnore.isEmpty() && petIgnore.contains(mapitem.getItem().getItemId())) {
-                        c.sendPacket(PacketCreator.enableActions());
-                        return;
-                    }
+                if (mapitem2.canBePickedBy(chr)) {
+                    handlePickup(chr, mapitem2, petIndex);
                 }
             }
+            // if (mapitem.getMeso() > 0) {
+            // if (!chr.isEquippedMesoMagnet()) {
+            // c.sendPacket(PacketCreator.enableActions());
+            // return;
+            // }
 
-            chr.pickupItem(ob, petIndex);
+            // if (chr.isEquippedPetItemIgnore()) {
+            // final Set<Integer> petIgnore = chr.getExcludedItems();
+            // if (!petIgnore.isEmpty() && petIgnore.contains(Integer.MAX_VALUE)) {
+            // c.sendPacket(PacketCreator.enableActions());
+            // return;
+            // }
+            // }
+            // } else {
+            // if (!chr.isEquippedItemPouch()) {
+            // c.sendPacket(PacketCreator.enableActions());
+            // return;
+            // }
+
+            // if (chr.isEquippedPetItemIgnore()) {
+            // final Set<Integer> petIgnore = chr.getExcludedItems();
+            // if (!petIgnore.isEmpty() &&
+            // petIgnore.contains(mapitem.getItem().getItemId())) {
+            // c.sendPacket(PacketCreator.enableActions());
+            // return;
+            // }
+            // }
+            // }
+
+            // chr.pickupItem(ob, petIndex);
         } catch (NullPointerException | ClassCastException e) {
             c.sendPacket(PacketCreator.enableActions());
         }
+    }
+
+    private void handlePickup(Character chr, MapItem mapitem, int petIndex) {
+        if (mapitem.getMeso() > 0) {
+            if (!chr.isEquippedMesoMagnet()) {
+                return;
+            }
+
+            if (chr.isEquippedPetItemIgnore()) {
+                final Set<Integer> petIgnore = chr.getExcludedItems();
+                if (!petIgnore.isEmpty() && petIgnore.contains(Integer.MAX_VALUE)) {
+                    return;
+                }
+            }
+        } else {
+            if (!chr.isEquippedItemPouch()) {
+                return;
+            }
+
+            if (chr.isEquippedPetItemIgnore()) {
+                final Set<Integer> petIgnore = chr.getExcludedItems();
+                if (!petIgnore.isEmpty() && petIgnore.contains(mapitem.getItem().getItemId())) {
+                    return;
+                }
+            }
+        }
+
+        chr.pickupItem(mapitem, petIndex);
     }
 }
