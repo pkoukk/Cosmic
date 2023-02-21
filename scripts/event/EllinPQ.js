@@ -24,7 +24,7 @@
  */
 
 var isPq = true;
-var minPlayers = 4, maxPlayers = 6;
+var minPlayers = 1, maxPlayers = 6;
 var minLevel = 44, maxLevel = 55;
 var entryMap = 930000000;
 var exitMap = 930000800;
@@ -76,7 +76,7 @@ function setEventExclusives(eim) {
     eim.setExclusiveItems(itemSet);
 }
 
-function setEventRewards(eim) {}
+function setEventRewards(eim) { }
 
 function getEligibleParty(party) {      //selects, from the given party, the team that is allowed to attempt this event
     var eligible = [];
@@ -128,7 +128,7 @@ function setup(level, lobbyid) {
     return eim;
 }
 
-function afterSetup(eim) {}
+function afterSetup(eim) { }
 
 function respawnStg2(eim) {
     if (!eim.getMapInstance(930000200).getPlayers().isEmpty()) {
@@ -164,7 +164,7 @@ function scheduledTimeout(eim) {
     end(eim);
 }
 
-function playerUnregistered(eim, player) {}
+function playerUnregistered(eim, player) { }
 
 function playerExit(eim, player) {
     eim.unregisterPlayer(player);
@@ -177,7 +177,7 @@ function playerLeft(eim, player) {
     }
 }
 
-function playerDead(eim, player) {}
+function playerDead(eim, player) { }
 
 function playerRevive(eim, player) { // player presses ok on the death pop up.
     if (eim.isEventTeamLackingNow(true, minPlayers, player)) {
@@ -248,8 +248,8 @@ function monsterKilled(mob, eim, hasKiller) {
     }
 }
 
-function allMonstersDead(eim) {}
+function allMonstersDead(eim) { }
 
-function cancelSchedule() {}
+function cancelSchedule() { }
 
-function dispose(eim) {}
+function dispose(eim) { }
