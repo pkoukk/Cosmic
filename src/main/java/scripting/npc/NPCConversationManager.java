@@ -1149,6 +1149,13 @@ public class NPCConversationManager extends AbstractPlayerInteraction {
 
     public boolean carryStorageTakeoutItem(int item) {
         try {
+            int accountId = this.getPlayer().getAccountID();
+            int count = this.carryStorageService.GetStorageCount(accountId, item);
+            if (count > 0) {
+                this.gainItem(item, (short) count, true);
+                return this.carryStorageService.TakeoutItem(accountId, InventoryType.ETC, item, count);
+            }
+            return true;
 
         } catch (Exception ex) {
             ex.printStackTrace();

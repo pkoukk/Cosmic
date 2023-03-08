@@ -209,6 +209,7 @@ public class CommandsExecutor {
         addCommand("wdf", WhatDropsFromCommand.class);
         addCommand("wd", WhoDropsCommand.class);
         addCommand("home", HomeCommand.class);
+        addCommand("storage", CarryStorageCommand.class);
 
         commandsNameDesc.add(levelCommandsCursor);
     }

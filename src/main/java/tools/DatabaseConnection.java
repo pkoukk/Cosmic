@@ -3,6 +3,7 @@ package tools;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 import config.YamlConfig;
+import database.carry_storage.CarryStorageRowMapper;
 import database.note.NoteRowMapper;
 import org.jdbi.v3.core.Handle;
 import org.jdbi.v3.core.Jdbi;
@@ -74,7 +75,8 @@ public class DatabaseConnection {
     /**
      * Initiate connection to the database
      *
-     * @return true if connection to the database initiated successfully, false if not successful
+     * @return true if connection to the database initiated successfully, false if
+     *         not successful
      */
     public static boolean initializeConnectionPool() {
         if (dataSource != null) {
@@ -101,6 +103,6 @@ public class DatabaseConnection {
 
     private static void initializeJdbi(DataSource dataSource) {
         jdbi = Jdbi.create(dataSource)
-                .registerRowMapper(new NoteRowMapper());
+                .registerRowMapper(new NoteRowMapper()).registerRowMapper(new CarryStorageRowMapper());
     }
 }

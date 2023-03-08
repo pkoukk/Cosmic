@@ -72,4 +72,18 @@ public class CarryStorageService {
         }
     }
 
+    public int GetStorageCount(int accountId, int itemId) {
+        try {
+            Optional<CarryStorage> storage = carryDao.findByItemId(accountId, itemId);
+            if (storage.isPresent()) {
+                CarryStorage s = storage.get();
+                return s.quantity();
+            }
+            return 0;
+        } catch (DaoException e) {
+            log.error("Failed to take out item to char {}", accountId, e);
+            return 0;
+        }
+    }
+
 }

@@ -15,9 +15,7 @@ public class CarryStorageDao {
     public void save(CarryStorage cs) {
         try (Handle handle = DatabaseConnection.getHandle()) {
             handle.createUpdate(
-                    """
-                            INSERT INTO carry_storage (`account_id`, `item_id`, `quantity`, `inventory_type`, `timestamp`)
-                                VALUES (?, ?, ?, ?, ?, ?)""")
+                    "INSERT INTO carry_storage (`account_id`, `item_id`, `quantity`, `inventory_type`, `timestamp`) VALUES (?,?,?,?,?)")
                     .bind(0, cs.accountId())
                     .bind(1, cs.itemId())
                     .bind(2, cs.quantity())
@@ -31,12 +29,7 @@ public class CarryStorageDao {
 
     public Optional<CarryStorage> findByItemId(int accountId, int itemId) {
         try (Handle handle = DatabaseConnection.getHandle()) {
-            return handle.createQuery("""
-                    SELECT *
-                    FROM carry_storage
-                    WHERE `account_id` = ?
-                    AND `item_id` = ?
-                    """)
+            return handle.createQuery("SELECT * FROM carry_storage WHERE `account_id` = ? AND `item_id` = ?")
                     .bind(0, accountId)
                     .bind(1, itemId)
                     .mapTo(CarryStorage.class)
@@ -48,14 +41,11 @@ public class CarryStorageDao {
 
     public List<CarryStorage> findByItemIds(int accountId, Set<Integer> itemIds) {
         try (Handle handle = DatabaseConnection.getHandle()) {
-            return handle.createQuery("""
-                    SELECT *
-                    FROM carry_storage
-                    WHERE `account_id` = ?
-                    AND `item_id` IN (?)
-                    """)
-                    .bind(0, accountId)
-                    .bind(1, itemIds)
+            return handle
+                    .createQuery(
+                            "SELECT * FROM carry_storage WHERE `account_id` = :accountId AND `item_id` IN (<itemIds>)")
+                    .bind("accountId", accountId)
+                    .bindList("itemIds", itemIds)
                     .mapTo(CarryStorage.class)
                     .list();
         } catch (JdbiException e) {
@@ -66,10 +56,7 @@ public class CarryStorageDao {
     public void updateQuantityById(int id, int quantity) {
         try (Handle handle = DatabaseConnection.getHandle()) {
             handle.createUpdate(
-                    """
-                            update carry_storage set quantity = quantity + ?
-                            where id = ?
-                            """)
+                    "update carry_storage set quantity = quantity + ? where id = ?")
                     .bind(0, quantity)
                     .bind(1, id)
                     .execute();
