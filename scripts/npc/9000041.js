@@ -85,37 +85,40 @@ function action(mode, type, selection) {
             cm.sendYesNo(text);
         }
     } else if (status == 2) {
-        var fee;
-        if (sel1 == 0)
+        var fee = 10;
+        if (sel1 == 0) {
             fee = 33;
-        else if (sel1 == 1)
-            fee == 66;
-        else if (sel1 == 2)
+        }
+        else if (sel1 == 1) {
+            fee = 66;
+        }
+        else if (sel1 == 2) {
             fee = 99;
-        else if (sel1 == 3)
+        }
+        else if (sel1 == 3) {
             fee = 50;
-        else
+        }
+        else {
             fee = 10;
+        }
         if (cm.haveItem(4001126, fee)) {
             if (sel1 < 3) {
                 if (cm.canHold(selection)) {
                     var item = cm.gainItem(selection, 1, true, false);
                     cm.gainItem(4001126, -fee);
                     cm.sendOk("#z" + selection + "#已经发送到您的背包,请注意查收");
-                    cm.getPlayer().全服道具喇叭(cm.getPlayer().getName() + " : 恭喜玩家用枫叶成功兑换了", false, item);
                     cm.dispose();
                 } else {
                     cm.sendOk("背包空间不足,兑换失败");
                     cm.dispose();
                 }
             } else if (sel1 == 3) {
-                if (cm.haveItem(1092030, false)) {
+                if (cm.haveItem(1092030)) {
                     if (cm.canHold(selection)) {
                         var item = cm.gainItem(selection, 1, true, false);
                         cm.gainItem(4001126, -fee);
                         cm.gainItem(1092030, -1);
                         cm.sendOk("#z" + selection + "#已经发送到您的背包,请注意查收");
-                        cm.getPlayer().全服道具喇叭(cm.getPlayer().getName() + " : 恭喜玩家用枫叶成功兑换了", false, item);
                         cm.dispose();
                     } else {
                         cm.sendOk("背包空间不足,兑换失败");
@@ -133,7 +136,6 @@ function action(mode, type, selection) {
                             var item = cm.gainItem(抽奖[random], 1, true, false);
                             cm.gainItem(4001126, -fee);
                             cm.sendOk("恭喜,这次抽中了#i" + 抽奖[random] + "#");
-                            cm.getPlayer().全服道具喇叭(cm.getPlayer().getName() + " : 枫叶抽奖获得了", false, item);
                             status = -1;
                         } else {
                             cm.sendOk("背包空间不足,兑换失败");
