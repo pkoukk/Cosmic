@@ -132,7 +132,7 @@ function action(mode, type, selection) {
                 if (curItemQty > 0) {
                     cm.sendGetText("你想放入多少个#b#t" + tickSel + "##k? (#r" + curItemQty + "#k可用)#k");
                 } else {
-                    cm.sendPrev("你没有放入任何东西.点击'#r返回#k'." + tickSel + "你没有这么多橡皮擦(#r");
+                    cm.sendPrev("你没有 #b#t" + tickSel + "##k . 点击 '#r返回#k' 回到主界面");
                     advance = false;
                 }
             }
@@ -146,7 +146,7 @@ function action(mode, type, selection) {
                 }
 
                 if (placedQty > curItemQty) {
-                    cm.sendPrev("#k可用). 点击'#r返回#k'." + curItemQty + "操作成功. 点击'#r返回#k'.");
+                    cm.sendPrev("你持有的橡皮擦数量不够 (有#r" + curItemQty + "#k 个). 点击 '#r返回#k' 回到主界面.");
                     advance = false;
                 } else {
                     if (curItemSel < tickets.length) {
@@ -155,11 +155,11 @@ function action(mode, type, selection) {
                         coins = placedQty;
                     }
 
-                    cm.sendPrev("输入一个正整数. 点击'#r返回#k'.");
+                    cm.sendPrev("操作成功. 点击 '#r返回#k' 回到主界面.");
                     advance = false;
                 }
             } catch (err) {
-                cm.sendPrev("清理一下背包.");
+                cm.sendPrev("输入一个正整数");
                 advance = false;
             }
 
@@ -238,14 +238,14 @@ function givePrize() {
     }
 
     if (!hasRewardSlot(lvTarget, lvQty)) {
-        cm.sendOk("Check for an available space on your inventory before retrieving a prize.");
+        cm.sendOk("在领取奖励之前检查一下你的背包是不是还有空间.");
     } else {
         var rnd = Math.floor(Math.random() * lvTarget.length);
 
         for (var i = 0; i < tickets.length; i++) {
-            cm.gainItem(4001009 + i, -1 * tickets[i]);
+            cm.gainItem(4001009 + i, parseInt(-1 * tickets[i]));
         }
-        cm.gainItem(coinId, -1 * coins);
+        cm.gainItem(coinId, parseInt(-1 * coins));
 
         cm.gainItem(lvTarget[rnd], lvQty[rnd]);
     }
