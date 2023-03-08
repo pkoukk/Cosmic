@@ -31,6 +31,7 @@ import scripting.event.EventInstanceManager;
 import server.life.*;
 import server.partyquest.GuardianSpawnPoint;
 import tools.DatabaseConnection;
+import tools.Randomizer;
 import tools.StringUtil;
 
 import java.awt.*;
@@ -83,7 +84,7 @@ public class MapFactory {
 
     private static void loadLifeFromDb(MapleMap map) {
         try (Connection con = DatabaseConnection.getConnection();
-             PreparedStatement ps = con.prepareStatement("SELECT * FROM plife WHERE map = ? and world = ?")) {
+                PreparedStatement ps = con.prepareStatement("SELECT * FROM plife WHERE map = ? and world = ?")) {
             ps.setInt(1, map.getId());
             ps.setInt(2, map.getWorld());
 
@@ -110,20 +111,25 @@ public class MapFactory {
         }
     }
 
-    private static void loadLifeRaw(MapleMap map, int id, String type, int cy, int f, int fh, int rx0, int rx1, int x, int y, int hide, int mobTime, int team) {
+    private static void loadLifeRaw(MapleMap map, int id, String type, int cy, int f, int fh, int rx0, int rx1, int x,
+            int y, int hide, int mobTime, int team) {
         AbstractLoadedLife myLife = loadLife(id, type, cy, f, fh, rx0, rx1, x, y, hide);
         if (myLife instanceof Monster monster) {
 
-            if (mobTime == -1) { //does not respawn, force spawn once
+            if (mobTime == -1) { // does not respawn, force spawn once
                 map.spawnMonster(monster);
-                
+
             } else {
-                AbstractLoadedLife doubleLife = loadLife(id, type, cy, f, fh, rx0, rx1, x, y, hide);
-                map.addMonsterSpawn((Monster)doubleLife, mobTime, team);
+                if (!monster.isBoss() && Randomizer.nextDouble() > 0.5) {
+                    AbstractLoadedLife doubleLife = loadLife(id, type, cy, f, fh, rx0, rx1, x, y, hide);
+                    map.addMonsterSpawn((Monster) doubleLife, mobTime, team);
+                }
+
                 map.addMonsterSpawn(monster, mobTime, team);
             }
 
-            //should the map be reseted, use allMonsterSpawn list of monsters to spawn them again
+            // should the map be reseted, use allMonsterSpawn list of monsters to spawn them
+            // again
             map.addAllMonsterSpawn(monster, mobTime, team);
         } else {
             map.addMapObject(myLife);
@@ -134,11 +140,12 @@ public class MapFactory {
         MapleMap map;
 
         String mapName = getMapName(mapid);
-        Data mapData = mapSource.getData(mapName);    // source.getData issue with giving nulls in rare ocasions found thanks to MedicOP
+        Data mapData = mapSource.getData(mapName); // source.getData issue with giving nulls in rare ocasions found
+                                                   // thanks to MedicOP
         Data infoData = mapData.getChildByPath("info");
 
         String link = DataTool.getString(infoData.getChildByPath("link"), "");
-        if (!link.equals("")) { //nexon made hundreds of dojo maps so to reduce the size they added links.
+        if (!link.equals("")) { // nexon made hundreds of dojo maps so to reduce the size they added links.
             mapName = getMapName(Integer.parseInt(link));
             mapData = mapSource.getData(mapName);
         }
@@ -164,14 +171,15 @@ public class MapFactory {
         }
         Data timeMob = infoData.getChildByPath("timeMob");
         if (timeMob != null) {
-            map.setTimeMob(DataTool.getInt(timeMob.getChildByPath("id")), DataTool.getString(timeMob.getChildByPath("message")));
+            map.setTimeMob(DataTool.getInt(timeMob.getChildByPath("id")),
+                    DataTool.getString(timeMob.getChildByPath("message")));
         }
 
         int[] bounds = new int[4];
         bounds[0] = DataTool.getInt(infoData.getChildByPath("VRTop"));
         bounds[1] = DataTool.getInt(infoData.getChildByPath("VRBottom"));
 
-        if (bounds[0] == bounds[1]) {    // old-style baked map
+        if (bounds[0] == bounds[1]) { // old-style baked map
             Data minimapData = mapData.getChildByPath("miniMap");
             if (minimapData != null) {
                 bounds[0] = DataTool.getInt(minimapData.getChildByPath("centerX")) * -1;
@@ -201,7 +209,8 @@ public class MapFactory {
                     int y1 = DataTool.getInt(footHold.getChildByPath("y1"));
                     int x2 = DataTool.getInt(footHold.getChildByPath("x2"));
                     int y2 = DataTool.getInt(footHold.getChildByPath("y2"));
-                    Foothold fh = new Foothold(new Point(x1, y1), new Point(x2, y2), Integer.parseInt(footHold.getName()));
+                    Foothold fh = new Foothold(new Point(x1, y1), new Point(x2, y2),
+                            Integer.parseInt(footHold.getName()));
                     fh.setPrev(DataTool.getInt(footHold.getChildByPath("prev")));
                     fh.setNext(DataTool.getInt(footHold.getChildByPath("next")));
                     if (fh.getX1() < lBound.x) {
@@ -240,7 +249,8 @@ public class MapFactory {
         }
         if (event == null) {
             try (Connection con = DatabaseConnection.getConnection();
-                 PreparedStatement ps = con.prepareStatement("SELECT * FROM playernpcs WHERE map = ? AND world = ?")) {
+                    PreparedStatement ps = con
+                            .prepareStatement("SELECT * FROM playernpcs WHERE map = ? AND world = ?")) {
                 ps.setInt(1, mapid);
                 ps.setInt(2, world);
 
@@ -268,13 +278,18 @@ public class MapFactory {
             Data mcData = mapData.getChildByPath("monsterCarnival");
             if (mcData != null) {
                 map.setDeathCP(DataTool.getIntConvert("deathCP", mcData, 0));
-                map.setMaxMobs(DataTool.getIntConvert("mobGenMax", mcData, 20));    // thanks Atoot for noticing CPQ1 bf. 3 and 4 not accepting spawns due to undefined limits, Lame for noticing a need to cap mob spawns even on such undefined limits
+                map.setMaxMobs(DataTool.getIntConvert("mobGenMax", mcData, 20)); // thanks Atoot for noticing CPQ1 bf. 3
+                                                                                 // and 4 not accepting spawns due to
+                                                                                 // undefined limits, Lame for noticing
+                                                                                 // a need to cap mob spawns even on
+                                                                                 // such undefined limits
                 map.setTimeDefault(DataTool.getIntConvert("timeDefault", mcData, 0));
                 map.setTimeExpand(DataTool.getIntConvert("timeExpand", mcData, 0));
                 map.setMaxReactors(DataTool.getIntConvert("guardianGenMax", mcData, 16));
                 Data guardianGenData = mcData.getChildByPath("guardianGenPos");
                 for (Data node : guardianGenData.getChildren()) {
-                    GuardianSpawnPoint pt = new GuardianSpawnPoint(new Point(DataTool.getIntConvert("x", node), DataTool.getIntConvert("y", node)));
+                    GuardianSpawnPoint pt = new GuardianSpawnPoint(
+                            new Point(DataTool.getIntConvert("x", node), DataTool.getIntConvert("y", node)));
                     pt.setTeam(DataTool.getIntConvert("team", node, -1));
                     pt.setTaken(false);
                     map.addGuardianSpawnPoint(pt);
@@ -287,7 +302,8 @@ public class MapFactory {
 
                 if (mcData.getChildByPath("mob") != null) {
                     for (Data area : mcData.getChildByPath("mob")) {
-                        map.addMobSpawn(DataTool.getInt(area.getChildByPath("id")), DataTool.getInt(area.getChildByPath("spendCP")));
+                        map.addMobSpawn(DataTool.getInt(area.getChildByPath("id")),
+                                DataTool.getInt(area.getChildByPath("spendCP")));
                     }
                 }
             }
@@ -298,7 +314,8 @@ public class MapFactory {
             for (Data reactor : mapData.getChildByPath("reactor")) {
                 String id = DataTool.getString(reactor.getChildByPath("id"));
                 if (id != null) {
-                    Reactor newReactor = loadReactor(reactor, id, (byte) DataTool.getInt(reactor.getChildByPath("f"), 0));
+                    Reactor newReactor = loadReactor(reactor, id,
+                            (byte) DataTool.getInt(reactor.getChildByPath("f"), 0));
                     map.spawnReactor(newReactor);
                 }
             }
@@ -308,7 +325,8 @@ public class MapFactory {
         map.setStreetName(loadStreetName(mapid));
 
         map.setClock(mapData.getChildByPath("clock") != null);
-        map.setEverlast(DataTool.getIntConvert("everlast", infoData, 0) != 0); // thanks davidlafriniere for noticing value 0 accounting as true
+        map.setEverlast(DataTool.getIntConvert("everlast", infoData, 0) != 0); // thanks davidlafriniere for noticing
+                                                                               // value 0 accounting as true
         map.setTown(DataTool.getIntConvert("town", infoData, 0) != 0);
         map.setHPDec(DataTool.getIntConvert("decHP", infoData, 0));
         map.setHPDecProtect(DataTool.getIntConvert("protectItem", infoData, 0));
@@ -316,7 +334,8 @@ public class MapFactory {
         map.setBoat(mapData.getChildByPath("shipObj") != null);
         map.setTimeLimit(DataTool.getIntConvert("timeLimit", infoData, -1));
         map.setFieldType(DataTool.getIntConvert("fieldType", infoData, 0));
-        map.setMobCapacity(DataTool.getIntConvert("fixedMobCapacity", infoData, 500));//Is there a map that contains more than 500 mobs?
+        map.setMobCapacity(DataTool.getIntConvert("fixedMobCapacity", infoData, 500));// Is there a map that contains
+                                                                                      // more than 500 mobs?
 
         Data recData = infoData.getChildByPath("recovery");
         if (recData != null) {
@@ -342,7 +361,8 @@ public class MapFactory {
         return map;
     }
 
-    private static AbstractLoadedLife loadLife(int id, String type, int cy, int f, int fh, int rx0, int rx1, int x, int y, int hide) {
+    private static AbstractLoadedLife loadLife(int id, String type, int cy, int f, int fh, int rx0, int rx1, int x,
+            int y, int hide) {
         AbstractLoadedLife myLife = LifeFactory.getLife(id, type);
         myLife.setCy(cy);
         myLife.setF(f);
