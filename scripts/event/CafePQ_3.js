@@ -36,7 +36,7 @@ var maxMapId = 192000001;
 var eventMaps = [192000000, 192000001];
 
 var eventTime = 45;         // 45 minutes
-var couponsNeeded = 350;    // total of coupons to complete the event
+var couponsNeeded = 100;    // total of coupons to complete the event
 
 const maxLobbies = 1;
 
