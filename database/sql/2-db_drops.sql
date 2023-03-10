@@ -21971,7 +21971,9 @@ DELETE FROM temp_data WHERE dropperid >= 9300315 AND dropperid <= 9300324;
 (6802001, 2041028, 10, -1),
 (6802001, 2041023, 10, -1),
 (6802001, 2048012, 10, -1),
+(743,2502002,2022252,1,-1),
 (6802001, 2040502, 10, -1);
+
 
   # update Amoria PQ reward boxes
   DELETE FROM `reactordrops` WHERE `reactorid` >= 6702003 AND `reactorid` <= 6702012;
